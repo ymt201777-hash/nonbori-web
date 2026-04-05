@@ -123,8 +123,8 @@
   #about { background: var(--white); text-align: center; padding-top: 0; }
   #about .section-heading { width: min(280px, 70vw); margin-bottom: 64px; }
   .members { display: flex; flex-direction: column; gap: 64px; align-items: center; }
-  .member { display: flex; flex-direction: column; align-items: center; gap: 20px; max-width: 360px; }
-  .member.reverse { flex-direction: column-reverse; }
+  .member { display: flex; align-items: center; gap: 40px; max-width: 600px; width: 100%; }
+  .member.reverse { flex-direction: row-reverse; }
   .member-photo {
     width: 180px; height: 180px;
     border-radius: 50%;
@@ -165,6 +165,8 @@
     .event-image { min-height: 200px; }
     .nav-links { gap: 20px; }
     .nav-links a img { height: 13px; }
+    .member, .member.reverse { flex-direction: column; text-align: center; }
+    .member { align-items: center; }
   }
 </style>
 </head>
