@@ -123,7 +123,8 @@
   #about { background: var(--white); text-align: center; padding-top: 0; }
   #about .section-heading { width: min(280px, 70vw); margin-bottom: 64px; }
   .members { display: flex; flex-direction: column; gap: 64px; align-items: center; }
-  .member { display: flex; flex-direction: column; align-items: center; gap: 20px; max-width: 360px; }
+  .member { display: flex; align-items: center; gap: 40px; max-width: 600px; width: 100%; }
+  .member.reverse { flex-direction: row-reverse; }
   .member-photo {
     width: 180px; height: 180px;
     border-radius: 50%;
@@ -143,7 +144,6 @@
     color: var(--red);
   }
   .member-name-svg { display: block; height: 70px; width: auto; }
-  .member-bio { font-size: 13px; line-height: 1.9; color: var(--red); text-align: center; }
 
   /* FOOTER */
   footer {
@@ -165,6 +165,8 @@
     .event-image { min-height: 200px; }
     .nav-links { gap: 20px; }
     .nav-links a img { height: 13px; }
+    .member, .member.reverse { flex-direction: column; text-align: center; }
+    .member { align-items: center; }
   }
 </style>
 </head>
@@ -224,17 +226,14 @@
       <div class="member">
         <div class="member-photo-placeholder">写真準備中</div>
         <img class="member-name-svg" src="member-yuichiro.svg" alt="REPRESENTATIVE YUICHIRO">
-        <p class="member-bio">新規事業開発・マーケティングに従事。DMM.com、M3などのメガベンチャーで新規事業の開発等を担当し、今は学習塾の経営が楽しく、週の半分は数学を教えてる。元中南米バックパッカー。</p>
       </div>
-      <div class="member">
+      <div class="member reverse">
         <img class="member-photo" src="photo-haru.svg" alt="はるのすけ">
         <img class="member-name-svg" src="member-haru.svg" alt="ART DIRECTOR HARU">
-        <p class="member-bio">アフリカでの学校デザインからお酒のデザインまで手掛けるデザイナー。アジアを旅して培った自由な感覚と遊び心で、洗練されたデザインの中にもどこか遊び心を入れ込む。</p>
       </div>
       <div class="member">
         <div class="member-photo-placeholder">写真準備中</div>
         <img class="member-name-svg" src="member-mibo.svg" alt="MERCHANDISER MI-BO-">
-        <p class="member-bio">ハマったものには、とことん深掘りしたくなる。おしゃれオタク。アパレル業界でマーチャンダイザーとして流行を作ってきた。ちゃんとこだわりを詰め込んだイベントの中身を素敵なものに仕上げていく。</p>
       </div>
     </div>
   </div>
