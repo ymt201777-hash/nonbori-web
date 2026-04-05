@@ -3,992 +3,253 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NONBORI — ワイヤーフレーム v0.2</title>
+<title>NONBORI</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --wire-bg: #F5F5F3;
-    --wire-surface: #E8E8E4;
-    --wire-block: #D0CFC9;
-    --wire-dark: #2A2A2A;
-    --wire-mid: #888884;
-    --wire-light: #BDBDB7;
-    --wire-accent: #C0392B;
-    --wire-border: #C5C5BF;
-    --font: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+    --red: #D32C25;
+    --white: #ffffff;
+    --black: #111111;
+    --font-body: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
     --max: 1100px;
   }
-
+  html { scroll-behavior: smooth; }
   body {
-    background: var(--wire-bg);
-    color: var(--wire-dark);
-    font-family: var(--font);
-    font-size: 14px;
-    line-height: 1.6;
+    background: var(--white);
+    color: var(--black);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.7;
+    overflow-x: hidden;
   }
 
-  /* ── ラベル・ノート ── */
-  .label {
-    display: inline-block;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    background: var(--wire-accent);
-    color: #fff;
-    padding: 2px 7px;
-    border-radius: 2px;
-    margin-bottom: 8px;
-  }
-  .note {
-    display: inline-block;
-    font-size: 11px;
-    color: var(--wire-accent);
-    background: #FDECEA;
-    border: 1px solid #F5C6C2;
-    border-radius: 3px;
-    padding: 3px 8px;
-    margin-top: 6px;
-  }
-
-  /* ── ワイヤーブロック ── */
-  .block {
-    background: var(--wire-block);
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: var(--wire-mid);
-    font-size: 12px;
-    font-weight: 500;
-  }
-  .block.img { width: 100%; }
-  .block.icon { width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0; }
-  .block.logo-area { height: 36px; width: 130px; }
-  .block.btn {
-    height: 48px;
-    background: var(--wire-dark);
-    color: #fff;
-    border-radius: 4px;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: .05em;
-    cursor: pointer;
-    border: none;
-    padding: 0 24px;
-    white-space: nowrap;
-  }
-  .block.btn.outline {
-    background: transparent;
-    border: 2px solid var(--wire-dark);
-    color: var(--wire-dark);
-  }
-  .block.btn.outline-white {
-    background: transparent;
-    border: 2px solid #fff;
-    color: #fff;
-  }
-  .block.btn.accent { background: var(--wire-accent); }
-  .block.btn.sm { height: 36px; font-size: 12px; }
-
-  /* ── レイアウト ── */
-  .container { max-width: var(--max); margin: 0 auto; padding: 0 28px; }
-  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
-  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-
-  /* ── セクション共通 ── */
-  .section {
-    padding: 72px 0;
-    border-bottom: 1px dashed var(--wire-border);
-    position: relative;
-  }
-  .section-header { margin-bottom: 40px; }
-  .section-header h2 { font-size: 26px; font-weight: 700; letter-spacing: .04em; margin-bottom: 6px; }
-  .section-header p { color: var(--wire-mid); font-size: 13px; }
-
-  /* ── アノテーション ── */
-  .ann {
-    background: #FFFBF0;
-    border: 1px solid #F0DCA0;
-    border-radius: 6px;
-    padding: 14px 18px;
-    margin-top: 36px;
-    font-size: 12px;
-    line-height: 1.8;
-  }
-  .ann h4 {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    color: #B08000;
-    margin-bottom: 8px;
-  }
-  .ann ul { padding-left: 16px; color: #666; }
-  .ann li { margin-bottom: 3px; }
-  .ann.dark { background: #1A1A1A; border-color: #333; }
-  .ann.dark h4 { color: #888; }
-  .ann.dark ul { color: #666; }
-
-  /* ════════════════════════════
-     ページナビゲーション（ワイヤー用）
-  ════════════════════════════ */
-
-  .page-switcher {
-    background: #1E1E1E;
-    padding: 10px 24px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    position: sticky;
-    top: 0;
-    z-index: 200;
-    flex-wrap: wrap;
-  }
-  .page-switcher span {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    color: #555;
-    margin-right: 4px;
-  }
-  .page-btn {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: .06em;
-    color: #888;
-    background: #2A2A2A;
-    border: 1px solid #333;
-    border-radius: 3px;
-    padding: 5px 14px;
-    cursor: pointer;
-    font-family: var(--font);
-    transition: all .15s;
-  }
-  .page-btn:hover { background: #333; color: #ccc; }
-  .page-btn.active { background: var(--wire-accent); color: #fff; border-color: var(--wire-accent); }
-
-  /* ── ページ表示切り替え ── */
-  .page { display: none; }
-  .page.active { display: block; }
-
-  /* ════════════════════════════
-     共通ヘッダー
-  ════════════════════════════ */
-  .site-header {
-    position: sticky;
-    top: 0;
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
     z-index: 100;
-    background: var(--wire-bg);
-    border-bottom: 2px solid var(--wire-dark);
-  }
-  .header-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 64px;
-    max-width: var(--max);
-    margin: 0 auto;
-    padding: 0 28px;
+    padding: 18px 48px;
+    background: transparent;
+    transition: background .3s;
   }
-  .nav-links { display: flex; gap: 32px; align-items: center; }
-  .nav-link {
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: .04em;
-    color: var(--wire-dark);
-    text-decoration: none;
-    border-bottom: 2px solid transparent;
-    padding-bottom: 2px;
-    cursor: pointer;
-    background: none;
-    border-left: none;
-    border-right: none;
-    border-top: none;
-    font-family: var(--font);
-  }
-  .nav-link:hover { border-bottom-color: var(--wire-accent); }
-  .nav-link.contact-btn {
-    background: var(--wire-dark);
-    color: #fff;
-    padding: 8px 18px;
-    border-radius: 3px;
-    border-bottom: none;
-  }
-  .nav-link.contact-btn:hover { background: var(--wire-accent); }
-  .header-ann {
-    background: #F0F0EC;
-    border-top: 1px dashed var(--wire-border);
-    padding: 8px 28px;
-    font-size: 11px;
-    color: var(--wire-mid);
-    max-width: 100%;
-  }
-
-  /* ════════════════════════════
-     / TOP PAGE
-  ════════════════════════════ */
+  nav.scrolled { background: var(--red); }
+  .nav-logo img { height: 28px; display: block; }
+  .nav-links { display: flex; align-items: center; gap: 40px; }
+  .nav-links a { display: block; text-decoration: none; }
+  .nav-links a img { height: 16px; display: block; transition: opacity .2s; }
+  .nav-links a:hover img { opacity: 0.7; }
 
   /* HERO */
-  .hero {
-    min-height: 90vh;
-    background: var(--wire-dark);
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero-bg-hint {
-    position: absolute;
-    inset: 0;
+  #hero {
+    background: var(--red);
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 13px;
-    color: #444;
-    font-style: italic;
+    padding: 120px 48px 80px;
   }
-  .hero-content {
-    position: relative;
-    z-index: 1;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 80px 28px 60px;
-    max-width: var(--max);
+  .hero-logo { width: min(640px, 85vw); display: block; }
+
+  /* SECTIONS */
+  section { padding: 100px 48px; }
+  .container { max-width: var(--max); margin: 0 auto; }
+  .section-heading { display: block; margin: 0 auto 56px; }
+
+  /* CONCEPT */
+  #concept { background: var(--white); text-align: center; }
+  #concept .section-heading { width: min(720px, 90vw); }
+  .concept-text {
+    font-size: 14px;
+    line-height: 2;
+    color: var(--black);
+    max-width: 560px;
     margin: 0 auto;
-    width: 100%;
   }
-  .hero-eyebrow {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: .2em;
-    text-transform: uppercase;
-    color: var(--wire-accent);
-    margin-bottom: 20px;
-  }
-  .hero-title {
-    font-size: clamp(64px, 10vw, 120px);
-    font-weight: 900;
-    line-height: 1;
-    letter-spacing: -.01em;
-    margin-bottom: 24px;
-  }
-  .hero-sub {
-    font-size: 16px;
-    color: #aaa;
-    max-width: 460px;
-    margin-bottom: 40px;
-    line-height: 1.8;
-  }
-  .hero-cta { display: flex; gap: 16px; }
 
-  /* CONCEPT (top) */
-  .concept-grid {
+  /* EVENT */
+  #event { background: var(--white); text-align: center; padding-top: 0; }
+  #event .section-heading { width: min(200px, 50vw); margin-bottom: 48px; }
+  .event-card {
+    max-width: 760px;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 56px;
-    align-items: center;
-  }
-  .concept-text h3 { font-size: 20px; font-weight: 700; margin-bottom: 14px; }
-  .concept-text p { color: var(--wire-mid); font-size: 13px; line-height: 1.9; margin-bottom: 14px; }
-
-  /* EVENTS PREVIEW (top) */
-  .events-preview-card {
-    background: #fff;
-    border: 1px solid var(--wire-border);
-    border-radius: 6px;
+    border: 2px solid var(--red);
+    border-radius: 16px;
     overflow: hidden;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    text-align: left;
   }
-  .events-preview-card .block.img { height: 280px; border-radius: 0; }
-  .events-preview-body { padding: 32px; display: flex; flex-direction: column; justify-content: center; }
-  .event-tag {
-    display: inline-block;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: .06em;
-    color: var(--wire-mid);
-    border: 1px solid var(--wire-border);
-    padding: 2px 8px;
-    border-radius: 2px;
-    margin-bottom: 12px;
-    text-transform: uppercase;
-  }
-  .events-preview-body h3 { font-size: 20px; font-weight: 700; margin-bottom: 10px; }
-  .events-preview-body .meta { font-size: 13px; color: var(--wire-mid); line-height: 1.8; margin-bottom: 20px; }
-  .see-all-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: .06em;
-    text-transform: uppercase;
-    color: var(--wire-mid);
-    margin-top: 24px;
-    cursor: pointer;
-    background: none;
-    border: none;
-    font-family: var(--font);
-    padding: 0;
-  }
-  .see-all-link:hover { color: var(--wire-accent); }
-
-  /* ABOUT PREVIEW (top) */
-  .about-preview-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-  .about-preview-card { text-align: center; }
-  .about-preview-card .block { height: 200px; margin-bottom: 14px; }
-  .about-preview-card .name { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
-  .about-preview-card .role { font-size: 11px; color: var(--wire-accent); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
-
-  /* ════════════════════════════
-     /events PAGE
-  ════════════════════════════ */
-  .events-page-header {
-    background: var(--wire-dark);
-    color: #fff;
-    padding: 64px 0 48px;
-    position: relative;
-  }
-  .events-page-header::before {
-    content: 'Page — /events';
-    position: absolute;
-    top: 0; left: 0;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: .1em;
-    color: #aaa;
-    background: #111;
-    padding: 3px 10px;
-    border-bottom-right-radius: 6px;
-  }
-  .events-page-header h1 { font-size: 48px; font-weight: 900; letter-spacing: -.01em; margin-bottom: 8px; }
-  .events-page-header p { color: #888; font-size: 14px; }
-
-  .event-card-lg {
-    background: #fff;
-    border: 1px solid var(--wire-border);
-    border-radius: 8px;
-    overflow: hidden;
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-  }
-  .event-card-lg .block.img { height: 360px; border-radius: 0; }
-  .event-card-lg-body { padding: 40px 36px; display: flex; flex-direction: column; justify-content: center; }
-  .event-card-lg-body h2 { font-size: 24px; font-weight: 700; margin-bottom: 12px; }
-  .event-card-lg-body .meta { font-size: 13px; color: var(--wire-mid); line-height: 1.9; margin-bottom: 24px; }
-
-  .event-card-sm {
-    background: #fff;
-    border: 1px solid var(--wire-border);
-    border-radius: 6px;
-    overflow: hidden;
-  }
-  .event-card-sm .block.img { height: 160px; border-radius: 0; }
-  .event-card-sm-body { padding: 16px; }
-  .event-card-sm-body h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
-  .event-card-sm-body .meta { font-size: 12px; color: var(--wire-mid); line-height: 1.7; }
-
-  .archive-row {
+  .event-image {
+    background: #f0f0f0;
+    min-height: 280px;
     display: flex;
     align-items: center;
-    gap: 16px;
-    padding: 16px 0;
-    border-bottom: 1px solid var(--wire-border);
-  }
-  .archive-row .block.img { width: 80px; height: 60px; flex-shrink: 0; border-radius: 4px; }
-  .archive-row-text h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
-  .archive-row-text p { font-size: 12px; color: var(--wire-mid); }
-  .archive-row-date { margin-left: auto; font-size: 11px; color: var(--wire-light); white-space: nowrap; }
-
-  /* ════════════════════════════
-     /about PAGE
-  ════════════════════════════ */
-  .about-page-header {
-    background: var(--wire-dark);
-    color: #fff;
-    padding: 64px 0 48px;
-    position: relative;
-  }
-  .about-page-header::before {
-    content: 'Page — /about';
-    position: absolute;
-    top: 0; left: 0;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: .1em;
+    justify-content: center;
     color: #aaa;
-    background: #111;
-    padding: 3px 10px;
-    border-bottom-right-radius: 6px;
-  }
-  .about-page-header h1 { font-size: 48px; font-weight: 900; margin-bottom: 8px; }
-  .about-page-header p { color: #888; font-size: 14px; }
-
-  .member-row {
-    display: grid;
-    grid-template-columns: 280px 1fr;
-    gap: 48px;
-    align-items: start;
-    padding: 48px 0;
-    border-bottom: 1px solid var(--wire-border);
-  }
-  .member-row .block { height: 340px; }
-  .member-row-text h3 { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
-  .member-row-text .role { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--wire-accent); margin-bottom: 20px; }
-  .member-row-text p { font-size: 13px; color: var(--wire-mid); line-height: 1.9; margin-bottom: 14px; }
-  .skills-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
-  .skill-tag {
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--wire-dark);
-    background: var(--wire-surface);
-    border: 1px solid var(--wire-border);
-    border-radius: 3px;
-    padding: 4px 10px;
-  }
-
-  .work-inquiry {
-    background: var(--wire-dark);
-    color: #fff;
-    padding: 64px 0;
-    position: relative;
-  }
-  .work-inquiry::before {
-    content: 'お仕事のご相談';
-    position: absolute;
-    top: 0; left: 0;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: .1em;
-    color: #aaa;
-    background: #111;
-    padding: 3px 10px;
-    border-bottom-right-radius: 6px;
-  }
-  .work-inquiry h2 { font-size: 32px; font-weight: 700; margin-bottom: 16px; }
-  .work-inquiry p { font-size: 14px; color: #888; line-height: 1.9; max-width: 520px; margin-bottom: 32px; }
-  .service-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 36px; }
-  .service-tag {
-    font-size: 12px;
-    font-weight: 600;
-    color: #aaa;
-    border: 1px solid #444;
-    border-radius: 3px;
-    padding: 6px 14px;
-  }
-
-  /* ════════════════════════════
-     /contact PAGE
-  ════════════════════════════ */
-  .contact-page-header {
-    background: var(--wire-dark);
-    color: #fff;
-    padding: 64px 0 48px;
-    position: relative;
-  }
-  .contact-page-header::before {
-    content: 'Page — /contact';
-    position: absolute;
-    top: 0; left: 0;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: .1em;
-    color: #aaa;
-    background: #111;
-    padding: 3px 10px;
-    border-bottom-right-radius: 6px;
-  }
-  .contact-page-header h1 { font-size: 48px; font-weight: 900; margin-bottom: 8px; }
-  .contact-page-header p { color: #888; font-size: 14px; }
-
-  .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 64px; align-items: start; }
-  .form-field {
-    background: var(--wire-surface);
-    border: 1px solid var(--wire-border);
-    border-radius: 4px;
-    height: 48px;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    padding: 0 16px;
     font-size: 13px;
-    color: var(--wire-mid);
   }
-  .form-field.textarea { height: 120px; align-items: flex-start; padding-top: 14px; }
-  .form-field.select::after { content: '▾'; margin-left: auto; color: var(--wire-light); }
-  .contact-info h3 { font-size: 18px; font-weight: 700; margin-bottom: 16px; }
-  .contact-info p { font-size: 13px; color: var(--wire-mid); line-height: 1.9; margin-bottom: 24px; }
-  .sns-item {
+  .event-body {
+    padding: 36px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+  }
+  .event-name { display: block; width: 140px; }
+  .event-meta { font-size: 13px; line-height: 1.9; color: var(--black); }
+  .event-meta strong { display: block; font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .event-btn {
+    display: inline-block;
+    background: var(--red);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px 24px;
+    border-radius: 6px;
+    text-decoration: none;
+    width: fit-content;
+    transition: opacity .2s;
+  }
+  .event-btn:hover { opacity: 0.85; }
+  .coming-soon { margin-top: 32px; font-size: 13px; color: #aaa; letter-spacing: .1em; }
+
+  /* ABOUT */
+  #about { background: var(--white); text-align: center; padding-top: 0; }
+  #about .section-heading { width: min(280px, 70vw); margin-bottom: 64px; }
+  .members { display: flex; flex-direction: column; gap: 64px; align-items: center; }
+  .member { display: flex; flex-direction: column; align-items: center; gap: 20px; max-width: 360px; }
+  .member-photo {
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    border: 3px solid var(--red);
+    object-fit: cover;
+    display: block;
+  }
+  .member-photo-placeholder {
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    border: 3px solid var(--red);
+    background: #f0f0f0;
     display: flex;
     align-items: center;
-    gap: 14px;
-    background: var(--wire-surface);
-    border: 1px solid var(--wire-border);
-    border-radius: 6px;
-    padding: 14px 18px;
-    margin-bottom: 10px;
-  }
-  .sns-label { font-size: 13px; font-weight: 700; }
-  .sns-handle { font-size: 12px; color: var(--wire-mid); margin-left: auto; }
-
-  /* ── フッター ── */
-  .site-footer {
-    background: #111;
-    color: #555;
-    padding: 32px 28px;
-    text-align: center;
+    justify-content: center;
     font-size: 12px;
-    letter-spacing: .06em;
+    color: #aaa;
   }
-  .site-footer span { color: var(--wire-accent); }
+  .member-name-svg { display: block; height: 70px; width: auto; }
+  .member-bio { font-size: 13px; line-height: 1.9; color: #555; text-align: center; }
+
+  /* FOOTER */
+  footer {
+    background: var(--red);
+    color: var(--white);
+    text-align: center;
+    padding: 48px 24px;
+  }
+  .footer-logo { display: block; height: 32px; margin: 0 auto 20px; }
+  .footer-copy { font-size: 11px; letter-spacing: .08em; color: rgba(255,255,255,.7); line-height: 1.8; }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    section { padding: 72px 24px; }
+    #hero { padding: 100px 24px 64px; }
+    .hero-logo { width: 80vw; }
+    .event-card { grid-template-columns: 1fr; }
+    .event-image { min-height: 200px; }
+    .nav-links { gap: 20px; }
+    .nav-links a img { height: 13px; }
+  }
 </style>
 </head>
 <body>
-<!-- ページ切り替えスイッチャー -->
-<div class="page-switcher">
-  <span>PAGE ▸</span>
-  <button class="page-btn active" onclick="showPage('top')">/ TOP</button>
-  <button class="page-btn" onclick="showPage('events')">/events</button>
-  <button class="page-btn" onclick="showPage('about')">/about</button>
-  <button class="page-btn" onclick="showPage('contact')">/contact</button>
-</div>
 
+<nav id="main-nav">
+  <a href="#" class="nav-logo">
+    <img src="logo-nav.svg" alt="NONBORI">
+  </a>
+  <div class="nav-links">
+    <a href="#event"><img src="nav-event.svg" alt="EVENT"></a>
+    <a href="#about"><img src="nav-about.svg" alt="ABOUT"></a>
+    <a href="#contact"><img src="nav-contact.svg" alt="CONTACT"></a>
+  </div>
+</nav>
 
-<!-- ════════════════════════════════════════════════════
-  共通ヘッダー（全ページ）
-════════════════════════════════════════════════════ -->
-<header class="site-header">
-  <div class="header-inner">
-    <div class="block logo-area">NONBORI ロゴ</div>
-    <nav class="nav-links">
-      <button class="nav-link" onclick="showPage('events')">EVENTS</button>
-      <button class="nav-link" onclick="showPage('about')">ABOUT</button>
-      <button class="nav-link contact-btn" onclick="showPage('contact')">CONTACT</button>
-    </nav>
-  </div></header>
+<section id="hero">
+  <img class="hero-logo" src="logo-white.svg" alt="NONBORI">
+</section>
 
+<section id="concept">
+  <div class="container">
+    <img class="section-heading" src="heading-whatisnonbori.svg" alt="WHAT IS NONBORI?">
+    <p class="concept-text">
+      僕らの地元、愛知県尾張地方の方言「のんぼり（鯉のぼり・布地）」が語源。<br>
+      人と人を織り交ぜる——その想いを名前に込めました。<br><br>
+      大人になっても好きなことにまっすぐに、<br>
+      こだわりを持って生きている僕たちだからこそつくれる、<br>
+      大人も楽しい"遊びごころ"が感じられるイベントを創造していきます。
+    </p>
+  </div>
+</section>
 
-<!-- ════════════════════════════════════════════════════
-  PAGE: / TOP
-════════════════════════════════════════════════════ -->
-<div class="page active" id="page-top">
-
-  <!-- HERO -->
-  <div class="hero">
-<div class="hero-content">
-      <div class="hero-eyebrow">EVENT CREATOR COLLECTIVE / TOKAI</div>
-      <h1 class="hero-title">NONBORI</h1>
-      <p class="hero-sub">やりたいことで、生きている。そんな人たちがつくる場所。</p>
-      <div class="hero-cta">
-        <button class="block btn accent" onclick="showPage('events')">イベントを見る</button>
-        <button class="block btn outline-white" onclick="showPage('about')">NONBORIとは</button>
+<section id="event">
+  <div class="container">
+    <img class="section-heading" src="nav-event.svg" alt="EVENT">
+    <div class="event-card">
+      <div class="event-image">イベント写真（準備中）</div>
+      <div class="event-body">
+        <img class="event-name" src="heading-asobo.svg" alt="ASOBO!">
+        <div class="event-meta">
+          <strong>2026年5月24日（日）</strong>
+          @みんなの森 ぎふメディアコスモス<br>
+          ファミリー向け / 子供服 , ワークショップ , フードトラック
+        </div>
+        <a href="#" class="event-btn">詳細をみる</a>
       </div>
     </div>
-    <div class="container"></div>
+    <p class="coming-soon">coming soon...</p>
   </div>
+</section>
 
-  <!-- CONCEPT -->
-  <div class="section">
-    <div class="container">
-      <div class="section-header">
-        <div class="label">CONCEPT</div>
-        <h2>NONBORIとは</h2>
+<section id="about">
+  <div class="container">
+    <img class="section-heading" src="heading-aboutus.svg" alt="ABOUT US">
+    <div class="members">
+      <div class="member">
+        <div class="member-photo-placeholder">写真準備中</div>
+        <img class="member-name-svg" src="member-yuichiro.svg" alt="REPRESENTATIVE YUICHIRO">
+        <p class="member-bio">新規事業開発・マーケティングに従事。DMM.com、M3などのメガベンチャーで新規事業の開発等を担当し、今は学習塾の経営が楽しく、週の半分は数学を教えてる。元中南米バックパッカー。</p>
       </div>
-      <div class="concept-grid">
-        <div class="concept-text">
-          <h3>やりたいことで、生きている。そんな人たちがつくる場所。</h3>
-          <p>
-            僕らの地元、愛知県岩倉市の方言「のんぼり（鯉のぼり・布地）」が語源。<br>
-            人と人を織り交ぜる——その意味をブランドの名前に込めました。
-          </p>
-          <p>
-            好きなこと、やりたいことだけで生きている僕たちだからこそ、<br>
-            つくれる"品のある自由"が感じられるイベントを創造していきます。
-          </p>
-        </div>
-        <div>
-          <div class="block img" style="height:320px;">KVビジュアル<br>（写真 or グラフィック）</div></div>
-      </div></div>
-  </div>
-
-  <!-- EVENTS PREVIEW -->
-  <div class="section">
-    <div class="container">
-      <div class="section-header">
-        <div class="label">EVENTS</div>
-        <h2>最新イベント</h2>
-        <p>次回開催のピックアップ</p>
+      <div class="member">
+        <img class="member-photo" src="photo-haru.svg" alt="はるのすけ">
+        <img class="member-name-svg" src="member-haru.svg" alt="ART DIRECTOR HARU">
+        <p class="member-bio">アフリカでの学校デザインからお酒のデザインまで手掛けるデザイナー。アジアを旅して培った自由な感覚と遊び心で、洗練されたデザインの中にもどこか遊び心を入れ込む。</p>
       </div>
-      <div class="events-preview-card">
-        <div class="block img" style="height:280px; border-radius:0;">イベントビジュアル<br>（ママフェス）</div>
-        <div class="events-preview-body">
-          <div class="event-tag">MARCHÉ</div>
-          <h3>ママフェス 2026</h3>
-          <div class="meta">
-            📅 2026年5月24日（日）<br>
-            📍 みんなの森 ぎふメディアコスモス<br>
-            👶 ファミリー向け / 子ども服・ワークショップ・フードトラック
-          </div>
-          <button class="block btn accent sm" style="width:160px;">詳細を見る</button>
-        </div>
-      </div>
-      <div style="display:flex; justify-content:flex-end; margin-top:20px;">
-        <button class="see-all-link" onclick="showPage('events')">すべてのイベントを見る →</button>
-      </div></div>
-  </div>
-
-  <!-- ABOUT PREVIEW -->
-  <div class="section">
-    <div class="container">
-      <div class="section-header">
-        <div class="label">ABOUT</div>
-        <h2>メンバー</h2>
-        <p>NONBORIを動かす3人</p>
-      </div>
-      <div class="about-preview-grid">
-        <div class="about-preview-card">
-          <div class="block" style="height:200px;">顔写真 or イラスト or シルエット？</div>
-          <div class="name">祐一郎</div>
-          <div class="role">Representative</div>
-        </div>
-        <div class="about-preview-card">
-          <div class="block" style="height:200px;">顔写真 or イラスト or シルエット？</div>
-          <div class="name">はるのすけ</div>
-          <div class="role">Creative Director</div>
-        </div>
-        <div class="about-preview-card">
-          <div class="block" style="height:200px;">顔写真 or イラスト or シルエット？</div>
-          <div class="name">みーぼー</div>
-          <div class="role">Merchandiser</div>
-        </div>
-      </div>
-      <div style="display:flex; justify-content:flex-end; margin-top:24px;">
-        <button class="see-all-link" onclick="showPage('about')">詳しく見る →</button>
-      </div></div>
-  </div>
-
-  <footer class="site-footer">
-    <div style="margin-bottom:6px;">© 2026 <span>NONBORI</span>. All rights reserved.</div>
-    <div style="font-size:10px;">東海地域発 イベントクリエイター集団</div>
-  </footer>
-</div>
-
-
-<!-- ════════════════════════════════════════════════════
-  PAGE: /events
-════════════════════════════════════════════════════ -->
-<div class="page" id="page-events">
-
-  <div class="events-page-header">
-    <div class="container">
-      <h1>EVENTS</h1>
-      <p>NONBORIが手がけるイベントの一覧</p>
-    </div>
-  </div>
-
-  <!-- 最新のイベント -->
-  <div class="section">
-    <div class="container">
-      <div class="section-header">
-        <div class="label">LATEST</div>
-        <h2>最新のイベント</h2>
-      </div>
-      <div class="event-card-lg">
-        <div class="block img" style="height:360px; border-radius:0;">メインビジュアル<br>（ママフェス）</div>
-        <div class="event-card-lg-body">
-          <div class="event-tag">MARCHÉ</div>
-          <h2>ママフェス 2026</h2>
-          <div class="meta">
-            📅 2026年5月24日（日）<br>
-            📍 みんなの森 ぎふメディアコスモス<br>
-            🕐 開場 〇〇:〇〇 — 終了 〇〇:〇〇<br>
-            👶 ファミリー向け / 子ども服・ワークショップ・フードトラック
-          </div>
-          <button class="block btn accent sm" style="width:180px;">詳細・申し込み</button>
-        </div>
-      </div></div>
-  </div>
-
-  <!-- これから予定しているイベント -->
-  <div class="section">
-    <div class="container">
-      <div class="section-header">
-        <div class="label">UPCOMING</div>
-        <h2>これから予定しているイベント</h2>
-      </div>
-      <div class="grid-3">
-        <div class="event-card-sm">
-          <div class="block img" style="height:160px; border-radius:0;">イベントビジュアル<br>（キャリアトーク）</div>
-          <div class="event-card-sm-body">
-            <div class="event-tag">TALK</div>
-            <h3>正解のない選び方</h3>
-            <div class="meta">
-              📅 2026年5月17日（土）<br>
-              📍 犬山フロイデ
-            </div>
-            <button class="block btn sm outline" style="width:100%; margin-top:12px;">詳細を見る</button>
-          </div>
-        </div>
-        <div class="event-card-sm" style="opacity:.6;">
-          <div class="block img" style="height:160px; border-radius:0; background:#C8C8C2;">Coming Soon</div>
-          <div class="event-card-sm-body">
-            <div class="event-tag">MARCHÉ</div>
-            <h3>フルーツイベント（仮）</h3>
-            <div class="meta">
-              📅 2026年6〜7月 予定<br>
-              📍 調整中
-            </div>
-            <button class="block btn sm outline" style="width:100%; margin-top:12px; opacity:.5;" disabled>準備中</button>
-          </div>
-        </div>
-        <div class="event-card-sm" style="opacity:.6;">
-          <div class="block img" style="height:160px; border-radius:0; background:#C8C8C2;">Coming Soon</div>
-          <div class="event-card-sm-body">
-            <div class="event-tag">FESTIVAL</div>
-            <h3>盆踊りイベント（仮）</h3>
-            <div class="meta">
-              📅 2026年8月 予定<br>
-              📍 調整中
-            </div>
-            <button class="block btn sm outline" style="width:100%; margin-top:12px; opacity:.5;" disabled>準備中</button>
-          </div>
-        </div>
-      </div></div>
-  </div>
-
-  <!-- アーカイブ -->
-  <div class="section">
-    <div class="container">
-      <div class="section-header">
-        <div class="label">ARCHIVE</div>
-        <h2>アーカイブ</h2>
-        <p>過去に開催したイベント</p>
-      </div>
-
-      <div class="archive-row">
-        <div class="block img" style="width:80px; height:60px; flex-shrink:0; border-radius:4px;">写真</div>
-        <div class="archive-row-text">
-          <h4>過去イベント名 A</h4>
-          <p>〇〇会場 / MARCHÉ</p>
-        </div>
-        <div class="archive-row-date">2025年〇月</div>
-      </div>
-      <div class="archive-row">
-        <div class="block img" style="width:80px; height:60px; flex-shrink:0; border-radius:4px;">写真</div>
-        <div class="archive-row-text">
-          <h4>過去イベント名 B</h4>
-          <p>〇〇会場 / TALK</p>
-        </div>
-        <div class="archive-row-date">2025年〇月</div>
-      </div>
-      <div class="archive-row">
-        <div class="block img" style="width:80px; height:60px; flex-shrink:0; border-radius:4px;">写真</div>
-        <div class="archive-row-text">
-          <h4>過去イベント名 C</h4>
-          <p>〇〇会場 / MARCHÉ</p>
-        </div>
-        <div class="archive-row-date">2024年〇月</div>
-      </div></div>
-  </div>
-
-  <footer class="site-footer">
-    <div style="margin-bottom:6px;">© 2026 <span>NONBORI</span>. All rights reserved.</div>
-    <div style="font-size:10px;">東海地域発 イベントクリエイター集団</div>
-  </footer>
-</div>
-
-
-<!-- ════════════════════════════════════════════════════
-  PAGE: /about
-════════════════════════════════════════════════════ -->
-<div class="page" id="page-about">
-
-  <div class="about-page-header">
-    <div class="container">
-      <h1>ABOUT</h1>
-      <p>NONBORIを動かす、僕らのこと</p>
-    </div>
-  </div>
-
-  <!-- CONCEPT 深掘り -->
-  <div class="section">
-    <div class="container">
-
-      <!-- フィロソフィー -->
-      <div class="section-header">
-        <div class="label">PHILOSOPHY</div>
-        <h2>やりたいことで、生きている。そんな人たちがつくる場所。</h2>
-      </div>
-      <div class="concept-grid">
-        <div class="concept-text">
-          <p>
-            僕らの地元、愛知県岩倉市の方言「のんぼり（鯉のぼり・布地）」が語源。<br>
-            人と人を織り交ぜる——その意味をブランドの名前に込めました。
-          </p>
-          <p>
-            好きなこと、やりたいことだけで生きている僕たちだからこそ、<br>
-            つくれる"品のある自由"が感じられるイベントを創造していきます。
-          </p>
-          <p style="margin-top:24px; padding-top:24px; border-top:1px solid var(--wire-border);">
-            <strong style="font-size:13px;">なぜ、NONBORIをつくったか。</strong><br>
-            <span style="color:var(--wire-mid);">好きなメンバーと、好きな空間をつくりたかった。それがNONBORIのはじまり。</span>
-          </p>
-        </div>
-        <div class="block img" style="height:280px;">
-          ビジュアル or グラフィック
-        </div>
-      </div>
-
-      <div style="margin-top:64px;">
-        <div class="label">VALUES</div>
-        <h3 style="font-size:20px; font-weight:700; margin: 10px 0 28px;">大切にしていること</h3>
-        <div style="border-top:3px solid var(--wire-dark); padding-top:24px; max-width:600px;">
-          <div style="font-size:16px; font-weight:700; margin-bottom:12px;">自分たちが休みを取ってでも行きたいイベントであること。</div>
-        </div>
-      </div></div>
-  </div>
-
-  <!-- メンバー詳細 -->
-  <div class="section">
-    <div class="container">
-      <div class="section-header">
-        <div class="label">MEMBERS</div>
-        <h2>メンバー紹介</h2>
-      </div>
-
-      <!-- 祐一郎 -->
-      <div class="member-row">
-        <div class="block" style="height:340px;">顔写真 or イラスト or シルエット？</div>
-        <div class="member-row-text">
-          <h3>祐一郎</h3>
-          <div class="role">Representative / Strategy & Marketing</div>
-          <p>新規事業開発・マーケティングに従事。DMM.com、M3などのメガベンチャーで新規事業の開発等を担当し、今は学習塾の経営が楽しく、週の半分は数学を教えてる。元中南米バックパッカー。</p>
-        </div>
-      </div>
-
-      <!-- はるのすけ -->
-      <div class="member-row">
-        <div class="block" style="height:340px;">顔写真 or イラスト or シルエット？</div>
-        <div class="member-row-text">
-          <h3>はるのすけ</h3>
-          <div class="role">Creative Director / Designer</div>
-          <p>アフリカでの学校デザインからお酒のデザインまで手掛けるデザイナー。アジアを旅して培った自由な感覚と遊び心で、洗練されたデザインの中にもどこか遊び心を入れ込む。</p>
-        </div>
-      </div>
-
-      <!-- みーぼー -->
-      <div class="member-row">
-        <div class="block" style="height:340px;">顔写真 or イラスト or シルエット？</div>
-        <div class="member-row-text">
-          <h3>みーぼー</h3>
-          <div class="role">Merchandiser</div>
-          <p>ハマったものには、とことん深掘りしたくなる。おしゃれオタク。アパレル業界でマーチャンダイザーとして流行を作ってきた。ちゃんとこだわりを詰め込んだイベントの中身を素敵なものに仕上げていく。</p>
-        </div>
-      </div></div>
-  </div>
-
-  <!-- お仕事のご相談 -->
-  <div class="work-inquiry">
-    <div class="container">
-      <h2>お仕事のご相談</h2>
-      <p>
-        NONBORIではイベント制作にとどまらず、<br>
-        Webサイト制作・ブランドデザイン・クリエイティブ全般のご依頼を承っております。<br>
-        まずはお気軽にご相談ください。
-      </p>
-      <div class="service-tags">
-        <div class="service-tag">Webサイト制作</div>
-        <div class="service-tag">ブランドデザイン</div>
-        <div class="service-tag">グラフィックデザイン</div>
-        <div class="service-tag">イベント企画・運営</div>
-        <div class="service-tag">その他クリエイティブ全般</div>
-      </div>
-      <button class="block btn accent" onclick="showPage('contact')">お問い合わせはこちら →</button>
-    </div>
-    <div class="container"></div>
-  </div>
-
-  <footer class="site-footer">
-    <div style="margin-bottom:6px;">© 2026 <span>NONBORI</span>. All rights reserved.</div>
-    <div style="font-size:10px;">東海地域発 イベントクリエイター集団</div>
-  </footer>
-</div>
-
-
-<!-- ════════════════════════════════════════════════════
-  PAGE: /contact
-════════════════════════════════════════════════════ -->
-<div class="page" id="page-contact">
-
-  <div class="contact-page-header">
-    <div class="container">
-      <h1>CONTACT</h1>
-      <p>イベント出展・コラボ・お仕事のご相談はこちらから</p>
-    </div>
-  </div>
-
-  <div class="section" style="border-bottom:none;">
-    <div class="container">
-      <div class="contact-grid">
-
-        <!-- 左：インフォ + SNS -->
-        <div class="contact-info">
-          <h3>お気軽にどうぞ</h3>
-          <p>
-            イベント出展のご希望、コラボレーション、<br>
-            お仕事のご依頼など、なんでもお気軽に。<br>
-            通常2〜3営業日以内にご返信いたします。
-          </p>
-          <div class="sns-item">
-            <div class="block icon" style="font-size:10px; color:#aaa;">IG</div>
-            <div class="sns-label">Instagram</div>
-            <div class="sns-handle">@nonbori_official</div>
-          </div></div>
-
-        <!-- 右：フォーム -->
-        <div>
-          <div class="form-field">お名前 *</div>
-          <div class="form-field">メールアドレス *</div>
-          <div class="form-field select" style="display:flex;">
-            <span>お問い合わせ種別 *</span>
-          </div>
-<div class="form-field textarea">メッセージ *</div>
-          <button class="block btn accent" style="width:100%;">送信する</button></div>
-
+      <div class="member">
+        <div class="member-photo-placeholder">写真準備中</div>
+        <img class="member-name-svg" src="member-mibo.svg" alt="MERCHANDISER MI-BO-">
+        <p class="member-bio">ハマったものには、とことん深掘りしたくなる。おしゃれオタク。アパレル業界でマーチャンダイザーとして流行を作ってきた。ちゃんとこだわりを詰め込んだイベントの中身を素敵なものに仕上げていく。</p>
       </div>
     </div>
   </div>
+</section>
 
-  <footer class="site-footer">
-    <div style="margin-bottom:6px;">© 2026 <span>NONBORI</span>. All rights reserved.</div>
-    <div style="font-size:10px;">東海地域発 イベントクリエイター集団</div>
-  </footer>
-</div>
-
+<footer id="contact">
+  <img class="footer-logo" src="logo-white.svg" alt="NONBORI">
+  <p class="footer-copy">
+    © 2026 NONBORI. All rights reserved.<br>
+    東海地域発 イベントクリエイター集団
+  </p>
+</footer>
 
 <script>
-  function showPage(id) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.page-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('page-' + id).classList.add('active');
-    document.querySelectorAll('.page-btn').forEach(b => {
-      if (b.textContent.trim() === '/ TOP' && id === 'top') b.classList.add('active');
-      if (b.textContent.trim() === '/events' && id === 'events') b.classList.add('active');
-      if (b.textContent.trim() === '/about' && id === 'about') b.classList.add('active');
-      if (b.textContent.trim() === '/contact' && id === 'contact') b.classList.add('active');
-    });
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 80);
+  });
 </script>
-
 </body>
 </html>
