@@ -796,3 +796,55 @@ footer {
     text-align: left;
   }
 }
+
+/* UPCOMING section */
+.upcoming-section {
+  position: relative;
+  width: 100%;
+}
+
+.upcoming-bg-img {
+  width: 100%;
+  display: block;
+}
+
+.upcoming-cards-inner {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 75%;
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* カード内テキストを白に（赤背景の上なので） */
+.upcoming-section .upcoming-card {
+  border-color: #FFFFFF;
+}
+.upcoming-section .uc-type,
+.upcoming-section .uc-title,
+.upcoming-section .uc-date,
+.upcoming-section .uc-venue {
+  color: #FFFFFF;
+}
+
+/* 白枠ボタン */
+.btn-white {
+  border-color: #FFFFFF;
+  color: #FFFFFF;
+}
+.btn-white:hover {
+  background: #FFFFFF;
+  color: #FF0000;
+}
+
+@media (max-width: 768px) {
+  .upcoming-cards-inner {
+    width: 80%;
+    top: 30%;
+    gap: 12px;
+  }
+}
