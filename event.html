@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EVENT | NONBORI</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--red:#FF0000;--white:#fff;--font:'Noto Sans JP',sans-serif}
+html{scroll-behavior:smooth}
+body{background:var(--white);color:var(--red);font-family:var(--font);font-weight:700;overflow-x:hidden}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:var(--red)}
+.nav-links{display:flex;align-items:center;gap:36px}
+.nav-links a{display:flex;align-items:center;text-decoration:none}
+.nav-links a img{display:block;height:14px}
+.nav-insta img{height:28px}
+
+/* NEW!! */
+#new-section{padding:80px 48px 60px}
+#new-section img.heading{width:min(220px,60%);display:block;margin:0 auto 40px}
+.new-card{max-width:760px;margin:0 auto}
+.new-card img{width:100%;display:block}
+
+/* UPCOMING */
+#upcoming{padding:0 48px 80px;text-align:center}
+#upcoming img.upcoming-oval{width:min(580px,90%);display:block;margin:0 auto}
+
+/* ARCHIVE */
+#archive{padding:0 48px 80px;text-align:center}
+#archive img.heading{width:min(300px,70%);display:block;margin:0 auto 40px}
+.archive-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:760px;margin:0 auto}
+.archive-card img{width:100%;display:block}
+
+footer{margin-top:40px}
+footer img{width:100%;display:block}
+footer .copy{background:var(--red);text-align:center;color:var(--white);font-size:11px;letter-spacing:.08em;padding:16px 24px 32px}
+
+@media(max-width:768px){
+  nav{padding:12px 20px}
+  .nav-links{gap:16px}
+  .nav-links a img{height:11px}
+  .nav-insta img{height:22px}
+  #new-section{padding:60px 24px 40px}
+  #upcoming{padding:0 24px 60px}
+  #archive{padding:0 24px 60px}
+  .archive-cards{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo"></div>
+  <div class="nav-links">
+    <a href="event.html"><img src="nav-event.svg" alt="EVENT"></a>
+    <a href="about.html"><img src="nav-aboutus.svg" alt="ABOUT US"></a>
+    <a href="contact.html"><img src="nav-contact.svg" alt="CONTACT"></a>
+    <a href="https://www.instagram.com/nonbori_official" target="_blank" class="nav-insta"><img src="nav-instagram.svg" alt="Instagram"></a>
+  </div>
+</nav>
+
+<section id="new-section">
+  <img class="heading" src="event-heading-new.svg" alt="NEW!!">
+  <div class="new-card">
+    <img src="event-asoboi-card.svg" alt="ASOBOI!">
+  </div>
+  <div style="max-width:760px;margin:16px auto 0;font-size:13px;line-height:2">
+    2026年5月24日（日）<br>
+    @みんなの森 ぎふメディアコスモス<br>
+    ファミリー向け / 子供服 , ワークショップ , フードトラック
+  </div>
+</section>
+
+<section id="upcoming">
+  <img class="upcoming-oval" src="event-upcoming-oval.svg" alt="UPCOMING">
+</section>
+
+<section id="archive">
+  <img class="heading" src="event-heading-archive.svg" alt="ARCHIVE">
+  <div class="archive-cards">
+    <div class="archive-card"><img src="event-archive-card.svg" alt="EVENT"></div>
+    <div class="archive-card"><img src="event-archive-card.svg" alt="EVENT"></div>
+    <div class="archive-card"><img src="event-archive-card.svg" alt="EVENT"></div>
+  </div>
+</section>
+
+<footer>
+  <img src="top-footer.svg" alt="">
+  <div class="copy">© 2026 NONBORI. All rights reserved.</div>
+</footer>
+
+</body>
+</html>

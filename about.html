@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ABOUT US | NONBORI</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--red:#FF0000;--white:#fff;--font:'Noto Sans JP',sans-serif}
+body{background:var(--white);color:var(--red);font-family:var(--font);font-weight:700;overflow-x:hidden}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:var(--red)}
+.nav-links{display:flex;align-items:center;gap:36px}
+.nav-links a{display:flex;align-items:center;text-decoration:none}
+.nav-links a img{display:block;height:14px}
+.nav-insta img{height:28px}
+
+/* HERO */
+#about-hero{padding-top:56px}
+#about-hero img{width:100%;display:block}
+
+/* MEMBERS */
+#members{padding:80px 48px}
+.member-row{display:grid;grid-template-columns:240px 1fr;gap:48px;align-items:start;max-width:900px;margin:0 auto 72px}
+.member-row.reverse{grid-template-columns:1fr 240px}
+.member-row.reverse .member-info{order:-1}
+.member-photo-wrap img{width:100%;display:block}
+.member-name-svg{display:block;width:min(280px,100%);margin-bottom:20px}
+.member-bio{font-size:13px;line-height:2;color:var(--red)}
+
+/* WORK INQUIRY */
+#work-inquiry{padding:0 48px 0;text-align:center}
+#work-inquiry img.circle{width:min(620px,90%);display:block;margin:0 auto}
+.work-text{font-size:13px;line-height:2;max-width:560px;margin:24px auto 0}
+.work-btn{display:inline-block;margin-top:32px;background:var(--white);color:var(--red);border:2px solid var(--red);padding:12px 40px;border-radius:30px;text-decoration:none;font-size:14px}
+
+footer{margin-top:80px}
+footer img{width:100%;display:block}
+footer .copy{background:var(--red);text-align:center;color:var(--white);font-size:11px;letter-spacing:.08em;padding:16px 24px 32px}
+
+@media(max-width:768px){
+  nav{padding:12px 20px}
+  .nav-links{gap:16px}
+  .nav-links a img{height:11px}
+  .nav-insta img{height:22px}
+  #members{padding:60px 24px}
+  .member-row,.member-row.reverse{grid-template-columns:1fr;gap:24px}
+  .member-row.reverse .member-info{order:0}
+  .member-photo-wrap img{max-width:200px;margin:0 auto}
+  #work-inquiry{padding:0 24px}
+  footer{margin-top:60px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo"></div>
+  <div class="nav-links">
+    <a href="event.html"><img src="nav-event.svg" alt="EVENT"></a>
+    <a href="about.html"><img src="nav-aboutus.svg" alt="ABOUT US"></a>
+    <a href="contact.html"><img src="nav-contact.svg" alt="CONTACT"></a>
+    <a href="https://www.instagram.com/nonbori_official" target="_blank" class="nav-insta"><img src="nav-instagram.svg" alt="Instagram"></a>
+  </div>
+</nav>
+
+<section id="about-hero">
+  <img src="about-hero.svg" alt="好きなメンバーと、好きな空間をつくりたかった。それがNONBORIのはじまり。">
+</section>
+
+<section id="members">
+
+  <!-- 祐一郎 -->
+  <div class="member-row">
+    <div class="member-photo-wrap">
+      <img src="circle-placeholder.svg" alt="祐一郎">
+    </div>
+    <div class="member-info">
+      <img class="member-name-svg" src="about-member-yuichiro.svg" alt="REPRESENTATIVE YUICHIRO">
+      <p class="member-bio">
+        新規事業開発・マーケティングに従事。DMM.com、M3などのメガベンチャーで新規事業の開発等を担当し、今は学習塾の経営が楽しく、週の半分は数学を教えてる。元中南米バックパッカー。
+      </p>
+    </div>
+  </div>
+
+  <!-- はるのすけ -->
+  <div class="member-row reverse">
+    <div class="member-photo-wrap">
+      <img src="photo-haru.svg" alt="はるのすけ">
+    </div>
+    <div class="member-info">
+      <img class="member-name-svg" src="about-member-haru.svg" alt="ART DIRECTOR HARU">
+      <p class="member-bio">
+        グラフィックデザインを軸とし、アートや工芸など多岐にわたる分野で東京を拠点に活動中。手描きとデジタルを行き来しながらビジュアルを作り上げる。最近の趣味は家具を作ること。
+      </p>
+    </div>
+  </div>
+
+  <!-- みーぼー -->
+  <div class="member-row">
+    <div class="member-photo-wrap">
+      <img src="circle-placeholder.svg" alt="みーぼー">
+    </div>
+    <div class="member-info">
+      <img class="member-name-svg" src="about-member-mibo.svg" alt="MERCHANDISER MI-BO-">
+      <p class="member-bio">
+        ハマったものには、とことん深掘りしたくなる、おしゃれオタク。アパレル業界でマーチャンダイザーとして流行を作ってきた。こだわりを詰め込んだイベントの中身を素敵なものに仕上げていく。
+      </p>
+    </div>
+  </div>
+
+</section>
+
+<section id="work-inquiry">
+  <img class="circle" src="about-work-inquiry.svg" alt="お仕事のご相談">
+  <p class="work-text">
+    NONBORIではイベント制作にとどまらず、<br>
+    Webサイト制作・ブランドデザイン・クリエイティブ全般のご依頼を承っております。<br>
+    まずはお気軽にご相談ください。
+  </p>
+  <a href="contact.html" class="work-btn">お問い合わせはこちら</a>
+</section>
+
+<footer>
+  <img src="top-footer.svg" alt="">
+  <div class="copy">© 2026 NONBORI. All rights reserved.</div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CONTACT | NONBORI</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--red:#FF0000;--white:#fff;--font:'Noto Sans JP',sans-serif}
+body{background:var(--white);color:var(--red);font-family:var(--font);font-weight:700;overflow-x:hidden}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:var(--red)}
+.nav-links{display:flex;align-items:center;gap:36px}
+.nav-links a{display:flex;align-items:center;text-decoration:none}
+.nav-links a img{display:block;height:14px}
+.nav-insta img{height:28px}
+
+/* CONTACT */
+#contact-section{padding:120px 48px 80px;max-width:700px;margin:0 auto;text-align:center}
+#contact-section img.heading{width:min(460px,90%);display:block;margin:0 auto 24px}
+.contact-desc{font-size:13px;line-height:2;margin-bottom:48px}
+.contact-form{text-align:left}
+.form-field{width:100%;margin-bottom:16px;padding:14px 20px;border:2px solid var(--red);border-radius:30px;font-family:var(--font);font-weight:700;font-size:14px;color:var(--red);background:var(--white);outline:none;appearance:none}
+.form-field::placeholder{color:rgba(255,0,0,0.5)}
+.form-field:focus{border-color:var(--red)}
+textarea.form-field{border-radius:16px;height:140px;resize:vertical}
+.form-btn{width:100%;padding:16px;background:var(--red);color:var(--white);border:none;border-radius:30px;font-family:var(--font);font-weight:700;font-size:15px;cursor:pointer;margin-top:8px}
+.form-btn:hover{opacity:.85}
+
+footer img{width:100%;display:block}
+footer .copy{background:var(--red);text-align:center;color:var(--white);font-size:11px;letter-spacing:.08em;padding:16px 24px 32px}
+
+@media(max-width:768px){
+  nav{padding:12px 20px}
+  .nav-links{gap:16px}
+  .nav-links a img{height:11px}
+  .nav-insta img{height:22px}
+  #contact-section{padding:100px 24px 60px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo"></div>
+  <div class="nav-links">
+    <a href="event.html"><img src="nav-event.svg" alt="EVENT"></a>
+    <a href="about.html"><img src="nav-aboutus.svg" alt="ABOUT US"></a>
+    <a href="contact.html"><img src="nav-contact.svg" alt="CONTACT"></a>
+    <a href="https://www.instagram.com/nonbori_official" target="_blank" class="nav-insta"><img src="nav-instagram.svg" alt="Instagram"></a>
+  </div>
+</nav>
+
+<section id="contact-section">
+  <img class="heading" src="contact-heading.svg" alt="お気軽にどうぞ。">
+  <p class="contact-desc">
+    イベント出展のご希望やコラボレーションのご相談、各種お仕事のご依頼など、<br>
+    お気軽にお問い合わせください。<br>
+    小さなご質問やご相談なども大歓迎です。<br><br>
+    お問い合わせには、通常2〜3営業日以内にご返信させていただきます。<br>
+    ご連絡お待ちしております。
+  </p>
+
+  <form class="contact-form" action="#" method="post">
+    <input class="form-field" type="text" name="name" placeholder="お名前" required>
+    <input class="form-field" type="email" name="email" placeholder="メールアドレス" required>
+    <select class="form-field" name="type">
+      <option value="" disabled selected>お問い合わせ種別</option>
+      <option>イベント出展希望</option>
+      <option>コラボ・取材</option>
+      <option>お仕事のご依頼</option>
+      <option>その他</option>
+    </select>
+    <textarea class="form-field" name="message" placeholder="メッセージ" required></textarea>
+    <button class="form-btn" type="submit">送信する</button>
+  </form>
+</section>
+
+<footer>
+  <img src="top-footer.svg" alt="">
+  <div class="copy">© 2026 NONBORI. All rights reserved.</div>
+</footer>
+
+</body>
+</html>
