@@ -1,126 +1,111 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NONBORI</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700&display=swap" rel="stylesheet">
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--red:#FF0000;--white:#fff;--font:'Noto Sans JP',sans-serif;--max:1100px}
-html{scroll-behavior:smooth}
-body{background:var(--white);color:var(--red);font-family:var(--font);font-weight:700;overflow-x:hidden}
-
-/* NAV PC */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:var(--red)}
-.nav-links{display:flex;align-items:center;gap:36px}
-.nav-links a{display:flex;align-items:center;text-decoration:none}
-.nav-links a img{display:block;height:14px}
-.nav-logo a{display:flex;align-items:center;text-decoration:none}
-.nav-insta img{height:28px}
-
-/* HERO */
-#hero{padding-top:56px}
-#hero img.hero-img{width:100%;display:block}
-
-/* CONCEPT */
-#concept{padding:80px 48px;text-align:center}
-#concept img.heading{width:min(700px,90%);display:block;margin:0 auto 40px}
-#concept p{font-size:14px;line-height:2.2;color:var(--red)}
-
-/* EVENT PREVIEW */
-#event-preview{padding:0 48px 80px;text-align:center}
-#event-preview img.event-circle{width:min(700px,90%);display:block;margin:0 auto}
-#event-preview a{display:inline-block;margin-top:32px;font-size:13px;color:var(--red);text-decoration:none;border-bottom:2px solid var(--red);padding-bottom:2px}
-
-/* ABOUT PREVIEW */
-#about-preview{padding:0 48px 0}
-#about-preview img.heading{width:min(340px,80%);display:block;margin:0 auto 56px}
-.members-grid{display:flex;flex-direction:column;gap:56px;max-width:700px;margin:0 auto}
-.member-row{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:40px}
-.member-row.reverse{direction:rtl}
-.member-row.reverse > *{direction:ltr}
-.member-photo{width:100%;max-width:220px;display:block}
-.member-name{width:100%;max-width:260px;display:block}
-
-/* FOOTER */
-footer{margin-top:80px}
-footer img{width:100%;display:block}
-footer .copy{background:var(--red);text-align:center;color:var(--white);font-size:11px;letter-spacing:.08em;padding:16px 24px 32px}
-
-/* MOBILE */
-.sp-only{display:none}
-.pc-only{display:block}
-
-@media(max-width:768px){
-  nav{padding:12px 20px}
-  .nav-links{gap:16px}
-  .nav-links a img{height:11px}
-  .nav-insta img{height:22px}
-  #concept{padding:60px 24px}
-  #event-preview{padding:0 24px 60px}
-  #about-preview{padding:0 24px}
-  .member-row{grid-template-columns:1fr 1fr;gap:20px}
-  footer{margin-top:60px}
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NONBORI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<nav>
-  <div class="nav-logo"><a href="index.html"><img src="nav-event.svg" alt="" style="height:0;width:0;opacity:0"></a></div>
-  <div class="nav-links">
-    <a href="event.html"><img src="nav-event.svg" alt="EVENT"></a>
-    <a href="about.html"><img src="nav-aboutus.svg" alt="ABOUT US"></a>
-    <a href="contact.html"><img src="nav-contact.svg" alt="CONTACT"></a>
-    <a href="https://www.instagram.com/nonbori_official" target="_blank" class="nav-insta"><img src="nav-instagram.svg" alt="Instagram"></a>
-  </div>
-</nav>
+  <!-- ===== HEADER ===== -->
+  <header>
+    <nav class="nav-links">
+      <a href="event.html"><img src="nav-event.svg" alt="EVENT"></a>
+      <a href="about.html"><img src="nav-aboutus.svg" alt="ABOUT US"></a>
+      <a href="contact.html"><img src="nav-contact.svg" alt="CONTACT"></a>
+    </nav>
+    <a href="https://www.instagram.com/nonbori_official" class="nav-instagram" target="_blank" rel="noopener noreferrer">
+      <img src="nav-instagram.svg" alt="Instagram">
+    </a>
+  </header>
 
-<section id="hero">
-  <img class="hero-img" src="top-hero.svg" alt="NONBORI">
-</section>
+  <main>
 
-<section id="concept">
-  <img class="heading" src="top-heading-whatisnonbori.svg" alt="WHAT IS NONBORI?">
-  <p>
-    僕らの地元、愛知県尾張地方の方言「のんぼり（鯉のぼり・布地）」が語源。<br>
-    人と人を織り交ぜる——その想いを名前に込めました。<br><br>
-    大人になっても好きなことにまっすぐに、<br>
-    こだわりを持って生きている僕たちだからこそつくれる、<br>
-    大人も楽しい"遊びごころ"が感じられるイベントを創造していきます。
-  </p>
-</section>
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+      <img src="top-hero.svg" alt="NONBORI">
+    </section>
 
-<section id="event-preview">
-  <img class="event-circle" src="top-event-circle.svg" alt="EVENT">
-  <br>
-  <a href="event.html">すべてのイベントを見る →</a>
-</section>
+    <!-- ===== WHAT IS NONBORI ===== -->
+    <section class="what-is">
+      <img class="section-heading" src="top-heading-whatisnonbori.svg" alt="WHAT IS NONBORI?">
+      <p>
+        僕らの地元、愛知県尾張地方の方言「のんぼり（鯉のぼり・布地）」が語源。<br>
+        人と人を織り交ぜる——その想いを名前に込めました。<br>
+        <br>
+        大人になっても好きなことにまっすぐに、<br>
+        こだわりを持って生きている僕たちだからこそつくれる、<br>
+        大人も楽しい"遊びごころ"が感じられるイベントを創造していきます。
+      </p>
+    </section>
 
-<section id="about-preview">
-  <img class="heading" src="top-heading-aboutus.svg" alt="ABOUT US">
-  <div class="members-grid">
-    <div class="member-row">
-      <img class="member-photo" src="circle-placeholder.svg" alt="祐一郎">
-      <img class="member-name" src="top-member-yuichiro.svg" alt="REPRESENTATIVE YUICHIRO">
-    </div>
-    <div class="member-row reverse">
-      <img class="member-photo" src="photo-haru.svg" alt="はるのすけ">
-      <img class="member-name" src="top-member-haru.svg" alt="ART DIRECTOR HARU">
-    </div>
-    <div class="member-row">
-      <img class="member-photo" src="circle-placeholder.svg" alt="みーぼー">
-      <img class="member-name" src="top-member-mibo.svg" alt="MERCHANDISER MI-BO-">
-    </div>
-  </div>
-</section>
+    <!-- ===== EVENT ===== -->
+    <section class="event-section">
+      <div class="event-circle-wrap">
+        <img class="event-circle-img" src="top-event-circle.svg" alt="EVENT">
+        <div class="event-cards">
+          <!-- ASOBO! カード -->
+          <div class="event-card main-card">
+            <p class="asobo-title">ASOBO!</p>
+            <p class="event-date">2026年10月4日（日）</p>
+            <p class="event-venue">@みんなの森 ぎふメディアコスモス</p>
+            <p class="event-tags">ファミリー向け / 子供服 , ワークショップ , フードトラック</p>
+            <a href="event.html" class="btn">詳細をみる</a>
+          </div>
+          <!-- coming soon カード -->
+          <div class="event-card coming-soon-card">
+            <span class="coming-soon-text">coming soon...</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<footer>
-  <img src="top-footer.svg" alt="">
-  <div class="copy">© 2026 NONBORI. All rights reserved.</div>
-</footer>
+    <!-- ===== ABOUT US ===== -->
+    <section class="about-preview">
+      <img class="section-heading" src="top-heading-aboutus.svg" alt="ABOUT US">
+
+      <!-- YUICHIRO: 写真（左）名前（右） -->
+      <div class="member-row">
+        <div class="member-photo">
+          <img src="circle-placeholder.svg" alt="祐一郎">
+        </div>
+        <div class="member-name-only">
+          <img src="top-member-yuichiro.svg" alt="REPRESENTATIVE YUICHIRO">
+        </div>
+      </div>
+
+      <!-- HARU: 名前（左）写真（右） -->
+      <div class="member-row reverse">
+        <div class="member-photo">
+          <img src="photo-haru.svg" alt="はるのすけ">
+        </div>
+        <div class="member-name-only">
+          <img src="top-member-haru.svg" alt="ART DIRECTOR HARU">
+        </div>
+      </div>
+
+      <!-- MI-BO-: 写真（左）名前（右） -->
+      <div class="member-row">
+        <div class="member-photo">
+          <img src="circle-placeholder.svg" alt="みーぼー">
+        </div>
+        <div class="member-name-only">
+          <img src="top-member-mibo.svg" alt="MERCHANDISER MI-BO-">
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <img class="footer-img" src="top-footer.svg" alt="">
+    <p class="copyright">© 2026 NONBORI. All rights reserved.</p>
+  </footer>
 
 </body>
 </html>

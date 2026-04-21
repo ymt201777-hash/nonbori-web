@@ -1,95 +1,120 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EVENT | NONBORI</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700&display=swap" rel="stylesheet">
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--red:#FF0000;--white:#fff;--font:'Noto Sans JP',sans-serif}
-html{scroll-behavior:smooth}
-body{background:var(--white);color:var(--red);font-family:var(--font);font-weight:700;overflow-x:hidden}
-
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:var(--red)}
-.nav-links{display:flex;align-items:center;gap:36px}
-.nav-links a{display:flex;align-items:center;text-decoration:none}
-.nav-links a img{display:block;height:14px}
-.nav-insta img{height:28px}
-
-/* NEW!! */
-#new-section{padding:80px 48px 60px}
-#new-section img.heading{width:min(220px,60%);display:block;margin:0 auto 40px}
-.new-card{max-width:760px;margin:0 auto}
-.new-card img{width:100%;display:block}
-
-/* UPCOMING */
-#upcoming{padding:0 48px 80px;text-align:center}
-#upcoming img.upcoming-oval{width:min(580px,90%);display:block;margin:0 auto}
-
-/* ARCHIVE */
-#archive{padding:0 48px 80px;text-align:center}
-#archive img.heading{width:min(300px,70%);display:block;margin:0 auto 40px}
-.archive-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:760px;margin:0 auto}
-.archive-card img{width:100%;display:block}
-
-footer{margin-top:40px}
-footer img{width:100%;display:block}
-footer .copy{background:var(--red);text-align:center;color:var(--white);font-size:11px;letter-spacing:.08em;padding:16px 24px 32px}
-
-@media(max-width:768px){
-  nav{padding:12px 20px}
-  .nav-links{gap:16px}
-  .nav-links a img{height:11px}
-  .nav-insta img{height:22px}
-  #new-section{padding:60px 24px 40px}
-  #upcoming{padding:0 24px 60px}
-  #archive{padding:0 24px 60px}
-  .archive-cards{grid-template-columns:1fr}
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EVENT | NONBORI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<nav>
-  <div class="nav-logo"></div>
-  <div class="nav-links">
-    <a href="event.html"><img src="nav-event.svg" alt="EVENT"></a>
-    <a href="about.html"><img src="nav-aboutus.svg" alt="ABOUT US"></a>
-    <a href="contact.html"><img src="nav-contact.svg" alt="CONTACT"></a>
-    <a href="https://www.instagram.com/nonbori_official" target="_blank" class="nav-insta"><img src="nav-instagram.svg" alt="Instagram"></a>
-  </div>
-</nav>
+  <!-- ===== HEADER ===== -->
+  <header>
+    <nav class="nav-links">
+      <a href="event.html"><img src="nav-event.svg" alt="EVENT"></a>
+      <a href="about.html"><img src="nav-aboutus.svg" alt="ABOUT US"></a>
+      <a href="contact.html"><img src="nav-contact.svg" alt="CONTACT"></a>
+    </nav>
+    <a href="https://www.instagram.com/nonbori_official" class="nav-instagram" target="_blank" rel="noopener noreferrer">
+      <img src="nav-instagram.svg" alt="Instagram">
+    </a>
+  </header>
 
-<section id="new-section">
-  <img class="heading" src="event-heading-new.svg" alt="NEW!!">
-  <div class="new-card">
-    <img src="event-asoboi-card.svg" alt="ASOBOI!">
-  </div>
-  <div style="max-width:760px;margin:16px auto 0;font-size:13px;line-height:2">
-    2026年5月24日（日）<br>
-    @みんなの森 ぎふメディアコスモス<br>
-    ファミリー向け / 子供服 , ワークショップ , フードトラック
-  </div>
-</section>
+  <main>
+    <div class="event-page-section">
 
-<section id="upcoming">
-  <img class="upcoming-oval" src="event-upcoming-oval.svg" alt="UPCOMING">
-</section>
+      <!-- ===== NEW!! ===== -->
+      <img class="event-page-heading" src="event-heading-new.svg" alt="NEW!!">
 
-<section id="archive">
-  <img class="heading" src="event-heading-archive.svg" alt="ARCHIVE">
-  <div class="archive-cards">
-    <div class="archive-card"><img src="event-archive-card.svg" alt="EVENT"></div>
-    <div class="archive-card"><img src="event-archive-card.svg" alt="EVENT"></div>
-    <div class="archive-card"><img src="event-archive-card.svg" alt="EVENT"></div>
-  </div>
-</section>
+      <div class="new-event-wrap">
+        <!-- ASOBO! メインカード -->
+        <div class="new-event-card">
+          <div class="card-image">
+            <img src="event-asoboi-card.svg" alt="ASOBO!">
+          </div>
+          <div class="card-body">
+            <p class="event-type-badge">ファミリー向け</p>
+            <p class="event-date">2026年10月4日（日）</p>
+            <p class="event-venue">@みんなの森 ぎふメディアコスモス</p>
+            <p class="event-tags">子供服 , ワークショップ , フードトラック</p>
+          </div>
+          <div class="card-footer">
+            <a href="contact.html" class="btn">詳細・申し込み</a>
+          </div>
+        </div>
 
-<footer>
-  <img src="top-footer.svg" alt="">
-  <div class="copy">© 2026 NONBORI. All rights reserved.</div>
-</footer>
+        <!-- coming soon プレースホルダー -->
+        <div class="coming-soon-placeholder">
+          <p>coming soon...</p>
+        </div>
+      </div>
+
+      <!-- ===== UPCOMING ===== -->
+      <img class="upcoming-heading" src="event-upcoming-oval.svg" alt="UPCOMING">
+
+      <div class="upcoming-events">
+
+        <!-- 正解のない選び方 -->
+        <div class="upcoming-card">
+          <div class="uc-left">
+            <p class="uc-type">トークイベント</p>
+            <p class="uc-title">正解のない選び方</p>
+            <p class="uc-date">2026年5月17日（土）</p>
+            <p class="uc-venue">@犬山フロイデ</p>
+          </div>
+          <div class="uc-right">
+            <a href="#" class="btn">詳細をみる</a>
+          </div>
+        </div>
+
+        <!-- マルシェ -->
+        <div class="upcoming-card">
+          <div class="uc-left">
+            <p class="uc-type">マルシェ</p>
+            <p class="uc-title">coming soon...</p>
+            <p class="uc-date">2026年6月〜7月予定</p>
+            <p class="uc-venue">@調整中</p>
+          </div>
+          <div class="uc-right">
+            <a href="#" class="btn">詳細をみる</a>
+          </div>
+        </div>
+
+        <!-- フェス -->
+        <div class="upcoming-card">
+          <div class="uc-left">
+            <p class="uc-type">フェス</p>
+            <p class="uc-title">coming soon...</p>
+            <p class="uc-date">2026年8月予定</p>
+            <p class="uc-venue">@調整中</p>
+          </div>
+          <div class="uc-right">
+            <a href="#" class="btn">詳細をみる</a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ===== ARCHIVE ===== -->
+      <img class="archive-heading" src="event-heading-archive.svg" alt="ARCHIVE">
+
+      <div class="archive-events">
+        <div class="archive-card"><img src="event-archive-card.svg" alt="EVENT"></div>
+        <div class="archive-card"><img src="event-archive-card.svg" alt="EVENT"></div>
+        <div class="archive-card"><img src="event-archive-card.svg" alt="EVENT"></div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <img class="footer-img" src="top-footer.svg" alt="">
+    <p class="copyright">© 2026 NONBORI. All rights reserved.</p>
+  </footer>
 
 </body>
 </html>
