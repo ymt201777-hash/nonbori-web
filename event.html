@@ -4,15 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EVENT | NONBORI</title>
+  <link rel="icon" type="image/svg+xml" href="ファビコン.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="event-page">
 
   <!-- ===== HEADER ===== -->
   <header>
+    <img class="header-bg-img" src="event-header-bg.svg" alt="">
+    <a href="index.html" class="nav-top" aria-label="TOPへ戻る">
+      <picture>
+        <source media="(max-width: 768px)" srcset="TOP_スマホver.svg">
+        <img src="TOP_PCweb%20ver.svg" alt="TOP">
+      </picture>
+    </a>
     <nav class="nav-links">
       <a href="event.html"><img src="nav-event.svg" alt="EVENT"></a>
       <a href="about.html"><img src="nav-aboutus.svg" alt="ABOUT US"></a>
@@ -30,10 +38,10 @@
       <img class="event-page-heading" src="event-heading-new.svg" alt="NEW!!">
 
       <div class="new-event-wrap">
-        <!-- ASOBO! メインカード -->
+        <!-- 左カラム：ASOBO! テキスト＋ボタン -->
         <div class="new-event-card">
           <div class="card-image">
-            <img src="event-asoboi-card.svg" alt="ASOBO!">
+            <img src="event-asoboi-title.svg" alt="ASOBO!">
           </div>
           <div class="card-body">
             <p class="event-type-badge">ファミリー向け</p>
@@ -42,13 +50,13 @@
             <p class="event-tags">子供服 , ワークショップ , フードトラック</p>
           </div>
           <div class="card-footer">
-            <a href="contact.html" class="btn">詳細・申し込み</a>
+            <a href="contact.html" class="btn btn-pill">詳細・申し込み</a>
           </div>
         </div>
 
-        <!-- coming soon プレースホルダー -->
-        <div class="coming-soon-placeholder">
-          <p>coming soon...</p>
+        <!-- 右カラム：次のイベントのビジュアル（placeholder） -->
+        <div class="new-event-placeholder">
+          <p>coming soon</p>
         </div>
       </div>
 

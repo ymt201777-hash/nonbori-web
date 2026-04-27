@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ASOBO! 出店申請 | NONBORI</title>
+  <link rel="icon" type="image/svg+xml" href="ファビコン.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header>
+    <a href="index.html" class="nav-top" aria-label="TOPへ戻る">
+      <picture>
+        <source media="(max-width: 768px)" srcset="TOP_スマホver.svg">
+        <img src="TOP_PCweb%20ver.svg" alt="TOP">
+      </picture>
+    </a>
+    <nav class="nav-links">
+      <a href="event.html"><img src="nav-event.svg" alt="EVENT"></a>
+      <a href="about.html"><img src="nav-aboutus.svg" alt="ABOUT US"></a>
+      <a href="contact.html"><img src="nav-contact.svg" alt="CONTACT"></a>
+    </nav>
+    <a href="https://www.instagram.com/nonbori_official" class="nav-instagram" target="_blank" rel="noopener noreferrer">
+      <img src="nav-instagram.svg" alt="Instagram">
+    </a>
+  </header>
+
+  <main>
+    <section class="apply-section">
+
+      <h1 class="apply-title">ASOBO! 出店申請</h1>
+
+      <!-- イベント概要 -->
+      <div class="apply-event-info">
+        <p>ASOBO！</p>
+        <p>2026年10月4日（日）</p>
+        <p>@みんなの森 ぎふメディアコスモス</p>
+        <p>ブース：3m×3m / 電源なし</p>
+      </div>
+
+      <!-- 出店申請フォーム -->
+      <form id="apply-form" class="contact-form" novalidate>
+
+        <!-- ===== 基本情報 ===== -->
+        <h2 class="apply-section-heading">基本情報</h2>
+
+        <div class="form-group">
+          <label class="form-label" for="shop_name">屋号・店名</label>
+          <input class="form-input" type="text" id="shop_name" name="shop_name" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="representative_name">代表者氏名</label>
+          <input class="form-input" type="text" id="representative_name" name="representative_name" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="email">メールアドレス</label>
+          <input class="form-input" type="email" id="email" name="email" placeholder="example@email.com" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="phone">電話番号</label>
+          <input class="form-input" type="tel" id="phone" name="phone" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="location">活動拠点（都道府県）</label>
+          <input class="form-input" type="text" id="location" name="location" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="sns">Instagram / SNSアカウント</label>
+          <input class="form-input" type="text" id="sns" name="sns" placeholder="任意">
+        </div>
+
+        <!-- ===== 出店カテゴリー ===== -->
+        <h2 class="apply-section-heading">出店カテゴリー</h2>
+
+        <div class="form-group">
+          <div class="form-radio-group horizontal">
+            <label class="form-radio-label">
+              <input class="form-radio-input" type="radio" name="category" value="キッチンカー（¥5,000）" required>
+              <span>キッチンカー（¥5,000）</span>
+            </label>
+            <label class="form-radio-label">
+              <input class="form-radio-input" type="radio" name="category" value="物販（¥2,000）">
+              <span>物販（¥2,000）</span>
+            </label>
+            <label class="form-radio-label">
+              <input class="form-radio-input" type="radio" name="category" value="ワークショップ（¥2,000）">
+              <span>ワークショップ（¥2,000）</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- ===== 出店内容 ===== -->
+        <h2 class="apply-section-heading">出店内容</h2>
+
+        <div class="form-group">
+          <label class="form-label" for="details">出店内容の詳細</label>
+          <textarea class="form-textarea" id="details" name="details" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="products">販売商品・価格帯</label>
+          <textarea class="form-textarea" id="products" name="products" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="past_events">過去のイベント出店実績</label>
+          <textarea class="form-textarea" id="past_events" name="past_events" placeholder="任意"></textarea>
+        </div>
+
+        <!-- ===== 設備・準備 ===== -->
+        <h2 class="apply-section-heading">設備・準備</h2>
+
+        <div class="form-group">
+          <div class="form-check-group">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" name="tent" value="はい">
+              <span>テントを持参できる</span>
+            </label>
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" name="generator" value="はい">
+              <span>発電機を持参できる（電源設備なし・必要な場合は必須）</span>
+            </label>
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" name="cashless" value="はい">
+              <span>キャッシュレス決済に対応している</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- ===== キッチンカーの方のみ ===== -->
+        <h2 class="apply-section-heading">キッチンカーの方のみ</h2>
+
+        <div class="form-group">
+          <div class="form-check-group">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" name="health_dept" value="はい">
+              <span>保健所への出店申請を完了済み、または予定している</span>
+            </label>
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" name="food_hygiene" value="はい">
+              <span>食品衛生責任者の資格を保有している</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- ===== 確認事項 ===== -->
+        <h2 class="apply-section-heading">確認事項</h2>
+
+        <div class="form-group">
+          <div class="form-check-group">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" name="liability_insurance" value="はい">
+              <span>賠償責任保険への加入を検討している（推奨）</span>
+            </label>
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" name="parent_consent" value="はい">
+              <span>申請者が未成年の場合、保護者の同意を得ている</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- ===== 規約同意 ===== -->
+        <h2 class="apply-section-heading">規約同意</h2>
+
+        <div class="form-group">
+          <div class="form-check-group">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" name="agree_terms" value="同意" required>
+              <span>出店規約を読み、内容に同意します</span>
+            </label>
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" name="agree_cancel" value="同意" required>
+              <span>キャンセルポリシーに同意します（8/31まで全額返金、9/1以降返金なし）</span>
+            </label>
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" name="agree_weather" value="同意" required>
+              <span>雨天中止ポリシーに同意します（Yahoo!天気・降水確率70%以上で中止・返金なし）</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- ===== 送信ボタン ===== -->
+        <button class="form-submit" type="submit">申請する</button>
+
+      </form>
+
+      <!-- 結果表示 -->
+      <div id="apply-result" class="apply-result" role="status" aria-live="polite"></div>
+
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <img class="footer-img" src="top-footer.svg" alt="">
+    <p class="copyright">© 2026 NONBORI. All rights reserved.</p>
+  </footer>
+
+  <!-- ===== EmailJS 送信処理 ===== -->
+  <script>
+    (function () {
+      // EmailJS 初期化（公開鍵はあとで差し替え）
+      emailjs.init({ publicKey: 'YOUR_PUBLIC_KEY' });
+
+      var SERVICE_ID = 'YOUR_SERVICE_ID';
+      var TEMPLATE_ID_ADMIN = 'YOUR_TEMPLATE_ID_ADMIN';
+      var TEMPLATE_ID_REPLY = 'YOUR_TEMPLATE_ID_REPLY';
+
+      var form = document.getElementById('apply-form');
+      var submitBtn = form.querySelector('.form-submit');
+      var resultEl = document.getElementById('apply-result');
+      var defaultBtnText = submitBtn.textContent;
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        // ブラウザ標準のバリデーション
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = '送信中...';
+        resultEl.textContent = '';
+        resultEl.className = 'apply-result';
+
+        // 1) 運営への通知 → 2) 申請者への自動返信
+        emailjs.sendForm(SERVICE_ID, TEMPLATE_ID_ADMIN, form)
+          .then(function () {
+            return emailjs.sendForm(SERVICE_ID, TEMPLATE_ID_REPLY, form);
+          })
+          .then(function () {
+            resultEl.textContent = '申請を受け付けました。2〜3営業日以内にご連絡します。';
+            resultEl.className = 'apply-result is-success';
+            form.reset();
+          })
+          .catch(function (error) {
+            resultEl.textContent = '送信に失敗しました。時間をおいて再度お試しください。';
+            resultEl.className = 'apply-result is-error';
+            console.error('EmailJS error:', error);
+          })
+          .finally(function () {
+            submitBtn.disabled = false;
+            submitBtn.textContent = defaultBtnText;
+          });
+      });
+    })();
+  </script>
+
+</body>
+</html>

@@ -4,15 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NONBORI</title>
+  <link rel="icon" type="image/svg+xml" href="ファビコン.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <!-- ===== HEADER ===== -->
   <header>
+    <a href="index.html" class="nav-top" aria-label="TOPへ戻る">
+      <picture>
+        <source media="(max-width: 768px)" srcset="TOP_スマホver.svg">
+        <img src="TOP_PCweb%20ver.svg" alt="TOP">
+      </picture>
+    </a>
     <nav class="nav-links">
       <a href="event.html"><img src="nav-event.svg" alt="EVENT"></a>
       <a href="about.html"><img src="nav-aboutus.svg" alt="ABOUT US"></a>
@@ -36,7 +43,6 @@
       <p>
         僕らの地元、愛知県尾張地方の方言「のんぼり（鯉のぼり・布地）」が語源。<br>
         人と人を織り交ぜる——その想いを名前に込めました。<br>
-        <br>
         大人になっても好きなことにまっすぐに、<br>
         こだわりを持って生きている僕たちだからこそつくれる、<br>
         大人も楽しい"遊びごころ"が感じられるイベントを創造していきます。
@@ -45,21 +51,28 @@
 
     <!-- ===== EVENT ===== -->
     <section class="event-section">
-      <div class="event-circle-wrap">
-        <img class="event-circle-img" src="top-event-circle.svg" alt="EVENT">
-        <div class="event-cards">
-          <!-- ASOBO! カード -->
-          <div class="event-card main-card">
-            <p class="asobo-title">ASOBO!</p>
+      <img class="event-bg" src="top-event-bg.svg" alt="">
+      <img class="event-section-heading" src="nav-event.svg" alt="EVENT">
+      <div class="new-event-wrap">
+        <!-- 左カラム：ASOBO! テキスト＋ボタン -->
+        <div class="new-event-card">
+          <div class="card-image">
+            <img src="top-event-asoboi-title.svg" alt="ASOBO!">
+          </div>
+          <div class="card-body">
+            <p class="event-type-badge">ファミリー向け</p>
             <p class="event-date">2026年10月4日（日）</p>
             <p class="event-venue">@みんなの森 ぎふメディアコスモス</p>
-            <p class="event-tags">ファミリー向け / 子供服 , ワークショップ , フードトラック</p>
-            <a href="event.html" class="btn">詳細をみる</a>
+            <p class="event-tags">子供服 , ワークショップ , フードトラック</p>
           </div>
-          <!-- coming soon カード -->
-          <div class="event-card coming-soon-card">
-            <span class="coming-soon-text">coming soon...</span>
+          <div class="card-footer">
+            <a href="event.html" class="btn btn-pill">詳細をみる</a>
           </div>
+        </div>
+
+        <!-- 右カラム：次のイベントのビジュアル（placeholder） -->
+        <div class="new-event-placeholder">
+          <p>coming soon</p>
         </div>
       </div>
     </section>
@@ -71,7 +84,7 @@
       <!-- YUICHIRO: 写真（左）名前（右） -->
       <div class="member-row">
         <div class="member-photo">
-          <img src="circle-placeholder.svg" alt="祐一郎">
+          <img src="photo-yuichiro.jpg" alt="祐一郎">
         </div>
         <div class="member-name-only">
           <img src="top-member-yuichiro.svg" alt="REPRESENTATIVE YUICHIRO">
@@ -81,7 +94,7 @@
       <!-- HARU: 名前（左）写真（右） -->
       <div class="member-row reverse">
         <div class="member-photo">
-          <img src="photo-haru.svg" alt="はるのすけ">
+          <img src="photo-harunosuke.svg" alt="はるのすけ">
         </div>
         <div class="member-name-only">
           <img src="top-member-haru.svg" alt="ART DIRECTOR HARU">
@@ -91,7 +104,7 @@
       <!-- MI-BO-: 写真（左）名前（右） -->
       <div class="member-row">
         <div class="member-photo">
-          <img src="circle-placeholder.svg" alt="みーぼー">
+          <img src="photo-mibo.jpg" alt="みーぼー">
         </div>
         <div class="member-name-only">
           <img src="top-member-mibo.svg" alt="MERCHANDISER MI-BO-">
