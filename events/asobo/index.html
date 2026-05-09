@@ -306,10 +306,21 @@ a {
 }
 
 .organizer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
   text-align: center;
   font-size: 11px;
-  color: #777;
+  color: var(--red);
   padding: 30px 20px 40px;
+}
+
+.organizer-logo {
+  height: 14px;
+  width: auto;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 /* ===== SP ===== */
@@ -451,7 +462,7 @@ a {
         <div class="faq-a">A. 近隣の市営駐車場をご利用ください。</div>
       </div>
 
-      <p class="organizer">主催：NONBORI</p>
+      <p class="organizer">主催：<img class="organizer-logo" src="../../logo-red.svg" alt="NONBORI"></p>
     </section>
 
   </main>
