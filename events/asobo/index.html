@@ -178,24 +178,16 @@ a {
   display: block;
 }
 
-/* APPLY CTA（マップ下のボタン） */
+/* APPLY CTA（マップ下のボタン：ロゴSVGの赤楕円上にテキストを重ねる） */
 #apply {
-  padding: 0;
+  padding: 20px 20px;
 }
 
 .apply-cta {
+  position: relative;
   display: block;
   text-decoration: none;
-}
-
-.apply-cta-bar {
-  background: var(--red);
-  color: var(--white);
-  text-align: center;
-  font-weight: 700;
-  font-size: 16px;
-  padding: 14px 16px;
-  letter-spacing: 0.05em;
+  width: 100%;
 }
 
 .apply-cta-logo {
@@ -204,7 +196,20 @@ a {
   height: auto;
 }
 
-.apply-cta:hover .apply-cta-bar {
+.apply-cta-text {
+  position: absolute;
+  left: 50%;
+  top: 70%; /* asobo-logo.svg の赤い楕円の中心付近 */
+  transform: translate(-50%, -50%);
+  color: var(--white);
+  font-weight: 700;
+  font-size: 18px;
+  white-space: nowrap;
+  letter-spacing: 0.05em;
+  pointer-events: none;
+}
+
+.apply-cta:hover {
   opacity: 0.9;
 }
 
@@ -379,8 +384,8 @@ a {
     <!-- APPLY -->
     <section id="apply">
       <a class="apply-cta" href="../../apply.html">
-        <div class="apply-cta-bar">出店申請ページへ</div>
         <img class="apply-cta-logo" src="../../asobo-logo.svg" alt="ASOBO!! ロゴ">
+        <span class="apply-cta-text">出店申請ページへ</span>
       </a>
     </section>
 
