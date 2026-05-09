@@ -151,13 +151,30 @@ a {
   display: block;
 }
 
-/* ABOUT */
-.subcatch {
-  color: var(--red);
+/* ABOUT タグライン（SVG背景に白文字オーバーレイ） */
+.about-tagline-wrap {
+  position: relative;
+  margin-top: 20px;
+}
+
+.about-tagline-bg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.about-tagline-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--white);
   font-weight: 700;
   font-size: 18px;
-  margin-top: 20px;
-  line-height: 1.6;
+  line-height: 1.4;
+  text-align: center;
+  white-space: nowrap;
+  pointer-events: none;
 }
 
 /* MAP */
@@ -377,7 +394,16 @@ a {
 このイベントは、"付き添い"のはずの大人も一緒に楽しめる、家族みんなのための場所です。
 子ども心を思い出しながら、遊び、食べ、つくる。フードトラックやワークショップ、
 こだわりのショップが並ぶ空間で、家族それぞれが主役になれる時間を過ごしましょう！</p>
-      <p class="subcatch">遊んで食べて、つくって。<br>家族でまるごと楽しむ日！</p>
+      <div class="about-tagline-wrap">
+        <img class="about-tagline-bg" src="../../asobo-date-venue.svg" alt="">
+        <div class="about-tagline-text">
+          遊んで<br>
+          食べて、<br>
+          つくって。<br>
+          家族でまるごと<br>
+          楽しむ日！
+        </div>
+      </div>
     </section>
 
     <!-- MAP -->
