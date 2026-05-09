@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASOBO!! | NONBORI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red: #e60012;
+  --white: #ffffff;
+  --black: #1a1a1a;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: 'Noto Sans JP', sans-serif;
+  color: var(--black);
+  background: var(--white);
+  overflow: hidden;
+  height: 100vh;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ===== 3カラムレイアウト ===== */
+.layout {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.left-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: calc(50vw - 200px);
+  height: 100vh;
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.left-panel img {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+}
+
+.right-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: calc(50vw - 200px);
+  height: 100vh;
+  background: var(--white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px 20px;
+}
+
+.right-panel .right-img {
+  width: 180px;
+  max-width: 100%;
+}
+
+.nav-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 180px;
+  margin-bottom: 20px;
+}
+
+.nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 180px;
+  height: 44px;
+  background: var(--red);
+  color: var(--white);
+  border: none;
+  border-radius: 100px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.nav-btn:hover {
+  opacity: 0.9;
+}
+
+/* ===== 中央スクロールエリア ===== */
+.center-area {
+  position: relative;
+  width: 400px;
+  height: 100vh;
+  margin: 0 auto;
+  overflow-y: scroll;
+  background: var(--white);
+}
+
+/* セクション共通 */
+.section {
+  padding: 30px 20px;
+}
+
+.section-heading {
+  color: var(--red);
+  font-weight: 700;
+  font-size: 22px;
+  margin-bottom: 16px;
+}
+
+.section p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--black);
+}
+
+/* TOPセクション */
+#top {
+  padding: 0;
+}
+
+.top-bar {
+  background: var(--red);
+  color: var(--white);
+  text-align: center;
+  padding: 12px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+#top img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ABOUT */
+.subcatch {
+  color: var(--red);
+  font-weight: 700;
+  font-size: 18px;
+  margin-top: 20px;
+  line-height: 1.6;
+}
+
+/* MAP */
+#map iframe {
+  width: 100%;
+  height: 300px;
+  border: 0;
+  display: block;
+}
+
+/* APPLY / NEWS ボタン */
+.cta-text {
+  margin: 12px 0 16px;
+  font-size: 14px;
+}
+
+.btn-link {
+  display: inline-block;
+  background: var(--red);
+  color: var(--white);
+  font-weight: 700;
+  border-radius: 100px;
+  padding: 12px 28px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.btn-link:hover {
+  opacity: 0.9;
+}
+
+/* FAQ アコーディオン */
+.faq-item {
+  border-bottom: 1px solid #eee;
+  padding: 12px 0;
+}
+
+.faq-q {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--black);
+  cursor: pointer;
+  padding: 6px 0;
+}
+
+.faq-q::after {
+  content: "+";
+  color: var(--red);
+  font-size: 20px;
+  font-weight: 700;
+  margin-left: 10px;
+}
+
+.faq-item.open .faq-q::after {
+  content: "−";
+}
+
+.faq-a {
+  display: none;
+  padding: 8px 4px 4px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--black);
+}
+
+.faq-item.open .faq-a {
+  display: block;
+}
+
+.organizer {
+  text-align: center;
+  font-size: 11px;
+  color: #777;
+  padding: 30px 20px 40px;
+}
+
+/* ===== SP ===== */
+@media (max-width: 768px) {
+  html, body {
+    overflow: auto;
+    height: auto;
+  }
+
+  .left-panel,
+  .right-panel .right-img {
+    display: none;
+  }
+
+  .right-panel {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    padding: 8px;
+    background: var(--white);
+    border-top: 1px solid #eee;
+    z-index: 100;
+    justify-content: center;
+  }
+
+  .nav-buttons {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 4px;
+    width: 100%;
+    margin: 0;
+    justify-content: space-between;
+  }
+
+  .nav-btn {
+    width: auto;
+    flex: 1;
+    height: 36px;
+    font-size: 10px;
+    padding: 0 4px;
+    border-radius: 100px;
+  }
+
+  .center-area {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    padding-bottom: 70px;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="layout">
+  <!-- 左パネル -->
+  <aside class="left-panel">
+    <img src="../../asoboi-characters-left.svg" alt="ASOBO!! characters left">
+  </aside>
+
+  <!-- 中央スクロール -->
+  <main class="center-area" id="centerScroll">
+
+    <!-- TOP -->
+    <section id="top">
+      <div class="top-bar">2026 Sun 10/4　©みんなの森 岐阜メディアコスモス</div>
+      <img src="../../asoboi-logo.svg" alt="ASOBO!! ロゴ">
+      <img src="../../asoboi-top-hero.svg" alt="ASOBO!! メインビジュアル">
+      <img src="../../asoboi-tagline.svg" alt="ASOBO!! タグライン">
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section">
+      <h2 class="section-heading">ASOBO!! とは…</h2>
+      <p>子どもたちはもちろん、子育てをしながら自分らしい暮らしも大切にしている大人たちへ。
+このイベントは、"付き添い"のはずの大人も一緒に楽しめる、家族みんなのための場所です。
+子ども心を思い出しながら、遊び、食べ、つくる。フードトラックやワークショップ、
+こだわりのショップが並ぶ空間で、家族それぞれが主役になれる時間を過ごしましょう！</p>
+      <p class="subcatch">遊んで食べて、つくって。<br>家族でまるごと楽しむ日！</p>
+    </section>
+
+    <!-- MAP -->
+    <section id="map" class="section">
+      <h2 class="section-heading">地図</h2>
+      <iframe
+        src="https://www.google.com/maps?q=%E3%81%BF%E3%82%93%E3%81%AA%E3%81%AE%E6%A3%AE%E3%81%8E%E3%81%B5%E3%83%A1%E3%83%87%E3%82%A3%E3%82%A2%E3%82%B3%E3%82%B9%E3%83%A2%E3%82%B9&output=embed"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        allowfullscreen></iframe>
+      <p class="cta-text">みんなの森 ぎふメディアコスモス（岐阜市司町40-5）</p>
+    </section>
+
+    <!-- APPLY -->
+    <section id="apply" class="section">
+      <h2 class="section-heading">出店申請ページ</h2>
+      <p class="cta-text">出店申請はこちらから!!</p>
+      <a class="btn-link" href="../../apply.html">申請する</a>
+    </section>
+
+    <!-- NEWS -->
+    <section id="news" class="section">
+      <h2 class="section-heading">最新情報</h2>
+      <p class="cta-text">最新情報はInstagramで発信しています</p>
+      <a class="btn-link" href="https://www.instagram.com/nonbori_official" target="_blank" rel="noopener">@nonbori_official</a>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="section">
+      <h2 class="section-heading">FAQ</h2>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button">Q. 入場料はかかりますか？</button>
+        <div class="faq-a">A. 入場無料です。</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button">Q. 雨天の場合はどうなりますか？</button>
+        <div class="faq-a">A. Yahoo!天気にて開催1週間前の降水確率が70%以上の場合は中止となります。中止の場合はSNSでお知らせします。</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button">Q. 駐車場はありますか？</button>
+        <div class="faq-a">A. 近隣の市営駐車場をご利用ください。</div>
+      </div>
+
+      <p class="organizer">主催：NONBORI</p>
+    </section>
+
+  </main>
+
+  <!-- 右パネル -->
+  <aside class="right-panel">
+    <img class="right-img" src="../../asoboi-characters-right.svg" alt="ASOBO!! characters right">
+    <nav class="nav-buttons">
+      <button class="nav-btn" data-target="top">TOP</button>
+      <button class="nav-btn" data-target="about">ASOBOとは</button>
+      <button class="nav-btn" data-target="map">地図</button>
+      <a class="nav-btn" href="../../apply.html">出店申請ページ</a>
+      <button class="nav-btn" data-target="news">最新情報</button>
+      <button class="nav-btn" data-target="faq">FAQ</button>
+    </nav>
+  </aside>
+</div>
+
+<script>
+  // ナビボタン → 中央エリア内スクロール
+  const scrollEl = document.getElementById('centerScroll');
+  document.querySelectorAll('.nav-btn[data-target]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.getAttribute('data-target');
+      const target = document.getElementById(id);
+      if (!target) return;
+
+      // SP は body スクロール、PC は中央エリアのスクロール
+      const isMobile = window.matchMedia('(max-width: 768px)').matches;
+      if (isMobile) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        const offset = target.offsetTop;
+        scrollEl.scrollTo({ top: offset, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // FAQ アコーディオン
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const q = item.querySelector('.faq-q');
+    q.addEventListener('click', () => {
+      item.classList.toggle('open');
+    });
+  });
+</script>
+
+</body>
+</html>

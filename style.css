@@ -49,11 +49,29 @@ header {
   padding: 0 40px;
 }
 
-/* contact / event ページのヘッダーはバナー型 SVG を背景に
+/* 各ページのヘッダーは丸みのある SVG を背景に
    （CSS background だと preserveAspectRatio が効かないブラウザがあるため img で配置） */
-body.contact-page header,
-body.event-page header {
+body.top-page header,
+body.about-page header,
+body.event-page header,
+body.contact-page header {
   background: transparent;
+}
+
+/* TOP / About Us 用: ページ最上部 60px(SP 50px) に赤い帯を敷く。
+   ヘッダーは常に右丸 SVG を表示。最上部ではこの帯が右丸の透明部分を埋めて
+   全幅赤に見え、スクロールすると帯がページと一緒に流れて右丸が現れる仕組み。 */
+body.top-page::before,
+body.about-page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: #FF0000;
+  z-index: 999; /* header(1000) より下、ページコンテンツより上 */
+  pointer-events: none;
 }
 
 .header-bg-img {
@@ -97,18 +115,14 @@ body.event-page header {
   width: auto;
 }
 
-/* TOPへ戻るリンク（左端固定） */
+/* TOPへ戻るリンク（nav-links 内・EVENT の左隣） */
 .nav-top {
-  position: absolute;
-  left: 40px;
-  top: 50%;
-  transform: translateY(-50%);
   display: flex;
   align-items: center;
 }
 
 .nav-top img {
-  height: 18px;
+  height: 14px;
   width: auto;
   display: block;
 }
@@ -179,6 +193,8 @@ footer {
 
 /* ============================================================
    INDEX — HERO
+   画像下端の丸い部分まで完全に見せるため、固定高さは設けず
+   100% 幅で自然なアスペクト比のまま表示する。
    ============================================================ */
 .hero {
   width: 100%;
@@ -195,7 +211,7 @@ footer {
    INDEX — WHAT IS NONBORI
    ============================================================ */
 .what-is {
-  padding: 72px 40px 80px;
+  padding: 140px 40px 160px;
   text-align: center;
   max-width: 900px;
   margin: 0 auto;
@@ -203,7 +219,7 @@ footer {
 
 .what-is .section-heading {
   max-width: 520px;
-  margin-bottom: 40px;
+  margin-bottom: 56px;
 }
 
 .what-is p {
@@ -287,7 +303,7 @@ footer {
    INDEX — ABOUT PREVIEW（メンバー2カラム、bio なし）
    ============================================================ */
 .about-preview {
-  padding: 80px 40px 0;
+  padding: 80px 40px 96px;
   max-width: 900px;
   margin: 0 auto;
 }
@@ -511,7 +527,7 @@ footer {
   gap: 6px;
 }
 
-/* 右カラム：placeholder（赤枠付き） */
+/* 右カラム：placeholder（赤枠付き）— img を入れたら自動で枠内に収まる */
 .new-event-placeholder {
   flex: 1.5;
   background: #FFFFFF;
@@ -524,6 +540,15 @@ footer {
   color: #FF0000;
   font-size: 18px;
   letter-spacing: 0.05em;
+  overflow: hidden;
+  position: relative;
+}
+
+.new-event-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .new-event-card .event-type-badge {
@@ -910,6 +935,11 @@ footer {
     padding: 0 16px;
   }
 
+  body.top-page::before,
+  body.about-page::before {
+    height: 50px;
+  }
+
   .nav-links {
     gap: 20px;
   }
@@ -926,12 +956,8 @@ footer {
     height: 18px;
   }
 
-  .nav-top {
-    left: 16px;
-  }
-
   .nav-top img {
-    height: 20px;
+    height: 11px;
   }
 
   main {
@@ -940,13 +966,13 @@ footer {
 
   /* ── WHAT IS ── */
   .what-is {
-    padding: 52px 24px 60px;
+    padding: 96px 24px 112px;
     text-align: left;
   }
 
   .what-is .section-heading {
     max-width: 280px;
-    margin-bottom: 28px;
+    margin-bottom: 40px;
   }
 
   .what-is p {
@@ -970,7 +996,7 @@ footer {
 
   /* ── ABOUT PREVIEW ── */
   .about-preview {
-    padding: 60px 24px 0;
+    padding: 60px 24px 72px;
   }
 
   .about-preview .section-heading {
@@ -1065,54 +1091,43 @@ footer {
   }
 }
 
-/* UPCOMING section */
+/* UPCOMING section（白背景上にテキスト見出し＋赤枠カード） */
 .upcoming-section {
-  position: relative;
   width: 100%;
+  padding: 80px 0 100px;
 }
 
-.upcoming-bg-img {
-  width: 100%;
-  display: block;
+/* デザイナーの「文字だけSVG」差し替えまでの仮テキスト見出し */
+.upcoming-heading-text {
+  font-size: 36px;
+  font-weight: 700;
+  color: #FF0000;
+  text-align: center;
+  letter-spacing: 0.15em;
+  margin: 0 auto 48px;
 }
 
 .upcoming-cards-inner {
-  position: absolute;
-  top: 35%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 75%;
+  width: 100%;
   max-width: 760px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-/* カード内テキストを白に（赤背景の上なので） */
-.upcoming-section .upcoming-card {
-  border-color: #FFFFFF;
-}
-.upcoming-section .uc-type,
-.upcoming-section .uc-title,
-.upcoming-section .uc-date,
-.upcoming-section .uc-venue {
-  color: #FFFFFF;
-}
-
-/* 白枠ボタン */
-.btn-white {
-  border-color: #FFFFFF;
-  color: #FFFFFF;
-}
-.btn-white:hover {
-  background: #FFFFFF;
-  color: #FF0000;
-}
-
 @media (max-width: 768px) {
+  .upcoming-section {
+    padding: 56px 0 72px;
+  }
+
+  .upcoming-heading-text {
+    font-size: 26px;
+    margin-bottom: 32px;
+  }
+
   .upcoming-cards-inner {
-    width: 80%;
-    top: 30%;
-    gap: 12px;
+    width: 100%;
+    padding: 0 24px;
   }
 }
