@@ -168,15 +168,60 @@ a {
   display: block;
 }
 
-/* ABOUT 見出しロゴ */
-.about-heading-logo {
-  width: 100%;
-  height: auto;
-  display: block;
+/* ABOUT 見出し（ASOBOテキストをSVGに置換） */
+.about-heading {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   margin-bottom: 16px;
 }
 
-/* NEWS / APPLY ボタン */
+.about-heading-logo {
+  height: 28px;
+  width: auto;
+  display: block;
+}
+
+.about-heading span {
+  display: inline-block;
+}
+
+/* APPLY CTA（マップ下のボタン：ロゴSVGの赤楕円上にテキストを重ねる） */
+#apply {
+  padding: 20px 20px;
+}
+
+.apply-cta {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  width: 100%;
+}
+
+.apply-cta-logo {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.apply-cta-text {
+  position: absolute;
+  left: 50%;
+  top: 70%;
+  transform: translate(-50%, -50%);
+  color: var(--white);
+  font-weight: 700;
+  font-size: 18px;
+  white-space: nowrap;
+  letter-spacing: 0.05em;
+  pointer-events: none;
+}
+
+.apply-cta:hover {
+  opacity: 0.9;
+}
+
+/* NEWS ボタン */
 .cta-text {
   margin: 12px 0 16px;
   font-size: 14px;
@@ -324,7 +369,10 @@ a {
 
     <!-- ABOUT -->
     <section id="about" class="section">
-      <img class="about-heading-logo" src="../../asobo-logo.svg" alt="ASOBO!! とは…">
+      <h2 class="section-heading about-heading">
+        <img class="about-heading-logo" src="../../ASOBO_web素材-05.svg" alt="ASOBO">
+        <span>とは…</span>
+      </h2>
       <p>子どもたちはもちろん、子育てをしながら自分らしい暮らしも大切にしている大人たちへ。
 このイベントは、"付き添い"のはずの大人も一緒に楽しめる、家族みんなのための場所です。
 子ども心を思い出しながら、遊び、食べ、つくる。フードトラックやワークショップ、
@@ -344,9 +392,11 @@ a {
     </section>
 
     <!-- APPLY -->
-    <section id="apply" class="section">
-      <h2 class="section-heading">ASOBO!! とは…</h2>
-      <a class="btn-link" href="../../apply.html">出店申請ページへ</a>
+    <section id="apply">
+      <a class="apply-cta" href="../../apply.html">
+        <img class="apply-cta-logo" src="../../asobo-logo.svg" alt="ASOBO!! ロゴ">
+        <span class="apply-cta-text">出店申請ページへ</span>
+      </a>
     </section>
 
     <!-- NEWS -->
