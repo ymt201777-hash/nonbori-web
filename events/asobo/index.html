@@ -375,20 +375,24 @@ a {
 
 .organizer {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 6px;
-  text-align: center;
-  font-size: 11px;
+  gap: 8px;
   color: var(--red);
   padding: 30px 20px 40px;
 }
 
+.organizer-label {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+}
+
 .organizer-logo {
-  height: 14px;
+  height: 18px;
   width: auto;
-  display: inline-block;
-  vertical-align: middle;
+  display: block;
 }
 
 /* フッター */
@@ -558,7 +562,10 @@ a {
         <div class="faq-a">A. 近隣の市営駐車場をご利用ください。</div>
       </div>
 
-      <p class="organizer">主催：<img class="organizer-logo" src="../../logo-red.svg" alt="NONBORI"></p>
+      <div class="organizer">
+        <p class="organizer-label">主催</p>
+        <img class="organizer-logo" src="../../logo-red.svg" alt="NONBORI">
+      </div>
     </section>
 
     <!-- FOOTER -->
