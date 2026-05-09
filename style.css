@@ -1,7 +1,7 @@
 /* ============================================================
    NONBORI — style.css
    カラー: 赤 #FF0000 (R255 G0 B0) / 白 #FFFFFF
-   フォント: Noto Sans JP Medium (500) で統一
+   フォント: M PLUS Rounded 1c → Zen Maru Gothic（Medium 500）
    ============================================================ */
 
 /* ── RESET ── */
@@ -14,7 +14,7 @@
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: 'M PLUS Rounded 1c', 'Zen Maru Gothic', sans-serif;
   font-weight: 500;
   color: #FF0000;
   background: #FFFFFF;
@@ -182,7 +182,7 @@ footer {
   background: transparent;
   cursor: pointer;
   transition: background 0.2s, color 0.2s;
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: 'M PLUS Rounded 1c', 'Zen Maru Gothic', sans-serif;
   letter-spacing: 0.05em;
 }
 
@@ -713,7 +713,7 @@ footer {
   border-radius: 12px;
   background: transparent;
   color: #FF0000;
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: 'M PLUS Rounded 1c', 'Zen Maru Gothic', sans-serif;
   font-weight: 500;
   font-size: 14px;
   outline: none;
@@ -759,7 +759,7 @@ footer {
   border-radius: 20px;
   background: transparent;
   color: #FF0000;
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: 'M PLUS Rounded 1c', 'Zen Maru Gothic', sans-serif;
   font-weight: 500;
   font-size: 15px;
   cursor: pointer;
