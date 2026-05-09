@@ -294,6 +294,16 @@ a {
   font-size: 14px;
 }
 
+/* Behold Instagram ウィジェット */
+.behold-wrap {
+  margin-top: 20px;
+}
+
+.behold-wrap behold-widget {
+  display: block;
+  width: 100%;
+}
+
 .btn-link {
   display: inline-block;
   background: var(--red);
@@ -518,6 +528,9 @@ a {
       <h2 class="section-heading">最新情報</h2>
       <p class="cta-text">最新情報はInstagramで発信しています</p>
       <a class="btn-link" href="https://www.instagram.com/nonbori_official" target="_blank" rel="noopener">@nonbori_official</a>
+      <div class="behold-wrap">
+        <behold-widget feed-id="dvgVk90MQYaLHKqvKE5f"></behold-widget>
+      </div>
     </section>
 
     <!-- FAQ -->
@@ -590,6 +603,14 @@ a {
       item.classList.toggle('open');
     });
   });
+
+  // Behold Instagram widget
+  (() => {
+    const s = document.createElement("script");
+    s.type = "module";
+    s.src = "https://w.behold.so/widget.js";
+    document.head.append(s);
+  })();
 </script>
 
 </body>
