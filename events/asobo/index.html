@@ -178,7 +178,37 @@ a {
   display: block;
 }
 
-/* APPLY / NEWS ボタン */
+/* APPLY CTA（マップ下のボタン） */
+#apply {
+  padding: 0;
+}
+
+.apply-cta {
+  display: block;
+  text-decoration: none;
+}
+
+.apply-cta-bar {
+  background: var(--red);
+  color: var(--white);
+  text-align: center;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 14px 16px;
+  letter-spacing: 0.05em;
+}
+
+.apply-cta-logo {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.apply-cta:hover .apply-cta-bar {
+  opacity: 0.9;
+}
+
+/* NEWS ボタン */
 .cta-text {
   margin: 12px 0 16px;
   font-size: 14px;
@@ -321,7 +351,6 @@ a {
     <!-- TOP -->
     <section id="top">
       <div class="top-bar">2026 Sun 10/4　©みんなの森 岐阜メディアコスモス</div>
-      <img src="../../asobo-logo.svg" alt="ASOBO!! ロゴ">
       <img src="../../asobo-top-hero.svg" alt="ASOBO!! メインビジュアル">
       <img src="../../asobo-tagline.svg" alt="ASOBO!! タグライン">
     </section>
@@ -348,10 +377,11 @@ a {
     </section>
 
     <!-- APPLY -->
-    <section id="apply" class="section">
-      <h2 class="section-heading">出店申請ページ</h2>
-      <p class="cta-text">出店申請はこちらから!!</p>
-      <a class="btn-link" href="../../apply.html">申請する</a>
+    <section id="apply">
+      <a class="apply-cta" href="../../apply.html">
+        <div class="apply-cta-bar">出店申請ページへ</div>
+        <img class="apply-cta-logo" src="../../asobo-logo.svg" alt="ASOBO!! ロゴ">
+      </a>
     </section>
 
     <!-- NEWS -->
