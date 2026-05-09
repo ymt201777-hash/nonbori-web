@@ -74,17 +74,56 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   padding: 30px 20px;
 }
 
-.right-panel .right-img {
-  width: 180px;
+/* PC: SVG ベースのナビ（楕円の上に白文字オーバーレイ） */
+.right-nav {
+  position: relative;
+  width: 220px;
   max-width: 100%;
 }
 
+.right-nav-bg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.right-btn {
+  position: absolute;
+  left: 2.25%;
+  width: 95.5%;
+  /* 楕円1個分の高さ ≒ 39.22 / 632.95 ≒ 6.2% */
+  height: 6.2%;
+  background: transparent;
+  border: none;
+  color: var(--white);
+  font-family: 'M PLUS Rounded 1c', 'Zen Maru Gothic', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+  padding: 0;
+  letter-spacing: 0.02em;
+}
+
+/* 各楕円の中心 y を viewBox(632.95) に対する % で算出 → top は (中心 − 高さ/2) */
+.right-btn-1 { top: 47.3%; } /* TOP            (center 50.4%) */
+.right-btn-2 { top: 56.6%; } /* ASOBOとは      (center 59.7%) */
+.right-btn-3 { top: 65.9%; } /* 地図            (center 69.0%) */
+.right-btn-4 { top: 75.2%; } /* 出店申請ページ (center 78.3%) */
+.right-btn-5 { top: 84.5%; } /* 最新情報       (center 87.6%) */
+.right-btn-6 { top: 93.8%; } /* FAQ            (center 96.9%) */
+
+.right-btn:hover {
+  opacity: 0.85;
+}
+
+/* SP 用テキストボタン（PC では非表示） */
 .nav-buttons {
-  display: flex;
+  display: none;
   flex-direction: column;
   gap: 10px;
   width: 180px;
@@ -416,7 +455,7 @@ p.organizer-label {
   }
 
   .left-panel,
-  .right-panel .right-img {
+  .right-nav {
     display: none;
   }
 
@@ -437,6 +476,7 @@ p.organizer-label {
   }
 
   .nav-buttons {
+    display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     gap: 4px;
@@ -578,12 +618,23 @@ p.organizer-label {
 
   <!-- 右パネル -->
   <aside class="right-panel">
-    <img class="right-img" src="../../asobo-characters-right.svg" alt="ASOBO!! characters right">
+    <!-- PC: SVG の楕円を直接ボタン化 -->
+    <div class="right-nav">
+      <img class="right-nav-bg" src="../../asobo-characters-right.svg" alt="ASOBO!! characters right">
+      <button class="right-btn right-btn-1" data-target="top">TOP</button>
+      <button class="right-btn right-btn-2" data-target="about">ASOBOとは</button>
+      <button class="right-btn right-btn-3" data-target="map">地図</button>
+      <button class="right-btn right-btn-4" data-target="apply">出店申請ページ</button>
+      <button class="right-btn right-btn-5" data-target="news">最新情報</button>
+      <button class="right-btn right-btn-6" data-target="faq">FAQ</button>
+    </div>
+
+    <!-- SP: 横並びテキストボタン（PCでは非表示） -->
     <nav class="nav-buttons">
       <button class="nav-btn" data-target="top">TOP</button>
       <button class="nav-btn" data-target="about">ASOBOとは</button>
       <button class="nav-btn" data-target="map">地図</button>
-      <a class="nav-btn" href="../../apply.html">出店申請ページ</a>
+      <button class="nav-btn" data-target="apply">出店申請ページ</button>
       <button class="nav-btn" data-target="news">最新情報</button>
       <button class="nav-btn" data-target="faq">FAQ</button>
     </nav>
@@ -593,7 +644,7 @@ p.organizer-label {
 <script>
   // ナビボタン → 中央エリア内スクロール
   const scrollEl = document.getElementById('centerScroll');
-  document.querySelectorAll('.nav-btn[data-target]').forEach(btn => {
+  document.querySelectorAll('[data-target]').forEach(btn => {
     btn.addEventListener('click', () => {
       const id = btn.getAttribute('data-target');
       const target = document.getElementById(id);
