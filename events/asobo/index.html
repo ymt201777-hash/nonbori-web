@@ -470,12 +470,23 @@ p.organizer-label {
     overflow: visible;
   }
 
-  /* セクション間の余白を均一に 1.5x（PCの 30px → SP は 45px） */
+  /* SP: 各章の上余白をすべて 45px に統一
+     （section 同士で padding が加算されないよう、下 padding は 0 にする） */
   .section,
   #about,
   #apply {
     padding-top: 45px;
-    padding-bottom: 45px;
+    padding-bottom: 0;
+  }
+
+  /* 章の中で別ブロックが続くケースも 45px に揃える */
+  #about .about-body {
+    margin-top: 45px;
+  }
+
+  .organizer {
+    padding-top: 45px;
+    padding-bottom: 30px;
   }
 }
 </style>
