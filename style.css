@@ -1314,18 +1314,16 @@ a.new-event-placeholder:hover {
     inset: 0;
     line-height: 1.5;
   }
-  /* "coming soon..." 白プレースホルダの中央 */
-  .sp-event-placeholder-text {
+  /* 白プレースホルダ内に asobo-characters-left.svg を配置 */
+  .sp-event-placeholder-img {
     position: absolute;
     left: 50%;
     /* SVG viewBox 389.22 × 1060.07: 白枠の中心 ≒ y 454 → 42.8% */
     top: 42.8%;
     transform: translate(-50%, -50%);
-    color: #FF0000;
-    font-weight: 700;
-    font-size: 16px;
-    letter-spacing: 0.05em;
-    white-space: nowrap;
+    width: 60%;
+    height: auto;
+    pointer-events: none;
   }
   /* ASOBO の下、日付・会場・タグ */
   .sp-event-info {
