@@ -235,8 +235,9 @@ footer {
   position: relative;
   width: 100%;
   overflow: hidden;
-  padding: 108px 36px;
-  min-height: 50vw; /* 背景SVG (top-event-bg.svg) の高さに合わせる */
+  padding: 108px 36px 160px;
+  /* 背景SVG: width 95% × aspect 1.8:1 ≒ 52.8vw + 余裕 */
+  min-height: 60vw;
 }
 
 /* 背景SVG：画面右端揃え・最背面（左に少し伸ばす） */
