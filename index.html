@@ -15,7 +15,8 @@
   <!-- ===== SP HEADER ===== -->
   <header class="sp-header sp-only">
     <button class="sp-hamburger-btn" type="button" data-sp-menu-open aria-label="メニュー">
-      <img src="sp-nav-hamburger-white.svg" alt="">
+      <img class="sp-hb-white" src="sp-nav-hamburger-white.svg" alt="">
+      <img class="sp-hb-red" src="sp-nav-hamburger.svg" alt="">
     </button>
   </header>
 
@@ -129,12 +130,12 @@
     <div class="sp-only">
 
       <!-- HERO -->
-      <section class="sp-hero">
+      <section class="sp-hero" data-sp-bg="red">
         <img src="sp-top-hero.svg" alt="NONBORI">
       </section>
 
       <!-- WHAT IS NONBORI -->
-      <section class="sp-what-is">
+      <section class="sp-what-is" data-sp-bg="white">
         <img class="sp-heading" src="sp-top-whatisnonbori.svg" alt="WHAT IS NONBORI?">
         <p>
           僕らの地元、愛知県尾張地方の方言「のんぼり（鯉のぼり・布地）」が語源。<br>
@@ -146,7 +147,7 @@
       </section>
 
       <!-- EVENT (SVG背景＋オーバーレイ) -->
-      <section class="sp-top-event">
+      <section class="sp-top-event" data-sp-bg="red">
         <img class="sp-bg" src="sp-top-event.svg" alt="EVENT - ASOBO!">
         <div class="sp-top-event-overlay">
           <a class="sp-event-placeholder-link" href="events/asobo/" aria-label="ASOBO!! 詳細"></a>
@@ -162,7 +163,7 @@
       </section>
 
       <!-- ABOUT US -->
-      <section class="sp-top-about">
+      <section class="sp-top-about" data-sp-bg="white">
         <img class="sp-heading" src="top-heading-aboutus.svg" alt="ABOUT US">
         <div class="sp-member-block">
           <div class="sp-member-photo"><img src="photo-yuichiro.jpg" alt="祐一郎"></div>
@@ -179,7 +180,7 @@
       </section>
 
       <!-- FOOTER -->
-      <footer class="sp-footer">
+      <footer class="sp-footer" data-sp-bg="red">
         <img src="sp-top-footer.svg" alt="">
         <p class="copyright">© 2026 NONBORI. All rights reserved.</p>
       </footer>
@@ -206,8 +207,9 @@
     </nav>
   </div>
 
-  <!-- ===== SP MENU JS ===== -->
+  <!-- ===== SP MENU + HEADER COLOR JS ===== -->
   <script>
+    // メニュー開閉
     document.querySelectorAll('[data-sp-menu-open]').forEach(b => {
       b.addEventListener('click', () => {
         const m = document.getElementById('spMenu');
@@ -220,6 +222,28 @@
         if (m) m.hidden = true;
       });
     });
+
+    // ヘッダー直下のセクション背景色によりハンバーガー色を切替
+    (function() {
+      const header = document.querySelector('.sp-header');
+      const sections = document.querySelectorAll('[data-sp-bg]');
+      if (!header || !sections.length) return;
+      const HEADER_OFFSET = 25; // ハンバーガーアイコン中心のy位置
+      function updateHeaderColor() {
+        let currentBg = 'red';
+        for (const s of sections) {
+          const r = s.getBoundingClientRect();
+          if (r.top <= HEADER_OFFSET && r.bottom > HEADER_OFFSET) {
+            currentBg = s.dataset.spBg;
+            break;
+          }
+        }
+        header.classList.toggle('is-on-white', currentBg === 'white');
+      }
+      window.addEventListener('scroll', updateHeaderColor, { passive: true });
+      window.addEventListener('resize', updateHeaderColor);
+      updateHeaderColor();
+    })();
   </script>
 
 </body>

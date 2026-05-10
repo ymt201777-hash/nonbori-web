@@ -15,7 +15,8 @@
   <!-- ===== SP HEADER ===== -->
   <header class="sp-header sp-only">
     <button class="sp-hamburger-btn" type="button" data-sp-menu-open aria-label="メニュー">
-      <img src="sp-nav-hamburger-white.svg" alt="">
+      <img class="sp-hb-white" src="sp-nav-hamburger-white.svg" alt="">
+      <img class="sp-hb-red" src="sp-nav-hamburger.svg" alt="">
     </button>
   </header>
 
@@ -99,7 +100,7 @@
 
     <!-- ===== SP CONTENT ===== -->
     <div class="sp-only">
-      <section class="sp-contact">
+      <section class="sp-contact" data-sp-bg="white">
         <h2 class="sp-contact-heading">お気軽にどうぞ。</h2>
         <p class="sp-contact-lead">
           イベント出展のご希望やコラボレーションのご相談、お仕事のご依頼など、お気軽にお問い合わせください。<br>
@@ -123,7 +124,7 @@
       </section>
 
       <!-- FOOTER -->
-      <footer class="sp-footer">
+      <footer class="sp-footer" data-sp-bg="red">
         <img src="sp-top-footer.svg" alt="">
         <p class="copyright">© 2026 NONBORI. All rights reserved.</p>
       </footer>
@@ -149,7 +150,7 @@
     </nav>
   </div>
 
-  <!-- ===== SP MENU JS ===== -->
+  <!-- ===== SP MENU + HEADER COLOR JS ===== -->
   <script>
     document.querySelectorAll('[data-sp-menu-open]').forEach(b => {
       b.addEventListener('click', () => {
@@ -163,6 +164,27 @@
         if (m) m.hidden = true;
       });
     });
+
+    (function() {
+      const header = document.querySelector('.sp-header');
+      const sections = document.querySelectorAll('[data-sp-bg]');
+      if (!header || !sections.length) return;
+      const HEADER_OFFSET = 25;
+      function updateHeaderColor() {
+        let currentBg = 'red';
+        for (const s of sections) {
+          const r = s.getBoundingClientRect();
+          if (r.top <= HEADER_OFFSET && r.bottom > HEADER_OFFSET) {
+            currentBg = s.dataset.spBg;
+            break;
+          }
+        }
+        header.classList.toggle('is-on-white', currentBg === 'white');
+      }
+      window.addEventListener('scroll', updateHeaderColor, { passive: true });
+      window.addEventListener('resize', updateHeaderColor);
+      updateHeaderColor();
+    })();
   </script>
 
 </body>

@@ -1195,18 +1195,19 @@ a.new-event-placeholder:hover {
     content: none;
   }
 
-  /* ── SP HEADER（赤バー＋ハンバーガー右上） ── */
+  /* ── SP HEADER（透明：ハンバーガーだけ浮かせる） ── */
   .sp-header {
     position: sticky;
     top: 0;
     width: 100%;
     height: 50px;
-    background: #FF0000;
+    background: transparent;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     padding: 0 16px;
     z-index: 200;
+    pointer-events: none; /* セクションのリンクをブロックしない */
   }
   .sp-hamburger-btn {
     background: transparent;
@@ -1214,12 +1215,19 @@ a.new-event-placeholder:hover {
     padding: 0;
     cursor: pointer;
     line-height: 0;
+    pointer-events: auto; /* ボタン自体は押せるように */
   }
+  /* 2 種類のアイコンを重ねて、bg に応じて表示切替 */
   .sp-hamburger-btn img {
     height: 18px;
     width: auto;
     display: block;
   }
+  .sp-hamburger-btn .sp-hb-red { display: none; }
+
+  /* 白背景の上ではハンバーガーを赤に */
+  .sp-header.is-on-white .sp-hb-white { display: none; }
+  .sp-header.is-on-white .sp-hb-red { display: block; }
 
   /* ── SP MENU OVERLAY（展開時） ── */
   .sp-menu-overlay {

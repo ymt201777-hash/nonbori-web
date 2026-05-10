@@ -15,7 +15,8 @@
   <!-- ===== SP HEADER ===== -->
   <header class="sp-header sp-only">
     <button class="sp-hamburger-btn" type="button" data-sp-menu-open aria-label="メニュー">
-      <img src="sp-nav-hamburger-white.svg" alt="">
+      <img class="sp-hb-white" src="sp-nav-hamburger-white.svg" alt="">
+      <img class="sp-hb-red" src="sp-nav-hamburger.svg" alt="">
     </button>
   </header>
 
@@ -118,12 +119,12 @@
     <div class="sp-only">
 
       <!-- HERO（赤曲線 + キャッチ白文字） -->
-      <section class="sp-about-hero">
+      <section class="sp-about-hero" data-sp-bg="red">
         <img src="sp-about-hero.svg" alt="好きなメンバーと、好きな空間をつくりたかった。それがNONBORIのはじまり。">
       </section>
 
       <!-- MEMBERS -->
-      <section class="sp-members">
+      <section class="sp-members" data-sp-bg="white">
         <div class="sp-member-block">
           <div class="sp-member-photo"><img src="photo-yuichiro.jpg" alt="祐一郎"></div>
           <img class="sp-member-name" src="sp-member-yuichiro.svg" alt="REPRESENTATIVE YUICHIRO">
@@ -142,7 +143,7 @@
       </section>
 
       <!-- お仕事のご相談（SVG背景＋オーバーレイ） -->
-      <section class="sp-work-inquiry">
+      <section class="sp-work-inquiry" data-sp-bg="red">
         <img src="sp-about-work-inquiry.svg" alt="">
         <div class="sp-work-inquiry-overlay">
           <h2 class="sp-wi-heading">お仕事の<br>ご相談</h2>
@@ -154,7 +155,7 @@
       </section>
 
       <!-- FOOTER -->
-      <footer class="sp-footer">
+      <footer class="sp-footer" data-sp-bg="red">
         <img src="sp-top-footer.svg" alt="">
         <p class="copyright">© 2026 NONBORI. All rights reserved.</p>
       </footer>
@@ -181,7 +182,7 @@
     </nav>
   </div>
 
-  <!-- ===== SP MENU JS ===== -->
+  <!-- ===== SP MENU + HEADER COLOR JS ===== -->
   <script>
     document.querySelectorAll('[data-sp-menu-open]').forEach(b => {
       b.addEventListener('click', () => {
@@ -195,6 +196,27 @@
         if (m) m.hidden = true;
       });
     });
+
+    (function() {
+      const header = document.querySelector('.sp-header');
+      const sections = document.querySelectorAll('[data-sp-bg]');
+      if (!header || !sections.length) return;
+      const HEADER_OFFSET = 25;
+      function updateHeaderColor() {
+        let currentBg = 'red';
+        for (const s of sections) {
+          const r = s.getBoundingClientRect();
+          if (r.top <= HEADER_OFFSET && r.bottom > HEADER_OFFSET) {
+            currentBg = s.dataset.spBg;
+            break;
+          }
+        }
+        header.classList.toggle('is-on-white', currentBg === 'white');
+      }
+      window.addEventListener('scroll', updateHeaderColor, { passive: true });
+      window.addEventListener('resize', updateHeaderColor);
+      updateHeaderColor();
+    })();
   </script>
 
 </body>

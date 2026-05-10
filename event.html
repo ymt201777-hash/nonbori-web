@@ -15,7 +15,8 @@
   <!-- ===== SP HEADER ===== -->
   <header class="sp-header sp-only">
     <button class="sp-hamburger-btn" type="button" data-sp-menu-open aria-label="メニュー">
-      <img src="sp-nav-hamburger-white.svg" alt="">
+      <img class="sp-hb-white" src="sp-nav-hamburger-white.svg" alt="">
+      <img class="sp-hb-red" src="sp-nav-hamburger.svg" alt="">
     </button>
   </header>
 
@@ -123,7 +124,7 @@
     <div class="sp-only">
 
       <!-- NEW!! -->
-      <section class="sp-event-new-block">
+      <section class="sp-event-new-block" data-sp-bg="white">
         <img class="sp-heading" src="sp-event-heading-new.svg" alt="NEW!!">
         <div class="sp-event-card">
           <a class="sp-event-placeholder" href="events/asobo/">coming soon...</a>
@@ -141,7 +142,7 @@
       </section>
 
       <!-- UPCOMING -->
-      <section class="sp-upcoming">
+      <section class="sp-upcoming" data-sp-bg="red">
         <h2 class="upcoming-heading-text sp-upcoming-heading-text" style="color:#FFFFFF;">UPCOMING</h2>
 
         <div class="sp-upcoming-card">
@@ -179,7 +180,7 @@
       </section>
 
       <!-- ARCHIVE -->
-      <section class="sp-archive">
+      <section class="sp-archive" data-sp-bg="white">
         <img class="sp-heading" src="event-heading-archive.svg" alt="ARCHIVE">
         <a class="sp-archive-card" href="#">EVENT</a>
         <a class="sp-archive-card" href="#">EVENT</a>
@@ -187,7 +188,7 @@
       </section>
 
       <!-- FOOTER -->
-      <footer class="sp-footer">
+      <footer class="sp-footer" data-sp-bg="red">
         <img src="sp-top-footer.svg" alt="">
         <p class="copyright">© 2026 NONBORI. All rights reserved.</p>
       </footer>
@@ -214,7 +215,7 @@
     </nav>
   </div>
 
-  <!-- ===== SP MENU JS ===== -->
+  <!-- ===== SP MENU + HEADER COLOR JS ===== -->
   <script>
     document.querySelectorAll('[data-sp-menu-open]').forEach(b => {
       b.addEventListener('click', () => {
@@ -228,6 +229,27 @@
         if (m) m.hidden = true;
       });
     });
+
+    (function() {
+      const header = document.querySelector('.sp-header');
+      const sections = document.querySelectorAll('[data-sp-bg]');
+      if (!header || !sections.length) return;
+      const HEADER_OFFSET = 25;
+      function updateHeaderColor() {
+        let currentBg = 'red';
+        for (const s of sections) {
+          const r = s.getBoundingClientRect();
+          if (r.top <= HEADER_OFFSET && r.bottom > HEADER_OFFSET) {
+            currentBg = s.dataset.spBg;
+            break;
+          }
+        }
+        header.classList.toggle('is-on-white', currentBg === 'white');
+      }
+      window.addEventListener('scroll', updateHeaderColor, { passive: true });
+      window.addEventListener('resize', updateHeaderColor);
+      updateHeaderColor();
+    })();
   </script>
 
 </body>
