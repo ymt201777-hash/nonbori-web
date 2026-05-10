@@ -1195,19 +1195,21 @@ a.new-event-placeholder:hover {
     content: none;
   }
 
-  /* ── SP HEADER（透明：ハンバーガーだけ浮かせる） ── */
+  /* ── SP HEADER（fixed：ハンバーガーだけ浮かせる、最上面） ── */
   .sp-header {
-    position: sticky;
+    position: fixed !important;
     top: 0;
+    left: 0;
+    right: 0;
     width: 100%;
     height: 50px;
-    background: transparent;
+    background: transparent !important;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     padding: 0 16px;
-    z-index: 200;
-    pointer-events: none; /* セクションのリンクをブロックしない */
+    z-index: 9999;
+    pointer-events: none;
   }
   .sp-hamburger-btn {
     background: transparent;
@@ -1277,7 +1279,6 @@ a.new-event-placeholder:hover {
   .sp-hero {
     width: 100%;
     line-height: 0;
-    margin-top: -50px; /* sticky header の真下から始める */
   }
   .sp-hero img { width: 100%; display: block; }
 
@@ -1571,7 +1572,6 @@ a.new-event-placeholder:hover {
   .sp-about-hero {
     width: 100%;
     line-height: 0;
-    margin-top: -50px;
   }
   .sp-about-hero img { width: 100%; display: block; }
 
