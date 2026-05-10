@@ -1437,14 +1437,14 @@ a.new-event-placeholder:hover {
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 18px;
+    top: 50%;
+    bottom: auto;
     text-align: center;
     color: #FFFFFF;
-    font-size: 11px;
+    font-size: 13px;
     line-height: 1;
     letter-spacing: 0.04em;
-    transform: none;
-    top: auto;
+    transform: translateY(-50%);
   }
 
   /* ============================================================
