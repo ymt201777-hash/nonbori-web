@@ -275,14 +275,14 @@ footer {
 }
 
 .event-section .new-event-card .event-type-badge {
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .event-section .new-event-card .event-date,
 .event-section .new-event-card .event-venue,
 .event-section .new-event-card .event-tags {
-  font-size: 14px;
-  line-height: 1.65;
+  font-size: 17px;
+  line-height: 1.75;
 }
 
 .event-section .new-event-placeholder {
@@ -291,9 +291,9 @@ footer {
 }
 
 .event-section .btn-pill {
-  padding: 11px 31px;
-  font-size: 13px;
-  border-radius: 22px;
+  padding: 13px 36px;
+  font-size: 16px;
+  border-radius: 26px;
 }
 
 /* TOPページ用：色反転（赤背景上に白文字・白枠） */
