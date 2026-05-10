@@ -1339,7 +1339,7 @@ a.new-event-placeholder:hover {
   .sp-event-info {
     position: absolute;
     left: 50%;
-    top: 76%;
+    top: 73%;
     transform: translateX(-50%);
     width: 90%;
     text-align: center;
