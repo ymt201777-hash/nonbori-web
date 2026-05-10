@@ -236,15 +236,15 @@ footer {
   width: 100%;
   overflow: hidden;
   padding: 108px 36px;
-  min-height: 49.5vw;
+  min-height: 50vw; /* 背景SVG (top-event-bg.svg) の高さに合わせる */
 }
 
-/* 背景SVG：画面右端揃え・最背面 */
+/* 背景SVG：画面右端揃え・最背面（サイズは変更しない） */
 .event-bg {
   position: absolute;
   right: 0;
   top: 0;
-  width: 85.5%;
+  width: 90%;
   height: auto;
   z-index: 0;
   pointer-events: none;
