@@ -1638,7 +1638,7 @@ a.new-event-placeholder:hover {
     margin: 8px auto 0;
   }
 
-  /* お仕事のご相談（赤背景セクション） */
+  /* お仕事のご相談（SVG をそのまま表示 + ボタン部分のみ透明リンク） */
   .sp-work-inquiry {
     position: relative;
     width: 100%;
@@ -1648,42 +1648,15 @@ a.new-event-placeholder:hover {
     width: 100%;
     display: block;
   }
-  .sp-work-inquiry-overlay {
+  /* SVG 内の白ピルボタン (viewBox 389.22 × 617.06 で x 99-291, y 431-470)
+     → 横 25.4–74.6% (幅 49.3%), 縦 69.8–76.2% (高さ 6.3%) */
+  .sp-wi-btn-link {
     position: absolute;
-    inset: 0;
-    line-height: 1.6;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 0 32px;
-    text-align: center;
-    color: #FFFFFF;
-  }
-  .sp-work-inquiry-overlay .sp-wi-heading {
-    color: #FFFFFF;
-    font-size: 30px;
-    font-weight: 700;
-    margin: 0 0 24px;
-    line-height: 1.4;
-  }
-  .sp-work-inquiry-overlay .sp-wi-text {
-    color: #FFFFFF;
-    font-size: 12px;
-    line-height: 1.8;
-    font-weight: 500;
-    margin: 0 0 24px;
-  }
-  .sp-work-inquiry-overlay .sp-wi-btn {
-    display: inline-block;
-    border: 2px solid #FFFFFF;
-    border-radius: 100px;
-    padding: 10px 28px;
-    color: #FFFFFF;
-    font-size: 13px;
-    font-weight: 700;
-    text-decoration: none;
-    background: transparent;
+    left: 25.4%;
+    top: 69.8%;
+    width: 49.3%;
+    height: 6.5%;
+    display: block;
   }
 
   /* ============================================================
