@@ -1289,12 +1289,12 @@ a.new-event-placeholder:hover {
   }
   .sp-what-is .sp-heading {
     display: block;
-    margin: 0 auto 36px;
-    max-width: 280px;
+    margin: 0 auto 40px;
+    max-width: 320px;
   }
   .sp-what-is p {
     color: #FF0000;
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 500;
     line-height: 2;
   }
