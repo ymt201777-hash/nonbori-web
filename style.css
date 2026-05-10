@@ -1638,18 +1638,35 @@ a.new-event-placeholder:hover {
     margin: 8px auto 0;
   }
 
-  /* お仕事のご相談（SVG をそのまま表示 + ボタン部分のみ透明リンク） */
+  /* お仕事のご相談（SVG + 本文オーバーレイ + 透明ボタンリンク） */
   .sp-work-inquiry {
     position: relative;
     width: 100%;
     line-height: 0;
+    /* SVG viewBox 389.22 × 617.06 で高さ固定 */
+    aspect-ratio: 389.22 / 617.06;
   }
   .sp-work-inquiry > img {
     width: 100%;
+    height: 100%;
     display: block;
   }
-  /* SVG 内の白ピルボタン (viewBox 389.22 × 617.06 で x 99-291, y 431-470)
-     → 横 25.4–74.6% (幅 49.3%), 縦 69.8–76.2% (高さ 6.3%) */
+  /* 見出し (上部 baked) と白ピル (y ≒ 70%) の間に本文を白文字で配置 */
+  .sp-wi-text {
+    position: absolute;
+    left: 50%;
+    top: 58%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    margin: 0;
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 12px;
+    line-height: 1.8;
+    font-weight: 500;
+  }
+  /* SVG 内の白ピルボタン (x 99-291, y 431-470)
+     → 横 25.4–74.6%, 縦 69.8–76.2% */
   .sp-wi-btn-link {
     position: absolute;
     left: 25.4%;
