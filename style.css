@@ -1623,7 +1623,7 @@ a.new-event-placeholder:hover {
   .sp-about-hero img { width: 100%; display: block; }
 
   .sp-members {
-    padding: 64px 24px 64px;
+    padding: 120px 24px 64px;
     text-align: center;
   }
   .sp-members .sp-member-block {
@@ -1645,6 +1645,7 @@ a.new-event-placeholder:hover {
     line-height: 0;
     /* SVG viewBox 389.22 × 617.06 で高さ固定 */
     aspect-ratio: 389.22 / 617.06;
+    margin-bottom: 80px;
   }
   .sp-work-inquiry > img {
     width: 100%;
