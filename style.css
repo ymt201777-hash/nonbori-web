@@ -1390,7 +1390,7 @@ a.new-event-placeholder:hover {
   .sp-top-about .sp-heading {
     display: block;
     margin: 0 auto 48px;
-    max-width: 220px;
+    max-width: 300px;
   }
   .sp-member-block {
     display: flex;
@@ -1412,6 +1412,10 @@ a.new-event-placeholder:hover {
     height: 100%;
     object-fit: cover;
     display: block;
+  }
+  /* Mibo の写真：全身画像なので頭部に寄せる */
+  .sp-member-photo img.is-sp-mibo {
+    object-position: center 18%;
   }
   .sp-member-name {
     display: block;
