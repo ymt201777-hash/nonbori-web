@@ -1325,37 +1325,45 @@ a.new-event-placeholder:hover {
     height: auto;
     pointer-events: none;
   }
+  /* ASOBO 文字（baked SVG の上に少し大きく重ねる） */
+  .sp-event-asobo-title {
+    position: absolute;
+    left: 50%;
+    /* baked ASOBO 中心 y 705 → 66.5% */
+    top: 66.5%;
+    transform: translate(-50%, -50%);
+    width: 55%;
+    height: auto;
+    pointer-events: none;
+  }
   /* ASOBO の下、日付・会場・タグ */
   .sp-event-info {
     position: absolute;
     left: 50%;
-    /* ASOBO 文字 (y 690-720) の下 ≒ y 760 → 71.7% */
     top: 73%;
     transform: translateX(-50%);
     width: 90%;
     text-align: center;
     color: #FFFFFF;
-    font-size: 11px;
-    line-height: 1.7;
+    font-size: 13px;
+    line-height: 1.8;
     font-weight: 700;
   }
   .sp-event-info .sp-event-info-tag {
-    font-size: 10px;
+    font-size: 12px;
     margin-top: 4px;
   }
   /* 白ピル "詳細をみる" の中央 */
   .sp-event-btn {
     position: absolute;
     left: 50%;
-    /* 白ピル (y 874-913) ≒ 中心 y 893 → 84.2% */
     top: 84.2%;
     transform: translate(-50%, -50%);
     color: #FF0000;
     font-weight: 700;
-    font-size: 13px;
+    font-size: 15px;
     text-decoration: none;
-    /* 白ピルのクリック領域に合わせる */
-    width: 30%;
+    width: 35%;
     text-align: center;
     padding: 8px 0;
   }
