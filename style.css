@@ -1211,8 +1211,6 @@ a.new-event-placeholder:hover {
   .sp-hamburger-btn img {
     height: 18px;
     width: auto;
-    /* 赤バー上で白く見せる：filter で色反転 */
-    filter: brightness(0) invert(1);
     display: block;
   }
 
