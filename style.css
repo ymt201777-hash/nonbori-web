@@ -1655,7 +1655,7 @@ a.new-event-placeholder:hover {
   .sp-wi-text {
     position: absolute;
     left: 50%;
-    top: 58%;
+    top: 53%;
     transform: translate(-50%, -50%);
     width: 90%;
     margin: 0;
@@ -1663,7 +1663,7 @@ a.new-event-placeholder:hover {
     color: #FFFFFF;
     font-size: 12px;
     line-height: 1.8;
-    font-weight: 500;
+    font-weight: 700;
   }
   /* SVG 内の白ピルボタン (x 99-291, y 431-470)
      → 横 25.4–74.6%, 縦 69.8–76.2% */
