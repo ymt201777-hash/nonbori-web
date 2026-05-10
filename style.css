@@ -1188,6 +1188,13 @@ a.new-event-placeholder:hover {
   body { padding-top: 0; overflow-x: hidden; }
   main { padding-top: 0; max-width: 100%; }
 
+  /* PC用の赤い帯擬似要素を SP では無効化（SPヘッダーを覆い隠さないように） */
+  body.top-page::before,
+  body.about-page::before {
+    display: none;
+    content: none;
+  }
+
   /* ── SP HEADER（赤バー＋ハンバーガー右上） ── */
   .sp-header {
     position: sticky;
