@@ -257,21 +257,21 @@ footer {
   z-index: 1;
   display: block;
   max-width: 360px;
-  margin: 0 auto 81px;
+  margin: 0 auto 120px;
 }
 
 /* TOPページ用：event-section 内の new-event-wrap を中央寄せ＆bg の前面に */
 .event-section .new-event-wrap {
   position: relative;
   z-index: 1;
-  max-width: 855px;
+  max-width: 980px;
   margin: 0 auto;
-  gap: 29px;
+  gap: 36px;
 }
 
 /* TOPページ用：カード内のサイズも少し拡大 */
 .event-section .new-event-card .card-image img {
-  max-width: 270px;
+  max-width: 320px;
 }
 
 .event-section .new-event-card .event-type-badge {
@@ -286,8 +286,8 @@ footer {
 }
 
 .event-section .new-event-placeholder {
-  min-height: 243px;
-  border-radius: 50px;
+  min-height: 290px;
+  border-radius: 56px;
 }
 
 .event-section .btn-pill {
