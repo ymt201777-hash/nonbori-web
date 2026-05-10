@@ -447,9 +447,10 @@ footer {
   position: relative;
   width: 100%;
   overflow: hidden;
-  padding: 100px 40px 80px;
+  padding: 100px 40px 160px;
   margin-bottom: 120px;
-  min-height: 50vw;
+  /* 背景SVG (about-work-bg.svg) の下に余白を確保 */
+  min-height: 60vw;
   text-align: center;
   display: flex;
   flex-direction: column;
