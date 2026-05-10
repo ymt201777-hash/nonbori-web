@@ -1325,12 +1325,11 @@ a.new-event-placeholder:hover {
     height: auto;
     pointer-events: none;
   }
-  /* ASOBO 文字（baked SVG の上に少し大きく重ねる） */
+  /* ASOBO 文字（オーバーレイ） */
   .sp-event-asobo-title {
     position: absolute;
     left: 50%;
-    /* baked ASOBO 中心 y 705 → 66.5% */
-    top: 66.5%;
+    top: 70%;
     transform: translate(-50%, -50%);
     width: 55%;
     height: auto;
@@ -1340,17 +1339,17 @@ a.new-event-placeholder:hover {
   .sp-event-info {
     position: absolute;
     left: 50%;
-    top: 73%;
+    top: 76%;
     transform: translateX(-50%);
     width: 90%;
     text-align: center;
     color: #FFFFFF;
-    font-size: 13px;
+    font-size: 15px;
     line-height: 1.8;
     font-weight: 700;
   }
   .sp-event-info .sp-event-info-tag {
-    font-size: 12px;
+    font-size: 13px;
     margin-top: 4px;
   }
   /* 白ピル "詳細をみる" の中央 */
