@@ -1304,9 +1304,12 @@ a.new-event-placeholder:hover {
     position: relative;
     width: 100%;
     line-height: 0;
+    /* SVG viewBox 389.22 × 1060.07 で高さを完全固定（ロード状態に依存しない） */
+    aspect-ratio: 389.22 / 1060.07;
   }
   .sp-top-event > .sp-bg {
     width: 100%;
+    height: 100%;
     display: block;
   }
   .sp-top-event-overlay {
@@ -1352,7 +1355,8 @@ a.new-event-placeholder:hover {
     font-size: 13px;
     margin-top: 4px;
   }
-  /* 白ピル "詳細をみる" の中央 */
+  /* 白ピル "詳細をみる" の中央
+     SVG 内の白ピル位置 (rect y 874-913, 中心 893) → 84.2% */
   .sp-event-btn {
     position: absolute;
     left: 50%;
@@ -1365,6 +1369,8 @@ a.new-event-placeholder:hover {
     width: 35%;
     text-align: center;
     padding: 8px 0;
+    /* 見栄え調整 */
+    line-height: 1;
   }
   /* 白プレースホルダ全体をクリック可能にする透明リンク */
   .sp-event-placeholder-link {
