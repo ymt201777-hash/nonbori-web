@@ -218,12 +218,12 @@ footer {
 }
 
 .what-is .section-heading {
-  max-width: 520px;
-  margin-bottom: 56px;
+  max-width: 620px;
+  margin-bottom: 64px;
 }
 
 .what-is p {
-  font-size: 15px;
+  font-size: 18px;
   line-height: 2.2;
   color: #FF0000;
 }
