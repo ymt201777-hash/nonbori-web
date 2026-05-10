@@ -276,9 +276,9 @@ footer {
 }
 
 .event-section .new-event-placeholder {
-  background: transparent;
+  background: #FFFFFF;
   border-color: #FFFFFF;
-  color: #FFFFFF;
+  color: #FF0000;
 }
 
 .event-section .btn-pill {
