@@ -1328,15 +1328,20 @@ a.new-event-placeholder:hover {
     height: auto;
     pointer-events: none;
   }
-  /* ASOBO 文字（オーバーレイ） */
+  /* ASOBO 文字（オーバーレイ・クリックで ASOBO ページへ） */
   .sp-event-asobo-title {
     position: absolute;
     left: 50%;
     top: 66%;
     transform: translate(-50%, -50%);
     width: 55%;
+    display: block;
+    text-decoration: none;
+  }
+  .sp-event-asobo-title img {
+    width: 100%;
     height: auto;
-    pointer-events: none;
+    display: block;
   }
   /* ASOBO の下、日付・会場・タグ */
   .sp-event-info {
@@ -1489,8 +1494,13 @@ a.new-event-placeholder:hover {
   .sp-asobo-title {
     display: block;
     max-width: 60%;
-    height: auto;
     margin: 0 auto;
+    text-decoration: none;
+  }
+  .sp-asobo-title img {
+    width: 100%;
+    height: auto;
+    display: block;
   }
   .sp-asobo-info {
     text-align: center;
