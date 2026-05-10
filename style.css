@@ -1284,7 +1284,7 @@ a.new-event-placeholder:hover {
 
   /* ── SP WHAT IS（TOP）── */
   .sp-what-is {
-    padding: 96px 24px 96px;
+    padding: 120px 24px 120px;
     text-align: center;
   }
   .sp-what-is .sp-heading {
@@ -1384,7 +1384,7 @@ a.new-event-placeholder:hover {
 
   /* ── SP ABOUT セクション（TOP page）── */
   .sp-top-about {
-    padding: 96px 24px 88px;
+    padding: 120px 24px 120px;
     text-align: center;
   }
   .sp-top-about .sp-heading {
