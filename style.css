@@ -447,7 +447,7 @@ footer {
   position: relative;
   width: 100%;
   overflow: hidden;
-  padding: 100px 40px 160px;
+  padding: 60px 40px 160px;
   margin-bottom: 120px;
   /* 背景SVG (about-work-bg.svg) の下に余白を確保 */
   min-height: 60vw;
@@ -472,18 +472,18 @@ footer {
   position: relative;
   z-index: 1;
   display: block;
-  max-width: 440px;
-  margin: 0 auto 36px;
+  max-width: 540px;
+  margin: 0 auto 40px;
 }
 
 .consultation-text {
   position: relative;
   z-index: 1;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 2;
   color: #FFFFFF;
   margin: 0 auto;
-  max-width: 760px;
+  max-width: 800px;
 }
 
 .consultation-btn-wrap {
