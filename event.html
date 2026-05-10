@@ -12,8 +12,15 @@
 </head>
 <body class="event-page">
 
-  <!-- ===== HEADER ===== -->
-  <header>
+  <!-- ===== SP HEADER ===== -->
+  <header class="sp-header sp-only">
+    <button class="sp-hamburger-btn" type="button" data-sp-menu-open aria-label="メニュー">
+      <img src="sp-nav-hamburger.svg" alt="">
+    </button>
+  </header>
+
+  <!-- ===== HEADER (PC) ===== -->
+  <header class="pc-only">
     <img class="header-bg-img" src="event-header-bg.svg" alt="">
     <nav class="nav-links">
       <a href="index.html" class="nav-top" aria-label="TOPへ戻る">
@@ -32,89 +39,196 @@
   </header>
 
   <main>
-    <div class="event-page-section">
 
-      <!-- ===== NEW!! ===== -->
-      <img class="event-page-heading" src="event-heading-new.svg" alt="NEW!!">
+    <!-- ===== PC CONTENT ===== -->
+    <div class="pc-only">
+      <div class="event-page-section">
 
-      <div class="new-event-wrap">
-        <!-- 左カラム：ASOBO! テキスト＋ボタン -->
-        <div class="new-event-card">
-          <div class="card-image">
-            <a href="events/asobo/">
-              <img src="event-asobo-title.svg" alt="ASOBO!">
-            </a>
+        <!-- ===== NEW!! ===== -->
+        <img class="event-page-heading" src="event-heading-new.svg" alt="NEW!!">
+
+        <div class="new-event-wrap">
+          <!-- 左カラム：ASOBO! テキスト＋ボタン -->
+          <div class="new-event-card">
+            <div class="card-image">
+              <a href="events/asobo/">
+                <img src="event-asobo-title.svg" alt="ASOBO!">
+              </a>
+            </div>
+            <div class="card-body">
+              <p class="event-type-badge">ファミリー向け</p>
+              <p class="event-date">2026年10月4日（日）</p>
+              <p class="event-venue">@みんなの森 ぎふメディアコスモス</p>
+              <p class="event-tags">子供服 , ワークショップ , フードトラック</p>
+            </div>
+            <div class="card-footer">
+              <a href="contact.html" class="btn btn-pill">詳細・申し込み</a>
+            </div>
           </div>
-          <div class="card-body">
-            <p class="event-type-badge">ファミリー向け</p>
-            <p class="event-date">2026年10月4日（日）</p>
-            <p class="event-venue">@みんなの森 ぎふメディアコスモス</p>
-            <p class="event-tags">子供服 , ワークショップ , フードトラック</p>
-          </div>
-          <div class="card-footer">
-            <a href="contact.html" class="btn btn-pill">詳細・申し込み</a>
+
+          <!-- 右カラム：次のイベントのビジュアル（ASOBOページへリンク） -->
+          <a class="new-event-placeholder" href="events/asobo/">
+            <img src="asobo-tagline.svg" alt="ASOBO!! tagline">
+          </a>
+        </div>
+
+        <!-- ===== UPCOMING ===== -->
+        <div class="upcoming-section">
+          <h2 class="upcoming-heading-text">UPCOMING</h2>
+          <div class="upcoming-cards-inner">
+
+            <div class="upcoming-card">
+              <div class="uc-left">
+                <p class="uc-type">トークイベント</p>
+                <p class="uc-title">正解のない選び方</p>
+                <p class="uc-date">2026年5月17日（土）</p>
+                <p class="uc-venue">@犬山フロイデ</p>
+              </div>
+              <div class="uc-right">
+                <a href="#" class="btn btn-pill">詳細をみる</a>
+              </div>
+            </div>
+
+            <div class="upcoming-card">
+              <div class="uc-left">
+                <p class="uc-type">マルシェ</p>
+                <p class="uc-title">coming soon...</p>
+                <p class="uc-date">2026年6月〜7月予定</p>
+                <p class="uc-venue">@調整中</p>
+              </div>
+              <div class="uc-right">
+                <a href="#" class="btn btn-pill">詳細をみる</a>
+              </div>
+            </div>
+
+            <div class="upcoming-card">
+              <div class="uc-left">
+                <p class="uc-type">フェス</p>
+                <p class="uc-title">coming soon...</p>
+                <p class="uc-date">2026年8月予定</p>
+                <p class="uc-venue">@調整中</p>
+              </div>
+              <div class="uc-right">
+                <a href="#" class="btn btn-pill">詳細をみる</a>
+              </div>
+            </div>
+
           </div>
         </div>
 
-        <!-- 右カラム：次のイベントのビジュアル（ASOBOページへリンク） -->
-        <a class="new-event-placeholder" href="events/asobo/">
-          <img src="asobo-tagline.svg" alt="ASOBO!! tagline">
-        </a>
       </div>
+    </div>
 
-      <!-- ===== UPCOMING ===== -->
-      <div class="upcoming-section">
-        <!-- TODO: 文字だけの UPCOMING SVG が用意できたら img に差し替え -->
-        <h2 class="upcoming-heading-text">UPCOMING</h2>
-        <div class="upcoming-cards-inner">
+    <!-- ===== SP CONTENT ===== -->
+    <div class="sp-only">
 
-          <div class="upcoming-card">
-            <div class="uc-left">
-              <p class="uc-type">トークイベント</p>
-              <p class="uc-title">正解のない選び方</p>
-              <p class="uc-date">2026年5月17日（土）</p>
-              <p class="uc-venue">@犬山フロイデ</p>
-            </div>
-            <div class="uc-right">
-              <a href="#" class="btn btn-pill">詳細をみる</a>
-            </div>
+      <!-- NEW!! -->
+      <section class="sp-event-new-block">
+        <img class="sp-heading" src="sp-event-heading-new.svg" alt="NEW!!">
+        <div class="sp-event-card">
+          <a class="sp-event-placeholder" href="events/asobo/">coming soon...</a>
+          <div class="sp-event-asobo-title">
+            <img src="event-asobo-title.svg" alt="ASOBO!">
           </div>
-
-          <div class="upcoming-card">
-            <div class="uc-left">
-              <p class="uc-type">マルシェ</p>
-              <p class="uc-title">coming soon...</p>
-              <p class="uc-date">2026年6月〜7月予定</p>
-              <p class="uc-venue">@調整中</p>
-            </div>
-            <div class="uc-right">
-              <a href="#" class="btn btn-pill">詳細をみる</a>
-            </div>
+          <div class="sp-event-meta">
+            ファミリー向け<br>
+            2026年10月4日（日）<br>
+            @みんなの森 ぎふメディアコスモス<br>
+            <span class="sp-event-tag">子供服 , ワークショップ , フードトラック</span>
           </div>
-
-          <div class="upcoming-card">
-            <div class="uc-left">
-              <p class="uc-type">フェス</p>
-              <p class="uc-title">coming soon...</p>
-              <p class="uc-date">2026年8月予定</p>
-              <p class="uc-venue">@調整中</p>
-            </div>
-            <div class="uc-right">
-              <a href="#" class="btn btn-pill">詳細をみる</a>
-            </div>
-          </div>
-
+          <a class="sp-pill-btn" href="contact.html">詳細・申し込み</a>
         </div>
-      </div>
+      </section>
+
+      <!-- UPCOMING -->
+      <section class="sp-upcoming">
+        <h2 class="upcoming-heading-text sp-upcoming-heading-text" style="color:#FFFFFF;">UPCOMING</h2>
+
+        <div class="sp-upcoming-card">
+          <div class="sp-event-placeholder"></div>
+          <p class="sp-uc-title">正解のない選び方</p>
+          <p class="sp-uc-meta">
+            2026年5月17日（土）<br>
+            @犬山フロイデ<br>
+            トークイベント
+          </p>
+          <a class="sp-pill-btn" href="#">詳細をみる</a>
+        </div>
+
+        <div class="sp-upcoming-card">
+          <div class="sp-event-placeholder"></div>
+          <p class="sp-uc-title">coming soon...</p>
+          <p class="sp-uc-meta">
+            2026年6月〜7月予定<br>
+            @調整中<br>
+            マルシェ
+          </p>
+          <a class="sp-pill-btn" href="#">詳細をみる</a>
+        </div>
+
+        <div class="sp-upcoming-card">
+          <div class="sp-event-placeholder"></div>
+          <p class="sp-uc-title">coming soon...</p>
+          <p class="sp-uc-meta">
+            2026年8月予定<br>
+            @調整中<br>
+            フェス
+          </p>
+          <a class="sp-pill-btn" href="#">詳細をみる</a>
+        </div>
+      </section>
+
+      <!-- ARCHIVE -->
+      <section class="sp-archive">
+        <img class="sp-heading" src="event-heading-archive.svg" alt="ARCHIVE">
+        <a class="sp-archive-card" href="#">EVENT</a>
+        <a class="sp-archive-card" href="#">EVENT</a>
+        <a class="sp-archive-card" href="#">EVENT</a>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="sp-footer">
+        <img src="sp-top-footer.svg" alt="">
+        <p class="copyright">© 2026 NONBORI. All rights reserved.</p>
+      </footer>
 
     </div>
+
   </main>
 
-  <!-- ===== FOOTER ===== -->
-  <footer>
+  <!-- ===== FOOTER (PC) ===== -->
+  <footer class="pc-only">
     <img class="footer-img" src="top-footer.svg" alt="">
     <p class="copyright">© 2026 NONBORI. All rights reserved.</p>
   </footer>
+
+  <!-- ===== SP MENU OVERLAY ===== -->
+  <div class="sp-menu-overlay sp-only" id="spMenu" hidden>
+    <button class="sp-menu-close" type="button" data-sp-menu-close aria-label="閉じる">×</button>
+    <nav class="sp-menu-links">
+      <a href="index.html">TOP</a>
+      <a href="event.html" class="active">EVENT</a>
+      <a href="about.html">ABOUT US</a>
+      <a href="contact.html">CONTACT</a>
+      <a href="https://www.instagram.com/nonbori_official" target="_blank" rel="noopener noreferrer">Instagram</a>
+    </nav>
+  </div>
+
+  <!-- ===== SP MENU JS ===== -->
+  <script>
+    document.querySelectorAll('[data-sp-menu-open]').forEach(b => {
+      b.addEventListener('click', () => {
+        const m = document.getElementById('spMenu');
+        if (m) m.hidden = false;
+      });
+    });
+    document.querySelectorAll('[data-sp-menu-close]').forEach(b => {
+      b.addEventListener('click', () => {
+        const m = document.getElementById('spMenu');
+        if (m) m.hidden = true;
+      });
+    });
+  </script>
 
 </body>
 </html>

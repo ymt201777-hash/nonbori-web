@@ -12,8 +12,15 @@
 </head>
 <body class="contact-page">
 
-  <!-- ===== HEADER ===== -->
-  <header>
+  <!-- ===== SP HEADER ===== -->
+  <header class="sp-header sp-only">
+    <button class="sp-hamburger-btn" type="button" data-sp-menu-open aria-label="メニュー">
+      <img src="sp-nav-hamburger.svg" alt="">
+    </button>
+  </header>
+
+  <!-- ===== HEADER (PC) ===== -->
+  <header class="pc-only">
     <img class="header-bg-img" src="contact-header-bg.svg" alt="">
     <nav class="nav-links">
       <a href="index.html" class="nav-top" aria-label="TOPへ戻る">
@@ -32,66 +39,131 @@
   </header>
 
   <main>
-    <section class="contact-section">
 
-      <!-- 見出し -->
-      <img class="contact-heading-img" src="contact-heading.svg" alt="お気軽にどうぞ。">
+    <!-- ===== PC CONTENT ===== -->
+    <div class="pc-only">
+      <section class="contact-section">
 
-      <!-- リード文 -->
-      <p class="contact-lead">
-        イベント出展のご希望やコラボレーションのご相談、各種お仕事のご依頼など、<br>
-        お気軽にお問い合わせください。<br>
-        小さなご質問やご相談なども大歓迎です。<br>
-        お問い合わせには、通常2〜3営業日以内にご返信させていただきます。<br>
-        ご連絡お待ちしております。
-      </p>
+        <!-- 見出し -->
+        <img class="contact-heading-img" src="contact-heading.svg" alt="お気軽にどうぞ。">
 
-      <!-- 出店申請への導線 -->
-      <div class="contact-apply-link">
-        <a href="apply.html" class="btn">イベント出店はこちら</a>
-      </div>
+        <!-- リード文 -->
+        <p class="contact-lead">
+          イベント出展のご希望やコラボレーションのご相談、各種お仕事のご依頼など、<br>
+          お気軽にお問い合わせください。<br>
+          小さなご質問やご相談なども大歓迎です。<br>
+          お問い合わせには、通常2〜3営業日以内にご返信させていただきます。<br>
+          ご連絡お待ちしております。
+        </p>
 
-      <!-- フォーム -->
-      <form class="contact-form" action="#" method="post">
-
-        <div class="form-group">
-          <label class="form-label" for="name">お名前</label>
-          <input class="form-input" type="text" id="name" name="name" placeholder="山田 太郎" required>
+        <!-- 出店申請への導線 -->
+        <div class="contact-apply-link">
+          <a href="apply.html" class="btn">イベント出店はこちら</a>
         </div>
 
-        <div class="form-group">
-          <label class="form-label" for="email">メールアドレス</label>
-          <input class="form-input" type="email" id="email" name="email" placeholder="example@email.com" required>
-        </div>
+        <!-- フォーム -->
+        <form class="contact-form" action="#" method="post">
 
-        <div class="form-group">
-          <label class="form-label" for="type">お問い合わせ種別</label>
-          <select class="form-select" id="type" name="type" required>
-            <option value="" disabled selected>選択してください</option>
+          <div class="form-group">
+            <label class="form-label" for="name">お名前</label>
+            <input class="form-input" type="text" id="name" name="name" placeholder="山田 太郎" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="email">メールアドレス</label>
+            <input class="form-input" type="email" id="email" name="email" placeholder="example@email.com" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="type">お問い合わせ種別</label>
+            <select class="form-select" id="type" name="type" required>
+              <option value="" disabled selected>選択してください</option>
+              <option value="event">イベント出展希望</option>
+              <option value="collab">コラボ・取材</option>
+              <option value="work">お仕事のご依頼</option>
+              <option value="other">その他</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="message">メッセージ</label>
+            <textarea class="form-textarea" id="message" name="message" placeholder="お気軽にどうぞ。" required></textarea>
+          </div>
+
+          <button class="form-submit" type="submit">送信する</button>
+
+        </form>
+
+      </section>
+    </div>
+
+    <!-- ===== SP CONTENT ===== -->
+    <div class="sp-only">
+      <section class="sp-contact">
+        <h2 class="sp-contact-heading">お気軽にどうぞ。</h2>
+        <p class="sp-contact-lead">
+          イベント出展のご希望やコラボレーションのご相談、お仕事のご依頼など、お気軽にお問い合わせください。<br>
+          小さなご質問やご相談なども大歓迎です。<br>
+          お問い合わせには、通常2〜3営業日以内にご返信させていただきます。ご連絡お待ちしております。
+        </p>
+
+        <form class="sp-contact-form" action="#" method="post">
+          <input type="text" name="sp_name" placeholder="お名前" required>
+          <input type="email" name="sp_email" placeholder="メールアドレス" required>
+          <select name="sp_type" required>
+            <option value="" disabled selected>お問い合わせ種別</option>
             <option value="event">イベント出展希望</option>
             <option value="collab">コラボ・取材</option>
             <option value="work">お仕事のご依頼</option>
             <option value="other">その他</option>
           </select>
-        </div>
+          <textarea name="sp_message" placeholder="メッセージ" required></textarea>
+          <button class="sp-submit-btn" type="submit">送信する</button>
+        </form>
+      </section>
 
-        <div class="form-group">
-          <label class="form-label" for="message">メッセージ</label>
-          <textarea class="form-textarea" id="message" name="message" placeholder="お気軽にどうぞ。" required></textarea>
-        </div>
+      <!-- FOOTER -->
+      <footer class="sp-footer">
+        <img src="sp-top-footer.svg" alt="">
+        <p class="copyright">© 2026 NONBORI. All rights reserved.</p>
+      </footer>
+    </div>
 
-        <button class="form-submit" type="submit">送信する</button>
-
-      </form>
-
-    </section>
   </main>
 
-  <!-- ===== FOOTER ===== -->
-  <footer>
+  <!-- ===== FOOTER (PC) ===== -->
+  <footer class="pc-only">
     <img class="footer-img" src="top-footer.svg" alt="">
     <p class="copyright">© 2026 NONBORI. All rights reserved.</p>
   </footer>
+
+  <!-- ===== SP MENU OVERLAY ===== -->
+  <div class="sp-menu-overlay sp-only" id="spMenu" hidden>
+    <button class="sp-menu-close" type="button" data-sp-menu-close aria-label="閉じる">×</button>
+    <nav class="sp-menu-links">
+      <a href="index.html">TOP</a>
+      <a href="event.html">EVENT</a>
+      <a href="about.html">ABOUT US</a>
+      <a href="contact.html" class="active">CONTACT</a>
+      <a href="https://www.instagram.com/nonbori_official" target="_blank" rel="noopener noreferrer">Instagram</a>
+    </nav>
+  </div>
+
+  <!-- ===== SP MENU JS ===== -->
+  <script>
+    document.querySelectorAll('[data-sp-menu-open]').forEach(b => {
+      b.addEventListener('click', () => {
+        const m = document.getElementById('spMenu');
+        if (m) m.hidden = false;
+      });
+    });
+    document.querySelectorAll('[data-sp-menu-close]').forEach(b => {
+      b.addEventListener('click', () => {
+        const m = document.getElementById('spMenu');
+        if (m) m.hidden = true;
+      });
+    });
+  </script>
 
 </body>
 </html>

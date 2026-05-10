@@ -12,8 +12,15 @@
 </head>
 <body class="about-page">
 
-  <!-- ===== HEADER ===== -->
-  <header>
+  <!-- ===== SP HEADER ===== -->
+  <header class="sp-header sp-only">
+    <button class="sp-hamburger-btn" type="button" data-sp-menu-open aria-label="メニュー">
+      <img src="sp-nav-hamburger.svg" alt="">
+    </button>
+  </header>
+
+  <!-- ===== HEADER (PC) ===== -->
+  <header class="pc-only">
     <img class="header-bg-img" src="about-header-bg.svg" alt="">
     <nav class="nav-links">
       <a href="index.html" class="nav-top" aria-label="TOPへ戻る">
@@ -33,82 +40,162 @@
 
   <main>
 
-    <!-- ===== STORY HERO ===== -->
-    <section class="about-story">
-      <img src="about-hero.svg" alt="好きなメンバーと、好きな空間をつくりたかった。それがNONBORIのはじまり。">
-    </section>
+    <!-- ===== PC CONTENT ===== -->
+    <div class="pc-only">
 
-    <!-- ===== MEMBERS ===== -->
-    <section class="members-section">
+      <!-- ===== STORY HERO ===== -->
+      <section class="about-story">
+        <img src="about-hero.svg" alt="好きなメンバーと、好きな空間をつくりたかった。それがNONBORIのはじまり。">
+      </section>
 
-      <!-- YUICHIRO: 写真（左）名前＋bio（右） -->
-      <div class="member-row-bio">
-        <div class="member-photo">
-          <img src="photo-yuichiro.jpg" alt="祐一郎">
-        </div>
-        <div class="member-info">
-          <div class="member-name-svg">
-            <img src="about-member-yuichiro.svg" alt="REPRESENTATIVE YUICHIRO">
+      <!-- ===== MEMBERS ===== -->
+      <section class="members-section">
+
+        <!-- YUICHIRO: 写真（左）名前＋bio（右） -->
+        <div class="member-row-bio">
+          <div class="member-photo">
+            <img src="photo-yuichiro.jpg" alt="祐一郎">
           </div>
-          <p class="member-bio">
-            新規事業開発・マーケティングに従事。DMM.com、M3などのメガベンチャーで新規事業の開発等を担当し、今は学習塾の経営が楽しく、週の半分は数学を教えてる。元中南米バックパッカー。
-          </p>
-        </div>
-      </div>
-
-      <!-- HARU: 名前＋bio（左）写真（右） -->
-      <div class="member-row-bio reverse">
-        <div class="member-photo">
-          <img src="photo-harunosuke.svg" alt="はるのすけ">
-        </div>
-        <div class="member-info">
-          <div class="member-name-svg">
-            <img src="about-member-haru.svg" alt="ART DIRECTOR HARU">
+          <div class="member-info">
+            <div class="member-name-svg">
+              <img src="about-member-yuichiro.svg" alt="REPRESENTATIVE YUICHIRO">
+            </div>
+            <p class="member-bio">
+              新規事業開発・マーケティングに従事。DMM.com、M3などのメガベンチャーで新規事業の開発等を担当し、今は学習塾の経営が楽しく、週の半分は数学を教えてる。元中南米バックパッカー。
+            </p>
           </div>
-          <p class="member-bio">
-            グラフィックデザインを軸とし、アートや工芸など多岐にわたる分野で東京を拠点に活動中。手描きとデジタルを行き来しながらビジュアルを作り上げる。最近の趣味は家具を作ること。
-          </p>
         </div>
-      </div>
 
-      <!-- MI-BO-: 写真（左）名前＋bio（右） -->
-      <div class="member-row-bio">
-        <div class="member-photo">
-          <img src="photo-mibo.jpg" alt="みーぼー">
-        </div>
-        <div class="member-info">
-          <div class="member-name-svg">
-            <img src="about-member-mibo.svg" alt="MERCHANDISER MI-BO-">
+        <!-- HARU: 名前＋bio（左）写真（右） -->
+        <div class="member-row-bio reverse">
+          <div class="member-photo">
+            <img src="photo-harunosuke.svg" alt="はるのすけ">
           </div>
-          <p class="member-bio">
-            ハマったものには、とことん深掘りしたくなる、おしゃれオタク。アパレル業界でマーチャンダイザーとして流行を作ってきた。こだわりを詰め込んだイベントの中身を素敵なものに仕上げていく。
-          </p>
+          <div class="member-info">
+            <div class="member-name-svg">
+              <img src="about-member-haru.svg" alt="ART DIRECTOR HARU">
+            </div>
+            <p class="member-bio">
+              グラフィックデザインを軸とし、アートや工芸など多岐にわたる分野で東京を拠点に活動中。手描きとデジタルを行き来しながらビジュアルを作り上げる。最近の趣味は家具を作ること。
+            </p>
+          </div>
         </div>
-      </div>
 
-    </section>
+        <!-- MI-BO-: 写真（左）名前＋bio（右） -->
+        <div class="member-row-bio">
+          <div class="member-photo">
+            <img src="photo-mibo.jpg" alt="みーぼー">
+          </div>
+          <div class="member-info">
+            <div class="member-name-svg">
+              <img src="about-member-mibo.svg" alt="MERCHANDISER MI-BO-">
+            </div>
+            <p class="member-bio">
+              ハマったものには、とことん深掘りしたくなる、おしゃれオタク。アパレル業界でマーチャンダイザーとして流行を作ってきた。こだわりを詰め込んだイベントの中身を素敵なものに仕上げていく。
+            </p>
+          </div>
+        </div>
 
-    <!-- ===== お仕事のご相談 ===== -->
-    <section class="consultation">
-      <img class="consultation-bg" src="about-work-bg.svg" alt="">
-      <img class="consultation-heading" src="about-work-inquiry-text-white.svg" alt="お仕事のご相談">
-      <p class="consultation-text">
-        NONBORIではイベント制作にとどまらず、<br>
-        Webサイト制作・ブランドデザイン・クリエイティブ全般のご依頼を承っております。<br>
-        まずはお気軽にご相談ください。
-      </p>
-      <div class="consultation-btn-wrap">
-        <a href="contact.html" class="btn">お問い合わせはこちら</a>
-      </div>
-    </section>
+      </section>
+
+      <!-- ===== お仕事のご相談 ===== -->
+      <section class="consultation">
+        <img class="consultation-bg" src="about-work-bg.svg" alt="">
+        <img class="consultation-heading" src="about-work-inquiry-text-white.svg" alt="お仕事のご相談">
+        <p class="consultation-text">
+          NONBORIではイベント制作にとどまらず、<br>
+          Webサイト制作・ブランドデザイン・クリエイティブ全般のご依頼を承っております。<br>
+          まずはお気軽にご相談ください。
+        </p>
+        <div class="consultation-btn-wrap">
+          <a href="contact.html" class="btn">お問い合わせはこちら</a>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ===== SP CONTENT ===== -->
+    <div class="sp-only">
+
+      <!-- HERO（赤曲線 + キャッチ白文字） -->
+      <section class="sp-about-hero">
+        <img src="sp-about-hero.svg" alt="好きなメンバーと、好きな空間をつくりたかった。それがNONBORIのはじまり。">
+      </section>
+
+      <!-- MEMBERS -->
+      <section class="sp-members">
+        <div class="sp-member-block">
+          <div class="sp-member-photo"><img src="photo-yuichiro.jpg" alt="祐一郎"></div>
+          <img class="sp-member-name" src="sp-member-yuichiro.svg" alt="REPRESENTATIVE YUICHIRO">
+          <p class="sp-member-bio">新規事業開発・マーケティングに従事。DMM.com、M3などのメガベンチャーで新規事業の開発等を担当し、今は学習塾の経営が楽しく、週の半分は数学を教えてる。元中南米バックパッカー。</p>
+        </div>
+        <div class="sp-member-block">
+          <div class="sp-member-photo"><img src="photo-harunosuke.svg" alt="はるのすけ"></div>
+          <img class="sp-member-name" src="sp-member-haru.svg" alt="ART DIRECTOR HARU">
+          <p class="sp-member-bio">グラフィックデザインを軸とし、アートや工芸など多岐にわたる分野で東京を拠点に活動中。手描きとデジタルを行き来しながらビジュアルを作り上げる。最近の趣味は家具を作ること。</p>
+        </div>
+        <div class="sp-member-block">
+          <div class="sp-member-photo"><img src="photo-mibo.jpg" alt="みーぼー"></div>
+          <img class="sp-member-name" src="sp-member-mibo.svg" alt="MERCHANDISER MI-BO-">
+          <p class="sp-member-bio">ハマったものには、とことん深掘りしたくなる、おしゃれオタク。アパレル業界でマーチャンダイザーとして流行を作ってきた。こだわりを詰め込んだイベントの中身を素敵なものに仕上げていく。</p>
+        </div>
+      </section>
+
+      <!-- お仕事のご相談（SVG背景＋オーバーレイ） -->
+      <section class="sp-work-inquiry">
+        <img src="sp-about-work-inquiry.svg" alt="">
+        <div class="sp-work-inquiry-overlay">
+          <h2 class="sp-wi-heading">お仕事の<br>ご相談</h2>
+          <p class="sp-wi-text">
+            NONBORIではイベント制作にとどまらず、Webサイト制作・ブランドデザイン・クリエイティブ全般のご依頼を承っております。まずはお気軽にご相談ください。
+          </p>
+          <a class="sp-wi-btn" href="contact.html">お問い合わせはこちら</a>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="sp-footer">
+        <img src="sp-top-footer.svg" alt="">
+        <p class="copyright">© 2026 NONBORI. All rights reserved.</p>
+      </footer>
+
+    </div>
 
   </main>
 
-  <!-- ===== FOOTER ===== -->
-  <footer>
+  <!-- ===== FOOTER (PC) ===== -->
+  <footer class="pc-only">
     <img class="footer-img" src="top-footer.svg" alt="">
     <p class="copyright">© 2026 NONBORI. All rights reserved.</p>
   </footer>
+
+  <!-- ===== SP MENU OVERLAY ===== -->
+  <div class="sp-menu-overlay sp-only" id="spMenu" hidden>
+    <button class="sp-menu-close" type="button" data-sp-menu-close aria-label="閉じる">×</button>
+    <nav class="sp-menu-links">
+      <a href="index.html">TOP</a>
+      <a href="event.html">EVENT</a>
+      <a href="about.html" class="active">ABOUT US</a>
+      <a href="contact.html">CONTACT</a>
+      <a href="https://www.instagram.com/nonbori_official" target="_blank" rel="noopener noreferrer">Instagram</a>
+    </nav>
+  </div>
+
+  <!-- ===== SP MENU JS ===== -->
+  <script>
+    document.querySelectorAll('[data-sp-menu-open]').forEach(b => {
+      b.addEventListener('click', () => {
+        const m = document.getElementById('spMenu');
+        if (m) m.hidden = false;
+      });
+    });
+    document.querySelectorAll('[data-sp-menu-close]').forEach(b => {
+      b.addEventListener('click', () => {
+        const m = document.getElementById('spMenu');
+        if (m) m.hidden = true;
+      });
+    });
+  </script>
 
 </body>
 </html>

@@ -1170,3 +1170,522 @@ a.new-event-placeholder:hover {
     padding: 0 24px;
   }
 }
+
+/* ============================================================
+   SP VERSION — フルレイアウト（max-width: 768px）
+   PC版に影響しないよう、SP専用要素のみ表示／PC専用要素は隠す
+   ============================================================ */
+
+/* SP only / PC only — display 切替 */
+.sp-only { display: none; }
+
+@media (max-width: 768px) {
+  .pc-only { display: none !important; }
+  .sp-only { display: block; }
+  .sp-only.is-flex { display: flex; }
+
+  /* base */
+  body { padding-top: 0; overflow-x: hidden; }
+  main { padding-top: 0; max-width: 100%; }
+
+  /* ── SP HEADER（赤バー＋ハンバーガー右上） ── */
+  .sp-header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 50px;
+    background: #FF0000;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 16px;
+    z-index: 200;
+  }
+  .sp-hamburger-btn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    line-height: 0;
+  }
+  .sp-hamburger-btn img {
+    height: 18px;
+    width: auto;
+    /* 赤バー上で白く見せる：filter で色反転 */
+    filter: brightness(0) invert(1);
+    display: block;
+  }
+
+  /* ── SP MENU OVERLAY（展開時） ── */
+  .sp-menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: #FF0000;
+    z-index: 1000;
+    overflow-y: auto;
+    padding: 24px;
+  }
+  .sp-menu-overlay[hidden] { display: none !important; }
+
+  .sp-menu-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: transparent;
+    border: none;
+    color: #FFFFFF;
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+
+  .sp-menu-links {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    align-items: center;
+  }
+  .sp-menu-links a {
+    color: #FFFFFF;
+    font-size: 22px;
+    font-weight: 700;
+    text-decoration: none;
+    text-align: center;
+    letter-spacing: 0.06em;
+  }
+  .sp-menu-links a.active {
+    text-decoration: underline;
+    text-underline-offset: 6px;
+  }
+
+  /* ── SP HERO（TOP）── */
+  .sp-hero {
+    width: 100%;
+    line-height: 0;
+    margin-top: -50px; /* sticky header の真下から始める */
+  }
+  .sp-hero img { width: 100%; display: block; }
+
+  /* ── SP WHAT IS（TOP）── */
+  .sp-what-is {
+    padding: 64px 24px 72px;
+    text-align: center;
+  }
+  .sp-what-is .sp-heading {
+    display: block;
+    margin: 0 auto 32px;
+    max-width: 200px;
+  }
+  .sp-what-is p {
+    color: #FF0000;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 2;
+  }
+
+  /* ── SP TOP EVENT セクション（背景SVG＋オーバーレイ） ── */
+  .sp-top-event {
+    position: relative;
+    width: 100%;
+    line-height: 0;
+  }
+  .sp-top-event > .sp-bg {
+    width: 100%;
+    display: block;
+  }
+  .sp-top-event-overlay {
+    position: absolute;
+    inset: 0;
+    line-height: 1.5;
+  }
+  /* "coming soon..." 白プレースホルダの中央 */
+  .sp-event-placeholder-text {
+    position: absolute;
+    left: 50%;
+    /* SVG viewBox 389.22 × 1060.07: 白枠の中心 ≒ y 454 → 42.8% */
+    top: 42.8%;
+    transform: translate(-50%, -50%);
+    color: #FF0000;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+  /* ASOBO の下、日付・会場・タグ */
+  .sp-event-info {
+    position: absolute;
+    left: 50%;
+    /* ASOBO 文字 (y 690-720) の下 ≒ y 760 → 71.7% */
+    top: 73%;
+    transform: translateX(-50%);
+    width: 90%;
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 11px;
+    line-height: 1.7;
+    font-weight: 700;
+  }
+  .sp-event-info .sp-event-info-tag {
+    font-size: 10px;
+    margin-top: 4px;
+  }
+  /* 白ピル "詳細をみる" の中央 */
+  .sp-event-btn {
+    position: absolute;
+    left: 50%;
+    /* 白ピル (y 874-913) ≒ 中心 y 893 → 84.2% */
+    top: 84.2%;
+    transform: translate(-50%, -50%);
+    color: #FF0000;
+    font-weight: 700;
+    font-size: 13px;
+    text-decoration: none;
+    /* 白ピルのクリック領域に合わせる */
+    width: 30%;
+    text-align: center;
+    padding: 8px 0;
+  }
+  /* 白プレースホルダ全体をクリック可能にする透明リンク */
+  .sp-event-placeholder-link {
+    position: absolute;
+    left: 7%;
+    top: 27%;
+    width: 86%;
+    height: 32%;
+    display: block;
+  }
+
+  /* ── SP ABOUT セクション（TOP page）── */
+  .sp-top-about {
+    padding: 64px 24px 56px;
+    text-align: center;
+  }
+  .sp-top-about .sp-heading {
+    display: block;
+    margin: 0 auto 48px;
+    max-width: 220px;
+  }
+  .sp-member-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .sp-member-photo {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #FF0000;
+    flex-shrink: 0;
+  }
+  .sp-member-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .sp-member-name {
+    display: block;
+    max-width: 200px;
+    width: auto;
+  }
+
+  /* ── SP FOOTER（曲線＋コピーライト） ── */
+  .sp-footer {
+    position: relative;
+    width: 100%;
+    line-height: 0;
+  }
+  .sp-footer > img {
+    width: 100%;
+    display: block;
+  }
+  .sp-footer .copyright {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 18px;
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 11px;
+    line-height: 1;
+    letter-spacing: 0.04em;
+    transform: none;
+    top: auto;
+  }
+
+  /* ============================================================
+     EVENT PAGE — SP
+     ============================================================ */
+  .sp-event-page {
+    padding: 0;
+  }
+  .sp-event-new-block {
+    padding: 56px 24px 0;
+    text-align: center;
+  }
+  .sp-event-new-block .sp-heading {
+    display: block;
+    margin: 0 auto 32px;
+    max-width: 220px;
+  }
+  .sp-event-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .sp-event-card .sp-event-placeholder {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: #FFFFFF;
+    border: 2px solid #FF0000;
+    border-radius: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FF0000;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+  }
+  .sp-event-card .sp-event-asobo-title img {
+    max-width: 220px;
+    height: auto;
+  }
+  .sp-event-card .sp-event-meta {
+    text-align: center;
+    color: #FF0000;
+    font-size: 12px;
+    line-height: 1.7;
+    font-weight: 700;
+  }
+  .sp-event-card .sp-event-meta .sp-event-tag {
+    font-size: 10px;
+  }
+  .sp-event-card .sp-pill-btn {
+    display: inline-block;
+    background: #FF0000;
+    color: #FFFFFF;
+    border-radius: 100px;
+    padding: 10px 32px;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    border: 2px solid #FF0000;
+  }
+
+  /* UPCOMING（赤背景 + 白プレースホルダ × 3） */
+  .sp-upcoming {
+    margin-top: 64px;
+    background: #FF0000;
+    border-top-left-radius: 80% 56px;
+    border-top-right-radius: 80% 56px;
+    padding: 72px 24px 80px;
+  }
+  .sp-upcoming-heading {
+    display: block;
+    margin: 0 auto 48px;
+    max-width: 220px;
+    filter: brightness(0) invert(1); /* 白に */
+  }
+  .sp-upcoming-card {
+    background: transparent;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+  .sp-upcoming-card .sp-event-placeholder {
+    background: #FFFFFF;
+    border: 2px solid #FFFFFF;
+    aspect-ratio: 1 / 1;
+    border-radius: 40px;
+    margin-bottom: 16px;
+  }
+  .sp-upcoming-card .sp-uc-title {
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .sp-upcoming-card .sp-uc-meta {
+    color: #FFFFFF;
+    font-size: 12px;
+    line-height: 1.6;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  .sp-upcoming-card .sp-pill-btn {
+    background: #FFFFFF;
+    color: #FF0000;
+    border-color: #FFFFFF;
+  }
+
+  /* ARCHIVE */
+  .sp-archive {
+    padding: 64px 24px 80px;
+    text-align: center;
+  }
+  .sp-archive .sp-heading {
+    display: block;
+    margin: 0 auto 48px;
+    max-width: 220px;
+  }
+  .sp-archive-card {
+    width: 100%;
+    aspect-ratio: 0.55 / 1;
+    margin-bottom: 24px;
+    background: transparent;
+    border: 2px solid #FF0000;
+    border-radius: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FF0000;
+    font-weight: 700;
+    font-size: 28px;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+  }
+
+  /* ============================================================
+     ABOUT PAGE — SP
+     ============================================================ */
+  .sp-about-hero {
+    width: 100%;
+    line-height: 0;
+    margin-top: -50px;
+  }
+  .sp-about-hero img { width: 100%; display: block; }
+
+  .sp-members {
+    padding: 64px 24px 64px;
+    text-align: center;
+  }
+  .sp-members .sp-member-block {
+    margin-bottom: 56px;
+  }
+  .sp-members .sp-member-bio {
+    color: #FF0000;
+    font-size: 12px;
+    line-height: 1.9;
+    font-weight: 500;
+    max-width: 320px;
+    margin: 8px auto 0;
+  }
+
+  /* お仕事のご相談（赤背景セクション） */
+  .sp-work-inquiry {
+    position: relative;
+    width: 100%;
+    line-height: 0;
+  }
+  .sp-work-inquiry > img {
+    width: 100%;
+    display: block;
+  }
+  .sp-work-inquiry-overlay {
+    position: absolute;
+    inset: 0;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 32px;
+    text-align: center;
+    color: #FFFFFF;
+  }
+  .sp-work-inquiry-overlay .sp-wi-heading {
+    color: #FFFFFF;
+    font-size: 30px;
+    font-weight: 700;
+    margin: 0 0 24px;
+    line-height: 1.4;
+  }
+  .sp-work-inquiry-overlay .sp-wi-text {
+    color: #FFFFFF;
+    font-size: 12px;
+    line-height: 1.8;
+    font-weight: 500;
+    margin: 0 0 24px;
+  }
+  .sp-work-inquiry-overlay .sp-wi-btn {
+    display: inline-block;
+    border: 2px solid #FFFFFF;
+    border-radius: 100px;
+    padding: 10px 28px;
+    color: #FFFFFF;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    background: transparent;
+  }
+
+  /* ============================================================
+     CONTACT PAGE — SP
+     ============================================================ */
+  .sp-contact {
+    padding: 56px 24px 56px;
+    text-align: center;
+  }
+  .sp-contact .sp-contact-heading {
+    color: #FF0000;
+    font-size: 30px;
+    font-weight: 700;
+    margin: 0 0 24px;
+  }
+  .sp-contact .sp-contact-lead {
+    color: #FF0000;
+    font-size: 12px;
+    line-height: 1.9;
+    font-weight: 500;
+    text-align: center;
+    margin: 0 0 32px;
+  }
+  .sp-contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .sp-contact-form input,
+  .sp-contact-form select,
+  .sp-contact-form textarea {
+    width: 100%;
+    border: 2px solid #FF0000;
+    border-radius: 100px;
+    padding: 12px 20px;
+    color: #FF0000;
+    font-size: 13px;
+    font-family: inherit;
+    background: transparent;
+    box-sizing: border-box;
+    font-weight: 700;
+  }
+  .sp-contact-form textarea {
+    border-radius: 24px;
+    min-height: 140px;
+    resize: vertical;
+  }
+  .sp-contact-form input::placeholder,
+  .sp-contact-form textarea::placeholder {
+    color: #FF0000;
+    opacity: 0.7;
+  }
+  .sp-contact-form .sp-submit-btn {
+    background: #FF0000;
+    color: #FFFFFF;
+    border: 2px solid #FF0000;
+    border-radius: 100px;
+    padding: 14px 0;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 8px;
+  }
+}
+

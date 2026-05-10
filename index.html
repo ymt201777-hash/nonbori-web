@@ -12,8 +12,15 @@
 </head>
 <body class="top-page">
 
-  <!-- ===== HEADER ===== -->
-  <header>
+  <!-- ===== SP HEADER ===== -->
+  <header class="sp-header sp-only">
+    <button class="sp-hamburger-btn" type="button" data-sp-menu-open aria-label="メニュー">
+      <img src="sp-nav-hamburger.svg" alt="">
+    </button>
+  </header>
+
+  <!-- ===== HEADER (PC) ===== -->
+  <header class="pc-only">
     <img class="header-bg-img" src="top-header-bg.svg" alt="">
     <nav class="nav-links">
       <a href="index.html" class="nav-top" aria-label="TOPへ戻る">
@@ -33,93 +40,187 @@
 
   <main>
 
-    <!-- ===== HERO ===== -->
-    <section class="hero">
-      <img src="top-hero.svg" alt="NONBORI">
-    </section>
+    <!-- ===== PC CONTENT ===== -->
+    <div class="pc-only">
 
-    <!-- ===== WHAT IS NONBORI ===== -->
-    <section class="what-is">
-      <img class="section-heading" src="top-heading-whatisnonbori.svg" alt="WHAT IS NONBORI?">
-      <p>
-        僕らの地元、愛知県尾張地方の方言「のんぼり（鯉のぼり・布地）」が語源。<br>
-        人と人を織り交ぜる——その想いを名前に込めました。<br>
-        大人になっても好きなことにまっすぐに、<br>
-        こだわりを持って生きている僕たちだからこそつくれる、<br>
-        大人も楽しい"遊びごころ"が感じられるイベントを創造していきます。
-      </p>
-    </section>
+      <!-- ===== HERO ===== -->
+      <section class="hero">
+        <img src="top-hero.svg" alt="NONBORI">
+      </section>
 
-    <!-- ===== EVENT ===== -->
-    <section class="event-section">
-      <img class="event-bg" src="top-event-bg.svg" alt="">
-      <img class="event-section-heading" src="nav-event.svg" alt="EVENT">
-      <div class="new-event-wrap">
-        <!-- 左カラム：ASOBO! テキスト＋ボタン -->
-        <div class="new-event-card">
-          <div class="card-image">
-            <img src="top-event-asobo-title.svg" alt="ASOBO!">
+      <!-- ===== WHAT IS NONBORI ===== -->
+      <section class="what-is">
+        <img class="section-heading" src="top-heading-whatisnonbori.svg" alt="WHAT IS NONBORI?">
+        <p>
+          僕らの地元、愛知県尾張地方の方言「のんぼり（鯉のぼり・布地）」が語源。<br>
+          人と人を織り交ぜる——その想いを名前に込めました。<br>
+          大人になっても好きなことにまっすぐに、<br>
+          こだわりを持って生きている僕たちだからこそつくれる、<br>
+          大人も楽しい"遊びごころ"が感じられるイベントを創造していきます。
+        </p>
+      </section>
+
+      <!-- ===== EVENT ===== -->
+      <section class="event-section">
+        <img class="event-bg" src="top-event-bg.svg" alt="">
+        <img class="event-section-heading" src="nav-event.svg" alt="EVENT">
+        <div class="new-event-wrap">
+          <!-- 左カラム：ASOBO! テキスト＋ボタン -->
+          <div class="new-event-card">
+            <div class="card-image">
+              <img src="top-event-asobo-title.svg" alt="ASOBO!">
+            </div>
+            <div class="card-body">
+              <p class="event-type-badge">ファミリー向け</p>
+              <p class="event-date">2026年10月4日（日）</p>
+              <p class="event-venue">@みんなの森 ぎふメディアコスモス</p>
+              <p class="event-tags">子供服 , ワークショップ , フードトラック</p>
+            </div>
+            <div class="card-footer">
+              <a href="event.html" class="btn btn-pill">詳細をみる</a>
+            </div>
           </div>
-          <div class="card-body">
-            <p class="event-type-badge">ファミリー向け</p>
-            <p class="event-date">2026年10月4日（日）</p>
-            <p class="event-venue">@みんなの森 ぎふメディアコスモス</p>
-            <p class="event-tags">子供服 , ワークショップ , フードトラック</p>
+
+          <!-- 右カラム：次のイベントのビジュアル（ASOBOページへリンク） -->
+          <a class="new-event-placeholder" href="events/asobo/">
+            <img src="asobo-tagline.svg" alt="ASOBO!! tagline">
+          </a>
+        </div>
+      </section>
+
+      <!-- ===== ABOUT US ===== -->
+      <section class="about-preview">
+        <img class="section-heading" src="top-heading-aboutus.svg" alt="ABOUT US">
+
+        <!-- YUICHIRO: 写真（左）名前（右） -->
+        <div class="member-row">
+          <div class="member-photo">
+            <img src="photo-yuichiro.jpg" alt="祐一郎">
           </div>
-          <div class="card-footer">
-            <a href="event.html" class="btn btn-pill">詳細をみる</a>
+          <div class="member-name-only">
+            <img src="top-member-yuichiro.svg" alt="REPRESENTATIVE YUICHIRO">
           </div>
         </div>
 
-        <!-- 右カラム：次のイベントのビジュアル（ASOBOページへリンク） -->
-        <a class="new-event-placeholder" href="events/asobo/">
-          <img src="asobo-tagline.svg" alt="ASOBO!! tagline">
-        </a>
-      </div>
-    </section>
+        <!-- HARU: 名前（左）写真（右） -->
+        <div class="member-row reverse">
+          <div class="member-photo">
+            <img src="photo-harunosuke.svg" alt="はるのすけ">
+          </div>
+          <div class="member-name-only">
+            <img src="top-member-haru.svg" alt="ART DIRECTOR HARU">
+          </div>
+        </div>
 
-    <!-- ===== ABOUT US ===== -->
-    <section class="about-preview">
-      <img class="section-heading" src="top-heading-aboutus.svg" alt="ABOUT US">
+        <!-- MI-BO-: 写真（左）名前（右） -->
+        <div class="member-row">
+          <div class="member-photo">
+            <img src="photo-mibo.jpg" alt="みーぼー">
+          </div>
+          <div class="member-name-only">
+            <img src="top-member-mibo.svg" alt="MERCHANDISER MI-BO-">
+          </div>
+        </div>
+      </section>
 
-      <!-- YUICHIRO: 写真（左）名前（右） -->
-      <div class="member-row">
-        <div class="member-photo">
-          <img src="photo-yuichiro.jpg" alt="祐一郎">
-        </div>
-        <div class="member-name-only">
-          <img src="top-member-yuichiro.svg" alt="REPRESENTATIVE YUICHIRO">
-        </div>
-      </div>
+    </div>
 
-      <!-- HARU: 名前（左）写真（右） -->
-      <div class="member-row reverse">
-        <div class="member-photo">
-          <img src="photo-harunosuke.svg" alt="はるのすけ">
-        </div>
-        <div class="member-name-only">
-          <img src="top-member-haru.svg" alt="ART DIRECTOR HARU">
-        </div>
-      </div>
+    <!-- ===== SP CONTENT ===== -->
+    <div class="sp-only">
 
-      <!-- MI-BO-: 写真（左）名前（右） -->
-      <div class="member-row">
-        <div class="member-photo">
-          <img src="photo-mibo.jpg" alt="みーぼー">
+      <!-- HERO -->
+      <section class="sp-hero">
+        <img src="sp-top-hero.svg" alt="NONBORI">
+      </section>
+
+      <!-- WHAT IS NONBORI -->
+      <section class="sp-what-is">
+        <img class="sp-heading" src="sp-top-whatisnonbori.svg" alt="WHAT IS NONBORI?">
+        <p>
+          僕らの地元、愛知県尾張地方の方言「のんぼり（鯉のぼり・布地）」が語源。<br>
+          人と人を織り交ぜる——その想いを名前に込めました。<br>
+          大人になっても好きなことにまっすぐに、<br>
+          こだわりを持って生きている僕たちだからこそつくれる、<br>
+          大人も楽しい"遊びごころ"が感じられるイベントを創造していきます。
+        </p>
+      </section>
+
+      <!-- EVENT (SVG背景＋オーバーレイ) -->
+      <section class="sp-top-event">
+        <img class="sp-bg" src="sp-top-event.svg" alt="EVENT - ASOBO!">
+        <div class="sp-top-event-overlay">
+          <a class="sp-event-placeholder-link" href="events/asobo/" aria-label="ASOBO!! 詳細"></a>
+          <span class="sp-event-placeholder-text">coming soon...</span>
+          <div class="sp-event-info">
+            ファミリー向け<br>
+            2026年10月4日（日）<br>
+            @みんなの森 ぎふメディアコスモス<br>
+            <span class="sp-event-info-tag">子供服 , ワークショップ , フードトラック</span>
+          </div>
+          <a class="sp-event-btn" href="event.html">詳細をみる</a>
         </div>
-        <div class="member-name-only">
-          <img src="top-member-mibo.svg" alt="MERCHANDISER MI-BO-">
+      </section>
+
+      <!-- ABOUT US -->
+      <section class="sp-top-about">
+        <img class="sp-heading" src="top-heading-aboutus.svg" alt="ABOUT US">
+        <div class="sp-member-block">
+          <div class="sp-member-photo"><img src="photo-yuichiro.jpg" alt="祐一郎"></div>
+          <img class="sp-member-name" src="sp-member-yuichiro.svg" alt="REPRESENTATIVE YUICHIRO">
         </div>
-      </div>
-    </section>
+        <div class="sp-member-block">
+          <div class="sp-member-photo"><img src="photo-harunosuke.svg" alt="はるのすけ"></div>
+          <img class="sp-member-name" src="sp-member-haru.svg" alt="ART DIRECTOR HARU">
+        </div>
+        <div class="sp-member-block">
+          <div class="sp-member-photo"><img src="photo-mibo.jpg" alt="みーぼー"></div>
+          <img class="sp-member-name" src="sp-member-mibo.svg" alt="MERCHANDISER MI-BO-">
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="sp-footer">
+        <img src="sp-top-footer.svg" alt="">
+        <p class="copyright">© 2026 NONBORI. All rights reserved.</p>
+      </footer>
+
+    </div>
 
   </main>
 
-  <!-- ===== FOOTER ===== -->
-  <footer>
+  <!-- ===== FOOTER (PC) ===== -->
+  <footer class="pc-only">
     <img class="footer-img" src="top-footer.svg" alt="">
     <p class="copyright">© 2026 NONBORI. All rights reserved.</p>
   </footer>
+
+  <!-- ===== SP MENU OVERLAY ===== -->
+  <div class="sp-menu-overlay sp-only" id="spMenu" hidden>
+    <button class="sp-menu-close" type="button" data-sp-menu-close aria-label="閉じる">×</button>
+    <nav class="sp-menu-links">
+      <a href="index.html" class="active">TOP</a>
+      <a href="event.html">EVENT</a>
+      <a href="about.html">ABOUT US</a>
+      <a href="contact.html">CONTACT</a>
+      <a href="https://www.instagram.com/nonbori_official" target="_blank" rel="noopener noreferrer">Instagram</a>
+    </nav>
+  </div>
+
+  <!-- ===== SP MENU JS ===== -->
+  <script>
+    document.querySelectorAll('[data-sp-menu-open]').forEach(b => {
+      b.addEventListener('click', () => {
+        const m = document.getElementById('spMenu');
+        if (m) m.hidden = false;
+      });
+    });
+    document.querySelectorAll('[data-sp-menu-close]').forEach(b => {
+      b.addEventListener('click', () => {
+        const m = document.getElementById('spMenu');
+        if (m) m.hidden = true;
+      });
+    });
+  </script>
 
 </body>
 </html>
