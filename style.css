@@ -239,12 +239,12 @@ footer {
   min-height: 50vw; /* 背景SVG (top-event-bg.svg) の高さに合わせる */
 }
 
-/* 背景SVG：画面右端揃え・最背面（サイズは変更しない） */
+/* 背景SVG：画面右端揃え・最背面（左に少し伸ばす） */
 .event-bg {
   position: absolute;
   right: 0;
   top: 0;
-  width: 90%;
+  width: 95%;
   height: auto;
   z-index: 0;
   pointer-events: none;
