@@ -96,7 +96,7 @@ body.about-page::before {
 }
 
 .nav-links a img {
-  height: 14px;
+  height: 18px;
   width: auto;
 }
 
@@ -111,7 +111,7 @@ body.about-page::before {
 }
 
 .nav-instagram img {
-  height: 22px;
+  height: 26px;
   width: auto;
 }
 
@@ -122,7 +122,7 @@ body.about-page::before {
 }
 
 .nav-top img {
-  height: 14px;
+  height: 18px;
   width: auto;
   display: block;
 }
