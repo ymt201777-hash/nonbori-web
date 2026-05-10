@@ -86,18 +86,23 @@
         <div class="form-group">
           <div class="form-radio-group horizontal">
             <label class="form-radio-label">
-              <input class="form-radio-input" type="radio" name="category" value="キッチンカー（¥5,000）" required>
-              <span>キッチンカー（¥5,000）</span>
+              <input class="form-radio-input" type="radio" name="category" value="キッチンカー（¥5,000 税込み）" required>
+              <span>キッチンカー（¥5,000 税込み）</span>
             </label>
             <label class="form-radio-label">
-              <input class="form-radio-input" type="radio" name="category" value="物販（¥2,000）">
-              <span>物販（¥2,000）</span>
+              <input class="form-radio-input" type="radio" name="category" value="物販（¥2,000 税込み）">
+              <span>物販（¥2,000 税込み）</span>
             </label>
             <label class="form-radio-label">
-              <input class="form-radio-input" type="radio" name="category" value="ワークショップ（¥2,000）">
-              <span>ワークショップ（¥2,000）</span>
+              <input class="form-radio-input" type="radio" name="category" value="ワークショップ（¥2,000 税込み）">
+              <span>ワークショップ（¥2,000 税込み）</span>
             </label>
           </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="genre">店舗ジャンル</label>
+          <input class="form-input" type="text" id="genre" name="genre" placeholder="例：子供服 / 木工 / 焼き菓子 / アクセサリー" required>
         </div>
 
         <!-- ===== 出店内容 ===== -->
@@ -125,11 +130,11 @@
           <div class="form-check-group">
             <label class="form-check-label">
               <input class="form-check-input" type="checkbox" name="tent" value="はい">
-              <span>テントを持参できる</span>
+              <span>テントを持参できる（テントを使用する場合は必須）</span>
             </label>
             <label class="form-check-label">
               <input class="form-check-input" type="checkbox" name="generator" value="はい">
-              <span>発電機を持参できる（電源設備なし・必要な場合は必須）</span>
+              <span>発電機を持参できる（電源設備なし・必要な場合は持参必須）</span>
             </label>
             <label class="form-check-label">
               <input class="form-check-input" type="checkbox" name="cashless" value="はい">
@@ -138,8 +143,35 @@
           </div>
         </div>
 
+        <!-- ===== 駐車場 ===== -->
+        <h2 class="apply-section-heading">駐車場</h2>
+
+        <div class="form-group">
+          <div class="form-check-group">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" name="parking_use" value="はい">
+              <span>駐車場を利用する（みんなの森 ぎふメディアコスモスへ事前報告が必要）</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="parking_count">利用台数（利用する場合）</label>
+          <input class="form-input" type="number" id="parking_count" name="parking_count" placeholder="例：1" min="0">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="parking_time">利用時間（利用する場合）</label>
+          <input class="form-input" type="text" id="parking_time" name="parking_time" placeholder="例：8:00〜18:00">
+        </div>
+
         <!-- ===== キッチンカーの方のみ ===== -->
         <h2 class="apply-section-heading">キッチンカーの方のみ</h2>
+
+        <div class="form-group">
+          <label class="form-label" for="vehicle_info">車の情報（車種・サイズ）</label>
+          <input class="form-input" type="text" id="vehicle_info" name="vehicle_info" placeholder="例：スズキ キャリイ／全長3.4m × 全幅1.5m">
+        </div>
 
         <div class="form-group">
           <div class="form-check-group">
