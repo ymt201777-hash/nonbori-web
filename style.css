@@ -1450,135 +1450,157 @@ a.new-event-placeholder:hover {
   /* ============================================================
      EVENT PAGE — SP
      ============================================================ */
-  .sp-event-page {
-    padding: 0;
-  }
-  .sp-event-new-block {
-    padding: 56px 24px 0;
+
+  /* NEW!! + ASOBOカード */
+  .sp-event-new {
+    padding: 80px 24px 96px;
     text-align: center;
   }
-  .sp-event-new-block .sp-heading {
+  .sp-event-new .sp-heading {
     display: block;
-    margin: 0 auto 32px;
-    max-width: 220px;
+    margin: 0 auto 48px;
+    max-width: 240px;
   }
-  .sp-event-card {
+  .sp-asobo-card {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 16px;
+    gap: 20px;
   }
-  .sp-event-card .sp-event-placeholder {
+  /* 白背景の placeholder（アソボキャラを内側に表示） */
+  .sp-asobo-placeholder {
     width: 100%;
     aspect-ratio: 1 / 1;
     background: #FFFFFF;
     border: 2px solid #FF0000;
-    border-radius: 40px;
+    border-radius: 64px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #FF0000;
-    font-weight: 700;
-    font-size: 16px;
-    letter-spacing: 0.05em;
     text-decoration: none;
+    overflow: hidden;
+    position: relative;
   }
-  .sp-event-card .sp-event-asobo-title img {
-    max-width: 220px;
+  .sp-asobo-placeholder-img {
+    max-width: 60%;
     height: auto;
+    pointer-events: none;
   }
-  .sp-event-card .sp-event-meta {
+  .sp-asobo-title {
+    display: block;
+    max-width: 60%;
+    height: auto;
+    margin: 0 auto;
+  }
+  .sp-asobo-info {
     text-align: center;
     color: #FF0000;
-    font-size: 12px;
-    line-height: 1.7;
+    font-size: 15px;
+    line-height: 1.8;
     font-weight: 700;
   }
-  .sp-event-card .sp-event-meta .sp-event-tag {
-    font-size: 10px;
+  .sp-asobo-info .sp-asobo-tags {
+    display: inline-block;
+    font-size: 13px;
+    margin-top: 4px;
   }
-  .sp-event-card .sp-pill-btn {
+  .sp-asobo-btn {
     display: inline-block;
     background: #FF0000;
     color: #FFFFFF;
+    border: 2px solid #FF0000;
     border-radius: 100px;
-    padding: 10px 32px;
+    padding: 12px 36px;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    margin-top: 8px;
+  }
+
+  /* UPCOMING（SVG背景にカード内容オーバーレイ） */
+  .sp-upcoming {
+    position: relative;
+    width: 100%;
+    line-height: 0;
+    /* viewBox 389.22 × 2526.36 で高さ固定 */
+    aspect-ratio: 389.22 / 2526.36;
+  }
+  .sp-upcoming-bg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .sp-upcoming-overlay {
+    position: absolute;
+    inset: 0;
+    line-height: 1.5;
+  }
+  /* 各 placeholder の下に配置するカード本体 */
+  .sp-uc-card {
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: #FFFFFF;
+    padding: 0 24px;
+  }
+  /* placeholder rect の y 座標から計算した % 位置（直下） */
+  /* placeholder1: y 349-692 / 2526 → bottom 27.4%, content starts ~28% */
+  .sp-uc-card-1 { top: 28%; }
+  /* placeholder2: y 1042-1385 → bottom 54.8% */
+  .sp-uc-card-2 { top: 55.5%; }
+  /* placeholder3: y 1774-2117 → bottom 83.8% */
+  .sp-uc-card-3 { top: 84.5%; }
+
+  .sp-uc-title {
+    color: #FFFFFF;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 8px;
+  }
+  .sp-uc-meta {
+    color: #FFFFFF;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.7;
+    margin: 0 0 14px;
+  }
+  .sp-uc-btn {
+    display: inline-block;
+    background: #FFFFFF;
+    color: #FF0000;
+    border: 2px solid #FFFFFF;
+    border-radius: 100px;
+    padding: 8px 28px;
     font-size: 13px;
     font-weight: 700;
     text-decoration: none;
-    border: 2px solid #FF0000;
-  }
-
-  /* UPCOMING（赤背景 + 白プレースホルダ × 3） */
-  .sp-upcoming {
-    margin-top: 64px;
-    background: #FF0000;
-    border-top-left-radius: 80% 56px;
-    border-top-right-radius: 80% 56px;
-    padding: 72px 24px 80px;
-  }
-  .sp-upcoming-heading {
-    display: block;
-    margin: 0 auto 48px;
-    max-width: 220px;
-    filter: brightness(0) invert(1); /* 白に */
-  }
-  .sp-upcoming-card {
-    background: transparent;
-    margin-bottom: 40px;
-    text-align: center;
-  }
-  .sp-upcoming-card .sp-event-placeholder {
-    background: #FFFFFF;
-    border: 2px solid #FFFFFF;
-    aspect-ratio: 1 / 1;
-    border-radius: 40px;
-    margin-bottom: 16px;
-  }
-  .sp-upcoming-card .sp-uc-title {
-    color: #FFFFFF;
-    font-size: 18px;
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-  .sp-upcoming-card .sp-uc-meta {
-    color: #FFFFFF;
-    font-size: 12px;
-    line-height: 1.6;
-    font-weight: 700;
-    margin-bottom: 16px;
-  }
-  .sp-upcoming-card .sp-pill-btn {
-    background: #FFFFFF;
-    color: #FF0000;
-    border-color: #FFFFFF;
   }
 
   /* ARCHIVE */
   .sp-archive {
-    padding: 64px 24px 80px;
+    padding: 96px 24px 80px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
   }
   .sp-archive .sp-heading {
     display: block;
-    margin: 0 auto 48px;
-    max-width: 220px;
+    margin: 0 auto 24px;
+    max-width: 240px;
   }
   .sp-archive-card {
-    width: 100%;
-    aspect-ratio: 0.55 / 1;
-    margin-bottom: 24px;
-    background: transparent;
-    border: 2px solid #FF0000;
-    border-radius: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #FF0000;
-    font-weight: 700;
-    font-size: 28px;
-    letter-spacing: 0.1em;
+    display: block;
+    width: 86%;
     text-decoration: none;
+    line-height: 0;
+  }
+  .sp-archive-card img {
+    width: 100%;
+    height: auto;
+    display: block;
   }
 
   /* ============================================================
