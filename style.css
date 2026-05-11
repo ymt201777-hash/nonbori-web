@@ -1719,7 +1719,7 @@ a.new-event-placeholder:hover {
     border: 2px solid #FF0000;
     border-radius: 100px;
     /* iOS select 潰れ対策: height でなく min-height + padding で揃える */
-    min-height: 48px;
+    min-height: 50px;
     padding: 14px 20px;
     color: #FF0000;
     font-size: 13px;
