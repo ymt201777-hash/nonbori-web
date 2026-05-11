@@ -1718,17 +1718,33 @@ a.new-event-placeholder:hover {
     width: 100%;
     border: 2px solid #FF0000;
     border-radius: 100px;
-    padding: 12px 20px;
+    padding: 0 20px;
+    height: 48px;
     color: #FF0000;
     font-size: 13px;
     font-family: inherit;
     background: transparent;
     box-sizing: border-box;
     font-weight: 700;
+    line-height: 1;
+    /* select もブラウザ標準UIを揃える */
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  /* select に右側の矢印（赤）を表示 */
+  .sp-contact-form select {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'><path fill='%23FF0000' d='M6 8L0 0h12z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 20px center;
+    background-size: 10px 7px;
+    padding-right: 40px;
   }
   .sp-contact-form textarea {
-    border-radius: 24px;
+    height: auto;
     min-height: 140px;
+    padding: 12px 20px;
+    border-radius: 24px;
+    line-height: 1.6;
     resize: vertical;
   }
   .sp-contact-form input::placeholder,
