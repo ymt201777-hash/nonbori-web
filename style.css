@@ -1733,6 +1733,7 @@ a.new-event-placeholder:hover {
   }
   /* select に右側の矢印（赤）を表示 */
   .sp-contact-form select {
+    min-height: 52px;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'><path fill='%23FF0000' d='M6 8L0 0h12z'/></svg>");
     background-repeat: no-repeat;
     background-position: right 20px center;
