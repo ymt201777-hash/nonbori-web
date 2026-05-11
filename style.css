@@ -371,9 +371,10 @@ footer {
   object-fit: cover;
 }
 
-/* mibo の元画像は周囲に白余白があるので img だけ拡大（親の枠は影響なし） */
+/* mibo: 元画像の下半分に顔があるので顔アップに */
 .member-photo img[src*="mibo"] {
-  transform: scale(1.2);
+  transform: scale(1.8);
+  transform-origin: center 68%;
 }
 
 .member-name-only img {
@@ -1418,9 +1419,11 @@ a.new-event-placeholder:hover {
     object-fit: cover;
     display: block;
   }
-  /* Mibo の写真：全身画像なので頭部に寄せる */
+  /* Mibo の写真：全身画像 → 顔アップ */
   .sp-member-photo img.is-sp-mibo {
-    object-position: center 18%;
+    object-position: center 15%;
+    transform: scale(1.6);
+    transform-origin: center 22%;
   }
   .sp-member-name {
     display: block;
