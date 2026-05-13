@@ -255,8 +255,8 @@
       emailjs.init({ publicKey: 'YOUR_PUBLIC_KEY' });
 
       var SERVICE_ID = 'YOUR_SERVICE_ID';
-      var TEMPLATE_ID_ADMIN = 'YOUR_TEMPLATE_ID_ADMIN';
-      var TEMPLATE_ID_REPLY = 'YOUR_TEMPLATE_ID_REPLY';
+      // テンプレート側で To: {{email}} + Cc: 運営アドレスを設定して一括送信
+      var TEMPLATE_ID = 'YOUR_APPLY_TEMPLATE_ID';
 
       var form = document.getElementById('apply-form');
       var submitBtn = form.querySelector('.form-submit');
@@ -277,11 +277,8 @@
         resultEl.textContent = '';
         resultEl.className = 'apply-result';
 
-        // 1) 運営への通知 → 2) 申請者への自動返信
-        emailjs.sendForm(SERVICE_ID, TEMPLATE_ID_ADMIN, form)
-          .then(function () {
-            return emailjs.sendForm(SERVICE_ID, TEMPLATE_ID_REPLY, form);
-          })
+        // テンプレートで To 申請者 + Cc 運営の同時送信
+        emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form)
           .then(function () {
             resultEl.textContent = '申請を受け付けました。2〜3営業日以内にご連絡します。';
             resultEl.className = 'apply-result is-success';

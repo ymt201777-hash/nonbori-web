@@ -203,8 +203,8 @@
       emailjs.init({ publicKey: 'YOUR_PUBLIC_KEY' });
 
       var SERVICE_ID = 'YOUR_SERVICE_ID';
-      var TEMPLATE_ID_ADMIN = 'YOUR_CONTACT_TEMPLATE_ID_ADMIN';
-      var TEMPLATE_ID_REPLY = 'YOUR_CONTACT_TEMPLATE_ID_REPLY';
+      // テンプレート側で To: {{email}} + Cc: 運営アドレスを設定して一括送信
+      var TEMPLATE_ID = 'YOUR_CONTACT_TEMPLATE_ID';
 
       function attachHandler(formId, resultId) {
         var form = document.getElementById(formId);
@@ -227,10 +227,7 @@
             resultEl.textContent = '';
             resultEl.className = 'apply-result';
           }
-          emailjs.sendForm(SERVICE_ID, TEMPLATE_ID_ADMIN, form)
-            .then(function () {
-              return emailjs.sendForm(SERVICE_ID, TEMPLATE_ID_REPLY, form);
-            })
+          emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form)
             .then(function () {
               if (resultEl) {
                 resultEl.textContent = 'お問い合わせを受け付けました。2〜3営業日以内にご返信します。';
