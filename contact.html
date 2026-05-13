@@ -199,12 +199,11 @@
   <!-- ===== EmailJS 送信処理（Contact PC + SP 共通） ===== -->
   <script>
     (function () {
-      // EmailJS 初期化（実値に差し替えてください）
-      emailjs.init({ publicKey: 'YOUR_PUBLIC_KEY' });
+      emailjs.init({ publicKey: '_sQOv2RGweXrTeb9Q' });
 
-      var SERVICE_ID = 'YOUR_SERVICE_ID';
+      var SERVICE_ID = 'service_5r6dmes';
       // テンプレート側で To: {{email}} + Cc: 運営アドレスを設定して一括送信
-      var TEMPLATE_ID = 'YOUR_CONTACT_TEMPLATE_ID';
+      var TEMPLATE_ID = 'template_03nhgom';
 
       function attachHandler(formId, resultId) {
         var form = document.getElementById(formId);
