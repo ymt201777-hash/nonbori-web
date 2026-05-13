@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700;900&family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body class="contact-page">
 
@@ -63,7 +64,7 @@
         </div>
 
         <!-- フォーム -->
-        <form class="contact-form" action="#" method="post">
+        <form id="pc-contact-form" class="contact-form" novalidate>
 
           <div class="form-group">
             <label class="form-label" for="name">お名前</label>
@@ -95,6 +96,9 @@
 
         </form>
 
+        <!-- 結果表示 -->
+        <div id="pc-contact-result" class="apply-result" role="status" aria-live="polite"></div>
+
       </section>
     </div>
 
@@ -112,19 +116,20 @@
           ご連絡お待ちしております。
         </p>
 
-        <form class="sp-contact-form" action="#" method="post">
-          <input type="text" name="sp_name" placeholder="お名前" required>
-          <input type="email" name="sp_email" placeholder="メールアドレス" required>
-          <select name="sp_type" required>
+        <form id="sp-contact-form" class="sp-contact-form" novalidate>
+          <input type="text" name="name" placeholder="お名前" required>
+          <input type="email" name="email" placeholder="メールアドレス" required>
+          <select name="type" required>
             <option value="" disabled selected>お問い合わせ種別</option>
             <option value="event_related">イベント関連</option>
             <option value="collab">コラボ・取材</option>
             <option value="work">お仕事のご依頼</option>
             <option value="other">その他</option>
           </select>
-          <textarea name="sp_message" placeholder="メッセージ" required></textarea>
+          <textarea name="message" placeholder="メッセージ" required></textarea>
           <button class="sp-submit-btn" type="submit">送信する</button>
         </form>
+        <div id="sp-contact-result" class="sp-contact-result" role="status" aria-live="polite"></div>
       </section>
 
       <!-- FOOTER -->
@@ -188,6 +193,69 @@
       window.addEventListener('scroll', updateHeaderColor, { passive: true });
       window.addEventListener('resize', updateHeaderColor);
       updateHeaderColor();
+    })();
+  </script>
+
+  <!-- ===== EmailJS 送信処理（Contact PC + SP 共通） ===== -->
+  <script>
+    (function () {
+      // EmailJS 初期化（実値に差し替えてください）
+      emailjs.init({ publicKey: 'YOUR_PUBLIC_KEY' });
+
+      var SERVICE_ID = 'YOUR_SERVICE_ID';
+      var TEMPLATE_ID_ADMIN = 'YOUR_CONTACT_TEMPLATE_ID_ADMIN';
+      var TEMPLATE_ID_REPLY = 'YOUR_CONTACT_TEMPLATE_ID_REPLY';
+
+      function attachHandler(formId, resultId) {
+        var form = document.getElementById(formId);
+        if (!form) return;
+        var resultEl = document.getElementById(resultId);
+        var submitBtn = form.querySelector('button[type="submit"]');
+        var defaultBtnText = submitBtn ? submitBtn.textContent : '送信する';
+
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+          }
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = '送信中...';
+          }
+          if (resultEl) {
+            resultEl.textContent = '';
+            resultEl.className = 'apply-result';
+          }
+          emailjs.sendForm(SERVICE_ID, TEMPLATE_ID_ADMIN, form)
+            .then(function () {
+              return emailjs.sendForm(SERVICE_ID, TEMPLATE_ID_REPLY, form);
+            })
+            .then(function () {
+              if (resultEl) {
+                resultEl.textContent = 'お問い合わせを受け付けました。2〜3営業日以内にご返信します。';
+                resultEl.className = 'apply-result is-success';
+              }
+              form.reset();
+            })
+            .catch(function (error) {
+              if (resultEl) {
+                resultEl.textContent = '送信に失敗しました。時間をおいて再度お試しください。';
+                resultEl.className = 'apply-result is-error';
+              }
+              console.error('EmailJS error:', error);
+            })
+            .finally(function () {
+              if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = defaultBtnText;
+              }
+            });
+        });
+      }
+
+      attachHandler('pc-contact-form', 'pc-contact-result');
+      attachHandler('sp-contact-form', 'sp-contact-result');
     })();
   </script>
 
