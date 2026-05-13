@@ -229,7 +229,7 @@
           emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form)
             .then(function () {
               if (resultEl) {
-                resultEl.textContent = 'お問い合わせを受け付けました。2〜3営業日以内にご返信します。';
+                resultEl.textContent = 'お問い合わせを受け付けました。';
                 resultEl.className = 'apply-result is-success';
               }
               form.reset();
