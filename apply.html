@@ -279,7 +279,7 @@
         // テンプレートで To 申請者 + Cc 運営の同時送信
         emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form)
           .then(function () {
-            resultEl.textContent = '申請を受け付けました。2〜3営業日以内にご連絡します。';
+            resultEl.textContent = '申請を受け付けました。';
             resultEl.className = 'apply-result is-success';
             form.reset();
           })
