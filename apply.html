@@ -200,7 +200,7 @@
           <div class="form-check-group">
             <label class="form-check-label">
               <input class="form-check-input" type="checkbox" name="parking_use" value="はい">
-              <span>駐車場を利用する（みんなの森 ぎふメディアコスモスへ事前報告が必要）</span>
+              <span>駐車場を利用する</span>
             </label>
           </div>
         </div>
@@ -312,8 +312,34 @@
       var resultEl = document.getElementById('apply-result');
       var defaultBtnText = submitBtn.textContent;
 
+      // 条件付き必須項目の制御
+      function updateConditionalRequired() {
+        // 駐車場：チェック時のみ台数・時間を必須に
+        var parkingUse = form.querySelector('input[name="parking_use"]');
+        var parkingCount = form.querySelector('input[name="parking_count"]');
+        var parkingTime = form.querySelector('input[name="parking_time"]');
+        var parkingChecked = parkingUse && parkingUse.checked;
+        if (parkingCount) parkingCount.required = !!parkingChecked;
+        if (parkingTime) parkingTime.required = !!parkingChecked;
+
+        // キッチンカー選択時のみキッチンカー関連を必須に
+        var selectedCat = form.querySelector('input[name="category"]:checked');
+        var isKitchen = selectedCat && selectedCat.value.indexOf('キッチンカー') === 0;
+        var vehicleInfo = form.querySelector('input[name="vehicle_info"]');
+        var healthDept = form.querySelector('input[name="health_dept"]');
+        var foodHygiene = form.querySelector('input[name="food_hygiene"]');
+        if (vehicleInfo) vehicleInfo.required = !!isKitchen;
+        if (healthDept) healthDept.required = !!isKitchen;
+        if (foodHygiene) foodHygiene.required = !!isKitchen;
+      }
+      form.addEventListener('change', updateConditionalRequired);
+      updateConditionalRequired();
+
       form.addEventListener('submit', function (e) {
         e.preventDefault();
+
+        // 送信前に条件付き必須を反映
+        updateConditionalRequired();
 
         // ブラウザ標準のバリデーション
         if (!form.checkValidity()) {
