@@ -233,6 +233,14 @@
               <input class="form-check-input" type="checkbox" name="food_hygiene" value="はい">
               <span>食品衛生責任者の資格を保有している</span>
             </label>
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" name="fire_dept" value="はい">
+              <span>火気を使用する場合、岐阜中消防署への露店等の開設届を提出する</span>
+            </label>
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" name="report_consent" value="はい">
+              <span>上記届出等の確認連絡を9/20までNONBORIにメールで送付することに同意する</span>
+            </label>
           </div>
         </div>
 
@@ -328,9 +336,13 @@
         var vehicleInfo = form.querySelector('input[name="vehicle_info"]');
         var healthDept = form.querySelector('input[name="health_dept"]');
         var foodHygiene = form.querySelector('input[name="food_hygiene"]');
+        var fireDept = form.querySelector('input[name="fire_dept"]');
+        var reportConsent = form.querySelector('input[name="report_consent"]');
         if (vehicleInfo) vehicleInfo.required = !!isKitchen;
         if (healthDept) healthDept.required = !!isKitchen;
         if (foodHygiene) foodHygiene.required = !!isKitchen;
+        if (fireDept) fireDept.required = !!isKitchen;
+        if (reportConsent) reportConsent.required = !!isKitchen;
       }
       form.addEventListener('change', updateConditionalRequired);
       updateConditionalRequired();
