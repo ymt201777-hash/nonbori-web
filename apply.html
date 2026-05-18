@@ -211,8 +211,12 @@
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="parking_time">利用時間（利用する場合）</label>
-          <input class="form-input" type="text" id="parking_time" name="parking_time" placeholder="例：8:00〜18:00">
+          <label class="form-label" for="parking_time_start">利用時間（利用する場合）</label>
+          <div class="time-range">
+            <input class="form-input time-input" type="time" id="parking_time_start" name="parking_time_start">
+            <span class="time-range-sep">〜</span>
+            <input class="form-input time-input" type="time" id="parking_time_end" name="parking_time_end">
+          </div>
         </div>
 
         <!-- ===== キッチンカーの方のみ ===== -->
@@ -330,10 +334,12 @@
         // 駐車場：チェック時のみ台数・時間を必須に
         var parkingUse = form.querySelector('input[name="parking_use"]');
         var parkingCount = form.querySelector('input[name="parking_count"]');
-        var parkingTime = form.querySelector('input[name="parking_time"]');
+        var parkingTimeStart = form.querySelector('input[name="parking_time_start"]');
+        var parkingTimeEnd = form.querySelector('input[name="parking_time_end"]');
         var parkingChecked = parkingUse && parkingUse.checked;
         if (parkingCount) parkingCount.required = !!parkingChecked;
-        if (parkingTime) parkingTime.required = !!parkingChecked;
+        if (parkingTimeStart) parkingTimeStart.required = !!parkingChecked;
+        if (parkingTimeEnd) parkingTimeEnd.required = !!parkingChecked;
 
         // キッチンカー選択時のみキッチンカー関連を必須に
         var selectedCat = form.querySelector('input[name="category"]:checked');
