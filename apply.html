@@ -219,8 +219,13 @@
         <h2 class="apply-section-heading">キッチンカーの方のみ</h2>
 
         <div class="form-group">
-          <label class="form-label" for="vehicle_info">車の情報（車種・サイズ）</label>
-          <input class="form-input" type="text" id="vehicle_info" name="vehicle_info" placeholder="例：スズキ キャリイ／全長3.4m × 全幅1.5m">
+          <label class="form-label" for="vehicle_model">車種</label>
+          <input class="form-input" type="text" id="vehicle_model" name="vehicle_model" placeholder="例：スズキ キャリイ">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="vehicle_size">サイズ</label>
+          <input class="form-input" type="text" id="vehicle_size" name="vehicle_size" placeholder="例：全長3.4m × 全幅1.5m">
         </div>
 
         <div class="form-group">
@@ -333,12 +338,14 @@
         // キッチンカー選択時のみキッチンカー関連を必須に
         var selectedCat = form.querySelector('input[name="category"]:checked');
         var isKitchen = selectedCat && selectedCat.value.indexOf('キッチンカー') === 0;
-        var vehicleInfo = form.querySelector('input[name="vehicle_info"]');
+        var vehicleModel = form.querySelector('input[name="vehicle_model"]');
+        var vehicleSize = form.querySelector('input[name="vehicle_size"]');
         var healthDept = form.querySelector('input[name="health_dept"]');
         var foodHygiene = form.querySelector('input[name="food_hygiene"]');
         var fireDept = form.querySelector('input[name="fire_dept"]');
         var reportConsent = form.querySelector('input[name="report_consent"]');
-        if (vehicleInfo) vehicleInfo.required = !!isKitchen;
+        if (vehicleModel) vehicleModel.required = !!isKitchen;
+        if (vehicleSize) vehicleSize.required = !!isKitchen;
         if (healthDept) healthDept.required = !!isKitchen;
         if (foodHygiene) foodHygiene.required = !!isKitchen;
         if (fireDept) fireDept.required = !!isKitchen;
