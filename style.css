@@ -793,6 +793,13 @@ a.new-event-placeholder:hover {
   font-size: 16px;
 }
 
+/* time input の clock アイコンを赤に（WebKit / Chrome / Edge） */
+.time-input::-webkit-calendar-picker-indicator {
+  filter: invert(15%) sepia(99%) saturate(7400%) hue-rotate(355deg) brightness(95%) contrast(115%);
+  opacity: 1;
+  cursor: pointer;
+}
+
 .form-select {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23FF0000' stroke-width='2' fill='none'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
