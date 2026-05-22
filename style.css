@@ -1536,8 +1536,11 @@ a.new-event-placeholder:hover {
     height: 180px;
     border-radius: 50%;
     overflow: hidden;
-    border: 2px solid #FF0000;
     flex-shrink: 0;
+  }
+  /* PC版と同じく、写真(jpg)のときだけ赤い外枠を付ける */
+  .sp-member-photo:has(img[src$=".jpg"]) {
+    border: 2px solid #FF0000;
   }
   .sp-member-photo img {
     width: 100%;
@@ -1545,11 +1548,10 @@ a.new-event-placeholder:hover {
     object-fit: cover;
     display: block;
   }
-  /* Mibo の写真：全身画像 → 顔アップ */
-  .sp-member-photo img.is-sp-mibo {
-    object-position: center 15%;
-    transform: scale(1.6);
-    transform-origin: center 22%;
+  /* Mibo の写真：PC版と同じ顔アップ設定 */
+  .sp-member-photo img[src*="mibo"] {
+    transform: scale(1.8);
+    transform-origin: center 68%;
   }
   .sp-member-name { display: block; }
   .sp-member-name .mn-title { height: 14px; }
