@@ -378,8 +378,9 @@ footer {
 }
 
 .member-name-only img {
-  width: 100%;
-  max-width: 280px;
+  height: 82px;
+  width: auto;
+  max-width: 100%;
 }
 
 /* HARU: name左、photo右（reverse）*/
@@ -427,8 +428,9 @@ footer {
 }
 
 .member-info .member-name-svg img {
-  max-width: 260px;
-  width: 100%;
+  height: 76px;
+  width: auto;
+  max-width: 100%;
 }
 
 .member-bio {
@@ -1346,48 +1348,46 @@ a.new-event-placeholder:hover {
   .sp-header.is-on-white .sp-hb-white { display: none; }
   .sp-header.is-on-white .sp-hb-red { display: block; }
 
-  /* ── SP MENU OVERLAY（展開時） ── */
+  /* ── SP MENU OVERLAY（展開時 / SVG）── */
   .sp-menu-overlay {
     position: fixed;
     inset: 0;
-    background: #FF0000;
+    background: #fff;
     z-index: 10000; /* SP ヘッダー (9999) より上に */
     overflow-y: auto;
-    padding: 24px;
   }
   .sp-menu-overlay[hidden] { display: none !important; }
 
-  .sp-menu-close {
+  .sp-menu-panel {
+    position: relative;
+    width: 100%;
+    max-width: 390px;
+    line-height: 0;
+  }
+  .sp-menu-img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  /* SVG上に重ねる透明なクリック領域（各メニュー項目に対応） */
+  .sp-menu-hot {
     position: absolute;
-    top: 16px;
-    right: 16px;
+    left: 0;
+    width: 88%;
+    display: block;
+    margin: 0;
+    padding: 0;
     background: transparent;
-    border: none;
-    color: #FFFFFF;
-    font-size: 28px;
-    line-height: 1;
+    border: 0;
     cursor: pointer;
-    padding: 4px 8px;
+    -webkit-tap-highlight-color: transparent;
   }
-
-  .sp-menu-links {
-    margin-top: 100px;
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
-    align-items: center;
-  }
-  .sp-menu-links a {
-    color: #FFFFFF;
-    font-size: 22px;
-    font-weight: 700;
-    text-decoration: none;
-    text-align: center;
-    letter-spacing: 0.06em;
-  }
-  .sp-menu-links a.active {
-    text-decoration: underline;
-    text-underline-offset: 6px;
+  .sp-menu-hot-close {
+    left: auto;
+    right: 0;
+    top: 2%;
+    width: 24%;
+    height: 13%;
   }
 
   /* ── SP HERO（TOP）── */
@@ -1541,8 +1541,9 @@ a.new-event-placeholder:hover {
   }
   .sp-member-name {
     display: block;
-    max-width: 200px;
+    height: 53px;
     width: auto;
+    max-width: 100%;
   }
 
   /* ── SP FOOTER（曲線＋コピーライト） ── */
