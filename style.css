@@ -377,11 +377,23 @@ footer {
   transform-origin: center 68%;
 }
 
-.member-name-only img {
-  height: 82px;
-  width: auto;
-  max-width: 100%;
+/* メンバー名：肩書(現状サイズ)＋名前(大きめ)を別スケールで表示するため、
+   同じSVGを2枚使い overflow で上下に切り出す（全ページ共通の土台） */
+.mn-title,
+.mn-name {
+  display: block;
+  width: max-content;
+  overflow: hidden;
+  line-height: 0;
 }
+.mn-title img,
+.mn-name img { display: block; }
+
+/* TOP ページ（PC） */
+.member-name-only .mn-title { height: 19px; }
+.member-name-only .mn-title img { height: 82px; }
+.member-name-only .mn-name { height: 53px; margin-top: 7px; }
+.member-name-only .mn-name img { height: 118.6px; margin-top: -65.8px; }
 
 /* HARU: name左、photo右（reverse）*/
 .member-row.reverse .member-photo { order: 2; }
@@ -427,11 +439,11 @@ footer {
   gap: 16px;
 }
 
-.member-info .member-name-svg img {
-  height: 76px;
-  width: auto;
-  max-width: 100%;
-}
+/* ABOUT ページ（PC） */
+.member-name-svg .mn-title { height: 17px; }
+.member-name-svg .mn-title img { height: 76px; }
+.member-name-svg .mn-name { height: 50px; margin-top: 6px; }
+.member-name-svg .mn-name img { height: 110.2px; margin-top: -61.1px; }
 
 .member-bio {
   font-size: 14px;
@@ -1539,12 +1551,11 @@ a.new-event-placeholder:hover {
     transform: scale(1.6);
     transform-origin: center 22%;
   }
-  .sp-member-name {
-    display: block;
-    height: 53px;
-    width: auto;
-    max-width: 100%;
-  }
+  .sp-member-name { display: block; }
+  .sp-member-name .mn-title { height: 14px; }
+  .sp-member-name .mn-title img { height: 53px; }
+  .sp-member-name .mn-name { height: 38px; margin-top: 4px; }
+  .sp-member-name .mn-name img { height: 74.8px; margin-top: -37.8px; }
 
   /* ── SP FOOTER（曲線＋コピーライト） ── */
   .sp-footer {
