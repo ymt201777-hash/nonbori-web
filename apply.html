@@ -337,12 +337,13 @@
       var resultEl = document.getElementById('apply-result');
       var defaultBtnText = submitBtn.textContent;
 
-      // 駐車場の利用時間：30分刻みの選択肢のみを生成（00:00〜23:30）
+      // 駐車場の利用時間：30分刻みの選択肢のみを生成（08:00〜21:00）
       ['parking_time_start', 'parking_time_end'].forEach(function (id) {
         var sel = document.getElementById(id);
         if (!sel) return;
-        for (var h = 0; h < 24; h++) {
+        for (var h = 8; h <= 21; h++) {
           for (var m = 0; m < 60; m += 30) {
+            if (h === 21 && m > 0) break; // 21:00 を最後の選択肢にする
             var t = ('0' + h).slice(-2) + ':' + ('0' + m).slice(-2);
             var opt = document.createElement('option');
             opt.value = t;
