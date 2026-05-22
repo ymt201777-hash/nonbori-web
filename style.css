@@ -1557,15 +1557,13 @@ a.new-event-placeholder:hover {
     transform: scale(1.8);
     transform-origin: center 68%;
   }
-  .sp-member-name { display: block; }
+  /* SP は肩書・名前を中央揃え（各SVGは title/name とも viewBox 中央基準のため
+     ウィンドウを中央寄せすれば文字も中央で揃う） */
+  .sp-member-name { display: flex; flex-direction: column; align-items: center; }
   .sp-member-name .mn-title { height: 16px; }
   .sp-member-name .mn-title img { height: 53px; }
   .sp-member-name .mn-name { height: 38px; margin-top: 10px; }
   .sp-member-name .mn-name img { height: 74.8px; margin-top: -37.8px; }
-  /* 肩書・名前の左端を揃える */
-  .sp-member-name .mn-title img[src*="yuichiro"] { margin-left: -12.9px; }
-  .sp-member-name .mn-name  img[src*="haru"]     { margin-left: -9.5px; }
-  .sp-member-name .mn-name  img[src*="mibo"]     { margin-left: -19.1px; }
 
   /* ── SP FOOTER（曲線＋コピーライト） ── */
   .sp-footer {
