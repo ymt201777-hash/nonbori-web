@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>logo-red animation v2</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+#stage {
+  width: 90vw;
+  max-width: 720px;
+  /* バウンド用に下にスペース確保 */
+  padding-bottom: 8px;
+}
+#stage svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.ctrl {
+  display: flex;
+  gap: 12px;
+  margin-top: 1.5rem;
+  justify-content: center;
+}
+button {
+  cursor: pointer;
+  font-size: 14px;
+  padding: 8px 24px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: #fff;
+  color: #333;
+}
+button:hover { background: #f5f5f5; }
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<div class="ctrl">
+  <button id="btn">もう一度</button>
+</div>
+
+<script>
+const SVG_SRC = `<svg id="_レイヤー_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 573.53 82.12"><defs><style>.cls-1{fill:#ff0000;}</style></defs><path class="cls-1" d="M568.65,72.37h-8.58c4.45-.03,8.06-3.65,8.06-8.11l.07-46.36c0-4.43-3.54-8.03-7.95-8.13h8.39c2.69,0,4.88-2.18,4.88-4.88S571.35.02,568.65.02h-17.14c-2.69,0-4.88,2.18-4.88,4.88s2.18,4.88,4.88,4.88h8.4c-4.4.09-7.95,3.68-7.95,8.11l-.07,46.36c0,4.47,3.59,8.09,8.05,8.13h-8.43c-2.69,0-4.88,2.18-4.88,4.88s2.18,4.88,4.88,4.88h17.14c2.69,0,4.88-2.18,4.88-4.88s-2.18-4.88-4.88-4.88Z"/><path class="cls-1" d="M149.45.03c-22.63,0-41.05,18.42-41.05,41.05s18.41,41.05,41.05,41.05,41.05-18.42,41.05-41.05S172.09.03,149.45.03ZM149.45,65.88c-13.67,0-24.8-11.12-24.8-24.8s11.12-24.8,24.8-24.8,24.8,11.12,24.8,24.8-11.12,24.8-24.8,24.8Z"/><path class="cls-1" d="M421.77.03c-22.63,0-41.05,18.42-41.05,41.05s18.41,41.05,41.05,41.05,41.05-18.42,41.05-41.05S444.41.03,421.77.03ZM421.77,65.88c-13.67,0-24.8-11.12-24.8-24.8s11.12-24.8,24.8-24.8,24.8,11.12,24.8,24.8-11.12,24.8-24.8,24.8Z"/><path class="cls-1" d="M364.77,22.97C364.77,10.3,354.46,0,341.8,0h-.42c-2.69,0-4.88,2.18-4.88,4.88s2.18,4.88,4.88,4.88h.42c7.29,0,13.22,5.93,13.22,13.22s-5.93,13.22-13.22,13.22c-2.69,0-4.88,2.18-4.88,4.88s2.18,4.88,4.88,4.88c7.29,0,13.22,5.93,13.22,13.22s-5.93,13.22-13.22,13.22h-.42c-2.69,0-4.88,2.18-4.88,4.88s2.18,4.88,4.88,4.88h.42c12.67,0,22.97-10.3,22.97-22.97,0-7.34-3.47-13.89-8.85-18.09,5.38-4.21,8.85-10.75,8.85-18.09Z"/><path class="cls-1" d="M336.92,8.16c0-4.49-3.64-8.13-8.13-8.13s-8.13,3.64-8.13,8.13v65.83c0,4.49,3.64,8.13,8.13,8.13s8.13-3.64,8.13-8.13V8.16Z"/><path class="cls-1" d="M527.85,26.11c0-14.39-11.71-26.09-26.09-26.09h-.4c-2.69,0-4.88,2.18-4.88,4.88s2.18,4.88,4.88,4.88h.4c9.01,0,16.34,7.33,16.34,16.34s-7.33,16.34-16.34,16.34c-2.63,0-4.77,2.09-4.87,4.7V8.16c0-4.49-3.64-8.13-8.13-8.13s-8.13,3.64-8.13,8.13v65.83c0,4.49,3.64,8.13,8.13,8.13s8.13-3.64,8.13-8.13v-26.48c.1,2.61,2.23,4.7,4.87,4.7,14.39,0,26.09-11.71,26.09-26.09Z"/><path class="cls-1" d="M513.02,53.53c-1.49-2.24-4.52-2.85-6.76-1.35-2.24,1.49-2.85,4.52-1.35,6.76l14.01,21.01c.94,1.41,2.49,2.17,4.06,2.17.93,0,1.87-.27,2.7-.82,2.24-1.49,2.85-4.52,1.35-6.76l-14.01-21.01Z"/><path class="cls-1" d="M24.77,2.17c-1.49-2.24-4.52-2.85-6.76-1.35-2.24,1.49-2.85,4.52-1.35,6.76l48.25,72.38c.94,1.41,2.49,2.17,4.06,2.17.93,0,1.87-.27,2.7-.82,2.24-1.49,2.85-4.52,1.35-6.76L24.77,2.17Z"/><path class="cls-1" d="M8.13.03C3.64.03,0,3.67,0,8.16v65.83c0,4.49,3.64,8.13,8.13,8.13s8.13-3.64,8.13-8.13V8.16C16.25,3.67,12.61.03,8.13.03Z"/><path class="cls-1" d="M81.56.03c-4.49,0-8.13,3.64-8.13,8.13v65.83c0,4.49,3.64,8.13,8.13,8.13s8.13-3.64,8.13-8.13V8.16C89.68,3.67,86.05.03,81.56.03Z"/><path class="cls-1" d="M234.17,2.17c-1.49-2.24-4.52-2.85-6.76-1.35-2.24,1.49-2.85,4.52-1.35,6.76l48.25,72.38c.94,1.41,2.49,2.17,4.06,2.17.93,0,1.87-.27,2.7-.82,2.24-1.49,2.85-4.52,1.35-6.76L234.17,2.17Z"/><path class="cls-1" d="M217.53.03c-4.49,0-8.13,3.64-8.13,8.13v65.83c0,4.49,3.64,8.13,8.13,8.13s8.13-3.64,8.13-8.13V8.16c0-4.49-3.64-8.13-8.13-8.13Z"/><path class="cls-1" d="M290.96.03c-4.49,0-8.13,3.64-8.13,8.13v65.83c0,4.49,3.64,8.13,8.13,8.13s8.13-3.64,8.13-8.13V8.16c0-4.49-3.64-8.13-8.13-8.13Z"/></svg>`;
+
+const BBOXES = [{"i": 8, "x": 0.0, "y": 0.0, "w": 16.3, "h": 82.1, "cx": 8.1}, {"i": 7, "x": 15.8, "y": 0.0, "w": 58.0, "h": 82.1, "cx": 44.8}, {"i": 9, "x": 73.4, "y": 0.0, "w": 16.3, "h": 82.1, "cx": 81.6}, {"i": 1, "x": 108.4, "y": 0.0, "w": 82.1, "h": 82.1, "cx": 149.4}, {"i": 11, "x": 209.4, "y": 0.0, "w": 16.3, "h": 82.1, "cx": 217.5}, {"i": 10, "x": 225.2, "y": 0.0, "w": 58.0, "h": 82.1, "cx": 254.2}, {"i": 12, "x": 282.8, "y": 0.0, "w": 16.3, "h": 82.1, "cx": 291.0}, {"i": 4, "x": 320.7, "y": 0.0, "w": 16.3, "h": 82.1, "cx": 328.8}, {"i": 3, "x": 336.5, "y": 0.0, "w": 28.3, "h": 82.2, "cx": 350.6}, {"i": 2, "x": 380.7, "y": 0.0, "w": 82.1, "h": 82.1, "cx": 421.8}, {"i": 5, "x": 480.6, "y": 0.0, "w": 47.2, "h": 82.1, "cx": 504.2}, {"i": 6, "x": 504.1, "y": 51.4, "w": 23.8, "h": 30.8, "cx": 516.0}, {"i": 0, "x": 546.6, "y": 0.0, "w": 26.9, "h": 82.1, "cx": 560.1}];
+
+const stage = document.getElementById('stage');
+
+// ----- バウンドしながら転がるアニメ -----
+// JS requestAnimationFrame で各パーツを個別に物理っぽく動かす
+// 転がり: translateX + translateY(バウンド) + rotate(回転)
+// バウンドは減衰する放物線を複数回繰り返す
+
+function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+
+// 単一パーツのアニメーション状態
+class RollingPart {
+  constructor(el, bb, startDelay) {
+    this.el = el;
+    this.bb = bb;
+    this.startDelay = startDelay; // ms
+    this.started = false;
+    this.done = false;
+
+    // 転がり始めの位置: 左外
+    this.startTx = -(bb.cx + 120);
+
+    // バウンド設定: 地面でバウンドしながら右へ進む
+    // bounces: [{relStart, relEnd, peakY, rotSpeed}]
+    // relStart/End: 全体duration内の割合(0~1)
+    // peakY: そのバウンドの最高点(px, 下方向正)  → 負値で上に飛ぶ
+    const totalDur = 2200 + Math.random() * 400; // ms
+    this.totalDur = totalDur;
+
+    // 回転量: ランダムに2~4回転
+    const totalRot = (Math.random() < 0.5 ? 1 : -1) * (720 + Math.random() * 720);
+    this.totalRot = totalRot;
+
+    // バウンド列: 転がりながら地面を3回バウンド
+    // 各バウンドは「飛び上がって落ちる」放物線
+    // y=0が地面(最終着地位置)
+    this.bounces = [
+      { t0: 0.0,  t1: 0.30, peak: -(80 + Math.random() * 40) },
+      { t0: 0.30, t1: 0.55, peak: -(45 + Math.random() * 25) },
+      { t0: 0.55, t1: 0.75, peak: -(22 + Math.random() * 15) },
+      { t0: 0.75, t1: 0.88, peak: -(10 + Math.random() * 8)  },
+      { t0: 0.88, t1: 1.00, peak: -(4  + Math.random() * 4)  },
+    ];
+
+    this.startTime = null;
+  }
+
+  // tProgress: 0~1
+  getBounceY(tProgress) {
+    for (const b of this.bounces) {
+      if (tProgress >= b.t0 && tProgress <= b.t1) {
+        const local = (tProgress - b.t0) / (b.t1 - b.t0);
+        // 放物線: y = 4 * peak * local * (local - 1)  → local=0,1でy=0, local=0.5でy=peak
+        return 4 * b.peak * local * (local - 1);
+      }
+    }
+    return 0;
+  }
+
+  tick(now) {
+    if (this.done) return;
+    if (!this.started) {
+      if (now < this.startDelay) return;
+      this.startTime = now;
+      this.started = true;
+      this.el.style.opacity = '1';
+    }
+
+    const elapsed = now - this.startTime;
+    let t = Math.min(elapsed / this.totalDur, 1);
+
+    // X方向: easeOut で左外→0
+    const tx = this.startTx * (1 - easeOut(t));
+
+    // 回転: 全体を通じて減速しながら回る
+    const rot = this.totalRot * (1 - easeOut(t));
+
+    // Y方向: バウンド
+    const ty = this.getBounceY(t);
+
+    this.el.style.transform = `translate(${tx}px, ${ty}px) rotate(${rot}deg)`;
+
+    if (t >= 1) {
+      // 完全停止: transformをリセットして元SVGの座標に完全一致させる
+      this.el.style.transform = '';
+      this.el.style.transition = 'none';
+      this.done = true;
+    }
+  }
+}
+
+let parts = [];
+let rafId = null;
+let startTs = null;
+
+function init() {
+  if (rafId) cancelAnimationFrame(rafId);
+  parts = [];
+  startTs = null;
+
+  stage.innerHTML = SVG_SRC;
+  const svg = stage.querySelector('svg');
+  const paths = svg.querySelectorAll('path');
+  paths.forEach((p, i) => { p.id = 'rp' + i; });
+
+  BBOXES.forEach((bb, order) => {
+    const el = document.getElementById('rp' + bb.i);
+    if (!el) return;
+
+    el.style.transformBox = 'fill-box';
+    el.style.transformOrigin = '50% 50%';
+    el.style.opacity = '0';
+    el.style.willChange = 'transform, opacity';
+
+    // 開始遅延: 左のパーツほど早く
+    const delay = order * 190 + Math.random() * 60 + 100; // ms
+
+    parts.push(new RollingPart(el, bb, delay));
+  });
+
+  // 初期transform設定
+  parts.forEach(rp => {
+    rp.el.style.transform = `translateX(${rp.startTx}px) rotate(${rp.totalRot}deg)`;
+  });
+
+  function loop(ts) {
+    if (!startTs) startTs = ts;
+    const now = ts - startTs;
+    parts.forEach(rp => rp.tick(now));
+    if (parts.some(rp => !rp.done)) {
+      rafId = requestAnimationFrame(loop);
+    }
+  }
+  rafId = requestAnimationFrame(loop);
+}
+
+init();
+document.getElementById('btn').addEventListener('click', init);
+</script>
+</body>
+</html>
