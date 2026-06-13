@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>logo-red battle</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+#stage { width:90vw; max-width:720px; }
+#stage svg { width:100%; height:auto; overflow:visible; display:block; }
+.ctrl { display:flex; gap:12px; margin-top:1.5rem; justify-content:center; }
+button {
+  cursor:pointer; font-size:14px; padding:8px 24px;
+  border-radius:8px; border:1px solid #ccc; background:#fff; color:#333;
+}
+button:hover { background:#f5f5f5; }
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<div class="ctrl"><button id="btn">もう一度</button></div>
+
+<script>
+const SVG_SRC = `<svg id="_レイヤー_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 573.53 82.12"><defs><style>.cls-1{fill:#ff0000;}</style></defs><path class="cls-1" d="M568.65,72.37h-8.58c4.45-.03,8.06-3.65,8.06-8.11l.07-46.36c0-4.43-3.54-8.03-7.95-8.13h8.39c2.69,0,4.88-2.18,4.88-4.88S571.35.02,568.65.02h-17.14c-2.69,0-4.88,2.18-4.88,4.88s2.18,4.88,4.88,4.88h8.4c-4.4.09-7.95,3.68-7.95,8.11l-.07,46.36c0,4.47,3.59,8.09,8.05,8.13h-8.43c-2.69,0-4.88,2.18-4.88,4.88s2.18,4.88,4.88,4.88h17.14c2.69,0,4.88-2.18,4.88-4.88s-2.18-4.88-4.88-4.88Z"/><path class="cls-1" d="M149.45.03c-22.63,0-41.05,18.42-41.05,41.05s18.41,41.05,41.05,41.05,41.05-18.42,41.05-41.05S172.09.03,149.45.03ZM149.45,65.88c-13.67,0-24.8-11.12-24.8-24.8s11.12-24.8,24.8-24.8,24.8,11.12,24.8,24.8-11.12,24.8-24.8,24.8Z"/><path class="cls-1" d="M421.77.03c-22.63,0-41.05,18.42-41.05,41.05s18.41,41.05,41.05,41.05,41.05-18.42,41.05-41.05S444.41.03,421.77.03ZM421.77,65.88c-13.67,0-24.8-11.12-24.8-24.8s11.12-24.8,24.8-24.8,24.8,11.12,24.8,24.8-11.12,24.8-24.8,24.8Z"/><path class="cls-1" d="M364.77,22.97C364.77,10.3,354.46,0,341.8,0h-.42c-2.69,0-4.88,2.18-4.88,4.88s2.18,4.88,4.88,4.88h.42c7.29,0,13.22,5.93,13.22,13.22s-5.93,13.22-13.22,13.22c-2.69,0-4.88,2.18-4.88,4.88s2.18,4.88,4.88,4.88c7.29,0,13.22,5.93,13.22,13.22s-5.93,13.22-13.22,13.22h-.42c-2.69,0-4.88,2.18-4.88,4.88s2.18,4.88,4.88,4.88h.42c12.67,0,22.97-10.3,22.97-22.97,0-7.34-3.47-13.89-8.85-18.09,5.38-4.21,8.85-10.75,8.85-18.09Z"/><path class="cls-1" d="M336.92,8.16c0-4.49-3.64-8.13-8.13-8.13s-8.13,3.64-8.13,8.13v65.83c0,4.49,3.64,8.13,8.13,8.13s8.13-3.64,8.13-8.13V8.16Z"/><path class="cls-1" d="M527.85,26.11c0-14.39-11.71-26.09-26.09-26.09h-.4c-2.69,0-4.88,2.18-4.88,4.88s2.18,4.88,4.88,4.88h.4c9.01,0,16.34,7.33,16.34,16.34s-7.33,16.34-16.34,16.34c-2.63,0-4.77,2.09-4.87,4.7V8.16c0-4.49-3.64-8.13-8.13-8.13s-8.13,3.64-8.13,8.13v65.83c0,4.49,3.64,8.13,8.13,8.13s8.13-3.64,8.13-8.13v-26.48c.1,2.61,2.23,4.7,4.87,4.7,14.39,0,26.09-11.71,26.09-26.09Z"/><path class="cls-1" d="M513.02,53.53c-1.49-2.24-4.52-2.85-6.76-1.35-2.24,1.49-2.85,4.52-1.35,6.76l14.01,21.01c.94,1.41,2.49,2.17,4.06,2.17.93,0,1.87-.27,2.7-.82,2.24-1.49,2.85-4.52,1.35-6.76l-14.01-21.01Z"/><path class="cls-1" d="M24.77,2.17c-1.49-2.24-4.52-2.85-6.76-1.35-2.24,1.49-2.85,4.52-1.35,6.76l48.25,72.38c.94,1.41,2.49,2.17,4.06,2.17.93,0,1.87-.27,2.7-.82,2.24-1.49,2.85-4.52,1.35-6.76L24.77,2.17Z"/><path class="cls-1" d="M8.13.03C3.64.03,0,3.67,0,8.16v65.83c0,4.49,3.64,8.13,8.13,8.13s8.13-3.64,8.13-8.13V8.16C16.25,3.67,12.61.03,8.13.03Z"/><path class="cls-1" d="M81.56.03c-4.49,0-8.13,3.64-8.13,8.13v65.83c0,4.49,3.64,8.13,8.13,8.13s8.13-3.64,8.13-8.13V8.16C89.68,3.67,86.05.03,81.56.03Z"/><path class="cls-1" d="M234.17,2.17c-1.49-2.24-4.52-2.85-6.76-1.35-2.24,1.49-2.85,4.52-1.35,6.76l48.25,72.38c.94,1.41,2.49,2.17,4.06,2.17.93,0,1.87-.27,2.7-.82,2.24-1.49,2.85-4.52,1.35-6.76L234.17,2.17Z"/><path class="cls-1" d="M217.53.03c-4.49,0-8.13,3.64-8.13,8.13v65.83c0,4.49,3.64,8.13,8.13,8.13s8.13-3.64,8.13-8.13V8.16c0-4.49-3.64-8.13-8.13-8.13Z"/><path class="cls-1" d="M290.96.03c-4.49,0-8.13,3.64-8.13,8.13v65.83c0,4.49,3.64,8.13,8.13,8.13s8.13-3.64,8.13-8.13V8.16c0-4.49-3.64-8.13-8.13-8.13Z"/></svg>`;
+const BBOXES  = [{"i": 8, "cx": 8.1}, {"i": 7, "cx": 44.8}, {"i": 9, "cx": 81.6}, {"i": 1, "cx": 149.4}, {"i": 11, "cx": 217.5}, {"i": 10, "cx": 254.2}, {"i": 12, "cx": 291.0}, {"i": 4, "cx": 328.8}, {"i": 3, "cx": 350.6}, {"i": 2, "cx": 421.8}, {"i": 5, "cx": 504.2}, {"i": 6, "cx": 516.0}, {"i": 0, "cx": 560.1}];
+const stage = document.getElementById('stage');
+
+function easeOut5(t) { return 1 - Math.pow(1-t, 5); }
+function lerp(a, b, t) { return a + (b-a)*t; }
+
+// ノイズ風の周期関数: 複数のsin波を重ね合わせてランダムっぽい動き
+function noise(t, seed) {
+  return Math.sin(t * 2.3 + seed * 1.7)  * 0.50
+       + Math.sin(t * 4.1 + seed * 3.1)  * 0.30
+       + Math.sin(t * 7.7 + seed * 5.3)  * 0.13
+       + Math.sin(t * 13.3+ seed * 2.9)  * 0.07;
+}
+
+class BattlePart {
+  constructor(el, bb, idx) {
+    this.el  = el;
+    this.bb  = bb;
+    this.idx = idx;
+
+    // 乱数シード (パーツごとに固有)
+    const s = idx * 7.391 + 1.23;
+    this.seedX   = s;
+    this.seedY   = s * 2.718;
+    this.seedRot = s * 3.141;
+
+    // 動きの振れ幅
+    this.ampX   = 60  + Math.random() * 80;   // 横振れ px
+    this.ampY   = 50  + Math.random() * 70;   // 縦振れ px
+    this.ampRot = 80  + Math.random() * 120;  // 回転 deg
+
+    // 戦いフェーズの長さ (ms): 各パーツでバラバラ
+    this.battleDur  = 3500 + Math.random() * 2000; // 3.5〜5.5秒
+    // 収束フェーズの長さ (ms)
+    this.settleDur  = 1200 + Math.random() * 600;  // 1.2〜1.8秒
+
+    this.totalDur = this.battleDur + this.settleDur;
+
+    // 登場タイミング: 少しずつずらしてバラバラに現れる
+    this.startDelay = Math.random() * 600 + idx * 80;
+
+    // 登場位置: 画面の各所からランダムに現れる
+    this.entryX = (Math.random() - 0.5) * 300;
+    this.entryY = (Math.random() - 0.5) * 200;
+    this.entryRot = (Math.random() - 0.5) * 360;
+
+    this.started   = false;
+    this.done      = false;
+    this.startTime = null;
+  }
+
+  tick(now) {
+    if (this.done) return;
+    if (!this.started) {
+      if (now < this.startDelay) return;
+      this.startTime = now;
+      this.started   = true;
+      this.el.style.opacity = '0';
+    }
+
+    const elapsed = now - this.startTime;
+    const t = Math.min(elapsed / this.totalDur, 1);
+
+    // ---- フェーズ1: 戦いフェーズ ----
+    const tBattle = Math.min(elapsed / this.battleDur, 1);
+
+    // 登場フェード (最初0.1の間)
+    const fadeIn = Math.min(tBattle / 0.10, 1);
+
+    // バトル中の位置: ノイズで激しく動き回る
+    // 序盤は激しく、終盤にかけて少し落ち着く (振れ幅が徐々に小さくなる)
+    const battleDecay = 1 - tBattle * 0.3; // 0.3倍まで縮小
+    const bx  = noise(tBattle * 8, this.seedX)   * this.ampX   * battleDecay;
+    const by  = noise(tBattle * 8, this.seedY)   * this.ampY   * battleDecay;
+    const brot= noise(tBattle * 6, this.seedRot) * this.ampRot * battleDecay;
+
+    // 登場オフセット: フェードインと共に entryX,Y → 0
+    const entryDecay = 1 - easeOut5(Math.min(tBattle / 0.25, 1));
+    const ex = this.entryX  * entryDecay;
+    const ey = this.entryY  * entryDecay;
+    const er = this.entryRot* entryDecay;
+
+    if (tBattle < 1) {
+      // まだ戦いフェーズ
+      const tx  = bx + ex;
+      const ty  = by + ey;
+      const rot = brot + er;
+      this.el.style.transform = `translate(${tx}px, ${ty}px) rotate(${rot}deg)`;
+      this.el.style.opacity   = String(fadeIn);
+      return;
+    }
+
+    // ---- フェーズ2: 収束フェーズ ----
+    const settleElapsed = elapsed - this.battleDur;
+    const ts = Math.min(settleElapsed / this.settleDur, 1);
+    const ease = easeOut5(ts);
+
+    // バトル終了時の位置 (bx,by,brotをtBattle=1で評価)
+    const bxEnd   = noise(1 * 8, this.seedX)   * this.ampX   * 0.7;
+    const byEnd   = noise(1 * 8, this.seedY)   * this.ampY   * 0.7;
+    const brotEnd = noise(1 * 6, this.seedRot) * this.ampRot * 0.7;
+
+    // 収束: バトル終了位置 → 0,0,0
+    const tx  = lerp(bxEnd,   0, ease);
+    const ty  = lerp(byEnd,   0, ease);
+    const rot = lerp(brotEnd, 0, ease);
+
+    this.el.style.transform = `translate(${tx}px, ${ty}px) rotate(${rot}deg)`;
+    this.el.style.opacity   = '1';
+
+    if (ts >= 1) {
+      this.el.style.transform = '';
+      this.el.style.opacity   = '1';
+      this.done = true;
+    }
+  }
+}
+
+let parts = [], rafId = null, startTs = null;
+
+function init() {
+  if (rafId) cancelAnimationFrame(rafId);
+  parts = []; startTs = null;
+
+  stage.innerHTML = SVG_SRC;
+  const svg = stage.querySelector('svg');
+  svg.querySelectorAll('path').forEach((p, i) => { p.id = 'rp' + i; });
+
+  BBOXES.forEach((bb, idx) => {
+    const el = document.getElementById('rp' + bb.i);
+    if (!el) return;
+    el.style.transformBox    = 'fill-box';
+    el.style.transformOrigin = '50% 50%';
+    el.style.opacity         = '0';
+    el.style.willChange      = 'transform, opacity';
+    parts.push(new BattlePart(el, bb, idx));
+  });
+
+  function loop(ts) {
+    if (!startTs) startTs = ts;
+    const now = ts - startTs;
+    parts.forEach(rp => rp.tick(now));
+    if (parts.some(rp => !rp.done)) rafId = requestAnimationFrame(loop);
+  }
+  rafId = requestAnimationFrame(loop);
+}
+
+init();
+document.getElementById('btn').addEventListener('click', init);
+</script>
+</body>
+</html>
