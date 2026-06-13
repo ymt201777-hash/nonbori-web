@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>logo-red animation v4</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+#stage { width:90vw; max-width:720px; }
+#stage svg { width:100%; height:auto; overflow:visible; display:block; }
+.ctrl { display:flex; gap:12px; margin-top:1.5rem; justify-content:center; }
+button {
+  cursor:pointer; font-size:14px; padding:8px 24px;
+  border-radius:8px; border:1px solid #ccc; background:#fff; color:#333;
+}
+button:hover { background:#f5f5f5; }
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<div class="ctrl"><button id="btn">もう一度</button></div>
+
+<script>
+const SVG_SRC = `<svg id="_レイヤー_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 573.53 82.12"><defs><style>.cls-1{fill:#ff0000;}</style></defs><path class="cls-1" d="M568.65,72.37h-8.58c4.45-.03,8.06-3.65,8.06-8.11l.07-46.36c0-4.43-3.54-8.03-7.95-8.13h8.39c2.69,0,4.88-2.18,4.88-4.88S571.35.02,568.65.02h-17.14c-2.69,0-4.88,2.18-4.88,4.88s2.18,4.88,4.88,4.88h8.4c-4.4.09-7.95,3.68-7.95,8.11l-.07,46.36c0,4.47,3.59,8.09,8.05,8.13h-8.43c-2.69,0-4.88,2.18-4.88,4.88s2.18,4.88,4.88,4.88h17.14c2.69,0,4.88-2.18,4.88-4.88s-2.18-4.88-4.88-4.88Z"/><path class="cls-1" d="M149.45.03c-22.63,0-41.05,18.42-41.05,41.05s18.41,41.05,41.05,41.05,41.05-18.42,41.05-41.05S172.09.03,149.45.03ZM149.45,65.88c-13.67,0-24.8-11.12-24.8-24.8s11.12-24.8,24.8-24.8,24.8,11.12,24.8,24.8-11.12,24.8-24.8,24.8Z"/><path class="cls-1" d="M421.77.03c-22.63,0-41.05,18.42-41.05,41.05s18.41,41.05,41.05,41.05,41.05-18.42,41.05-41.05S444.41.03,421.77.03ZM421.77,65.88c-13.67,0-24.8-11.12-24.8-24.8s11.12-24.8,24.8-24.8,24.8,11.12,24.8,24.8-11.12,24.8-24.8,24.8Z"/><path class="cls-1" d="M364.77,22.97C364.77,10.3,354.46,0,341.8,0h-.42c-2.69,0-4.88,2.18-4.88,4.88s2.18,4.88,4.88,4.88h.42c7.29,0,13.22,5.93,13.22,13.22s-5.93,13.22-13.22,13.22c-2.69,0-4.88,2.18-4.88,4.88s2.18,4.88,4.88,4.88c7.29,0,13.22,5.93,13.22,13.22s-5.93,13.22-13.22,13.22h-.42c-2.69,0-4.88,2.18-4.88,4.88s2.18,4.88,4.88,4.88h.42c12.67,0,22.97-10.3,22.97-22.97,0-7.34-3.47-13.89-8.85-18.09,5.38-4.21,8.85-10.75,8.85-18.09Z"/><path class="cls-1" d="M336.92,8.16c0-4.49-3.64-8.13-8.13-8.13s-8.13,3.64-8.13,8.13v65.83c0,4.49,3.64,8.13,8.13,8.13s8.13-3.64,8.13-8.13V8.16Z"/><path class="cls-1" d="M527.85,26.11c0-14.39-11.71-26.09-26.09-26.09h-.4c-2.69,0-4.88,2.18-4.88,4.88s2.18,4.88,4.88,4.88h.4c9.01,0,16.34,7.33,16.34,16.34s-7.33,16.34-16.34,16.34c-2.63,0-4.77,2.09-4.87,4.7V8.16c0-4.49-3.64-8.13-8.13-8.13s-8.13,3.64-8.13,8.13v65.83c0,4.49,3.64,8.13,8.13,8.13s8.13-3.64,8.13-8.13v-26.48c.1,2.61,2.23,4.7,4.87,4.7,14.39,0,26.09-11.71,26.09-26.09Z"/><path class="cls-1" d="M513.02,53.53c-1.49-2.24-4.52-2.85-6.76-1.35-2.24,1.49-2.85,4.52-1.35,6.76l14.01,21.01c.94,1.41,2.49,2.17,4.06,2.17.93,0,1.87-.27,2.7-.82,2.24-1.49,2.85-4.52,1.35-6.76l-14.01-21.01Z"/><path class="cls-1" d="M24.77,2.17c-1.49-2.24-4.52-2.85-6.76-1.35-2.24,1.49-2.85,4.52-1.35,6.76l48.25,72.38c.94,1.41,2.49,2.17,4.06,2.17.93,0,1.87-.27,2.7-.82,2.24-1.49,2.85-4.52,1.35-6.76L24.77,2.17Z"/><path class="cls-1" d="M8.13.03C3.64.03,0,3.67,0,8.16v65.83c0,4.49,3.64,8.13,8.13,8.13s8.13-3.64,8.13-8.13V8.16C16.25,3.67,12.61.03,8.13.03Z"/><path class="cls-1" d="M81.56.03c-4.49,0-8.13,3.64-8.13,8.13v65.83c0,4.49,3.64,8.13,8.13,8.13s8.13-3.64,8.13-8.13V8.16C89.68,3.67,86.05.03,81.56.03Z"/><path class="cls-1" d="M234.17,2.17c-1.49-2.24-4.52-2.85-6.76-1.35-2.24,1.49-2.85,4.52-1.35,6.76l48.25,72.38c.94,1.41,2.49,2.17,4.06,2.17.93,0,1.87-.27,2.7-.82,2.24-1.49,2.85-4.52,1.35-6.76L234.17,2.17Z"/><path class="cls-1" d="M217.53.03c-4.49,0-8.13,3.64-8.13,8.13v65.83c0,4.49,3.64,8.13,8.13,8.13s8.13-3.64,8.13-8.13V8.16c0-4.49-3.64-8.13-8.13-8.13Z"/><path class="cls-1" d="M290.96.03c-4.49,0-8.13,3.64-8.13,8.13v65.83c0,4.49,3.64,8.13,8.13,8.13s8.13-3.64,8.13-8.13V8.16c0-4.49-3.64-8.13-8.13-8.13Z"/></svg>`;
+const BBOXES  = [{"i": 8, "cx": 8.1, "y": 0.0, "h": 82.1}, {"i": 7, "cx": 44.8, "y": 0.0, "h": 82.1}, {"i": 9, "cx": 81.6, "y": 0.0, "h": 82.1}, {"i": 1, "cx": 149.4, "y": 0.0, "h": 82.1}, {"i": 11, "cx": 217.5, "y": 0.0, "h": 82.1}, {"i": 10, "cx": 254.2, "y": 0.0, "h": 82.1}, {"i": 12, "cx": 291.0, "y": 0.0, "h": 82.1}, {"i": 4, "cx": 328.8, "y": 0.0, "h": 82.1}, {"i": 3, "cx": 350.6, "y": 0.0, "h": 82.2}, {"i": 2, "cx": 421.8, "y": 0.0, "h": 82.1}, {"i": 5, "cx": 504.2, "y": 0.0, "h": 82.1}, {"i": 6, "cx": 516.0, "y": 51.4, "h": 30.8}, {"i": 0, "cx": 560.1, "y": 0.0, "h": 82.1}];
+// SVGのviewBox高さ
+const SVG_VB_H = 82.12;
+
+const stage = document.getElementById('stage');
+
+function easeOut3(t) { return 1 - Math.pow(1 - t, 3); }
+function easeIn2(t)  { return t * t; }
+
+class RollingPart {
+  constructor(el, bb, startDelay, pxPerUnit) {
+    this.el = el;
+    this.bb = bb;
+    this.startDelay = startDelay;
+    this.started = false;
+    this.done = false;
+    this.startTx = -(bb.cx + 120);
+    this.startTime = null;
+    this.totalDur = 2500 + Math.random() * 400;
+
+    // 回転: 転がってくる方向に合わせて時計回り
+    this.totalRot = -(720 + Math.random() * 720);
+
+    // ★ 地面バウンド:
+    //   「地面」= SVGのベースライン(y=82.12) = SVGレンダリング下端
+    //   各パーツの下端は地面とほぼ一致(y+h ≈ 82.12)
+    //   → パーツ中心から地面までの距離 = (SVG_VB_H - (bb.y + bb.h/2)) * pxPerUnit
+    //      これが「地面へのオフセット」= bounce時の最大translateY
+    //
+    //   動き:
+    //   1. 左から転がってくる (tx: startTx → 0)
+    //   2. 同時に地面に向かって落下: ty: -startDropH → groundOffset (地面に着く)
+    //   3. 地面で跳ね返り: ty: groundOffset → 0 → groundOffset*restitution → ...
+    //      減衰しながら ty=0(最終位置)に収束
+
+    // パーツ中心から地面(82.12)までの距離(SVGユニット)
+    const distToGround = SVG_VB_H - (bb.y + bb.h / 2);
+    // HTML px換算
+    this.groundOffsetPx = distToGround * pxPerUnit;
+
+    // 落下開始高さ: 地面からさらに上 (画面外くらい)
+    this.startDropPx = this.groundOffsetPx + (120 + Math.random() * 60);
+
+    // バウンドの反発係数
+    const r = () => 0.88 + Math.random() * 0.06; // 0.88~0.94
+    this.restitutions = [r(), r(), r(), r(), r(), r()];
+  }
+
+  // t: 0→1 全体進行
+  // 落下フェーズ(0→0.3): startDropPx → groundOffsetPx
+  // バウンドフェーズ(0.3→1): 地面でバウンド減衰 → 0
+  getBounceY(t) {
+    if (t < 0.30) {
+      // 落下: 上空からパーツ中心が地面位置へ
+      // easeIn で加速しながら落下
+      const local = t / 0.30;
+      return -(this.startDropPx - this.groundOffsetPx) * (1 - easeIn2(local))
+             + this.groundOffsetPx;
+      // t=0: -(startDrop - ground) + ground = -startDrop (上空)... 計算整理:
+      // local=0: -(startDrop-ground)*(1) + ground = -startDrop + 2*ground ... hmm
+    }
+    // バウンドフェーズ
+    const bt = (t - 0.30) / 0.70; // 0→1
+
+    // 各バウンドの区間と高さを計算
+    const segments = [
+      [0.00, 0.28],
+      [0.28, 0.50],
+      [0.50, 0.67],
+      [0.67, 0.79],
+      [0.79, 0.88],
+      [0.88, 1.00],
+    ];
+
+    // 最初のバウンド高さ: groundOffsetPx * restitution[0]
+    // (地面から跳ね上がる = translateY が groundOffset → 0 → groundOffset*res → ...)
+    let heights = [this.groundOffsetPx];
+    for (let i = 0; i < 5; i++) {
+      heights.push(heights[i] * this.restitutions[i]);
+    }
+
+    for (let i = 0; i < segments.length; i++) {
+      const [t0, t1] = segments[i];
+      if (bt >= t0 && bt <= t1) {
+        const local = (bt - t0) / (t1 - t0);
+        const peakH = heights[i]; // 跳ね上がり高さ
+        // 放物線: t=0(地面)→ t=0.5(頂点, -peakH上) → t=1(地面)
+        // ground位置=translateY(groundOffsetPx)、頂点=translateY(groundOffsetPx-peakH)
+        // ty = groundOffset - peakH * 4*local*(1-local)
+        // ただし最終バウンドは ty→0 に収束させる
+        const nextGround = (i < segments.length - 1) ? this.groundOffsetPx * Math.pow(0.9, i+1) : 0;
+        const startGround = (i === 0) ? this.groundOffsetPx : this.groundOffsetPx * Math.pow(0.9, i);
+        // シンプルに: 地面=startGround→頂点(上)→次の地面
+        const midY = startGround - peakH; // 頂点のty (負なら地面より上)
+        // local=0: startGround, local=0.5: midY, local=1: nextGround
+        return startGround + (midY - startGround) * 4 * local * (1 - local)
+               + (nextGround - startGround) * local;
+      }
+    }
+    return 0;
+  }
+
+  tick(now) {
+    if (this.done) return;
+    if (!this.started) {
+      if (now < this.startDelay) return;
+      this.startTime = now;
+      this.started = true;
+      this.el.style.opacity = '1';
+    }
+
+    const elapsed = now - this.startTime;
+    const t = Math.min(elapsed / this.totalDur, 1);
+
+    const tx  = this.startTx * (1 - easeOut3(t));
+    const rot = this.totalRot * (1 - easeOut3(t));
+    const ty  = this.getBounceY(t);
+
+    this.el.style.transform = `translate(${tx}px, ${ty}px) rotate(${rot}deg)`;
+
+    if (t >= 1) {
+      this.el.style.transform = '';
+      this.done = true;
+    }
+  }
+}
+
+let parts = [], rafId = null, startTs = null;
+
+function init() {
+  if (rafId) cancelAnimationFrame(rafId);
+  parts = []; startTs = null;
+
+  stage.innerHTML = SVG_SRC;
+  const svg = stage.querySelector('svg');
+  svg.querySelectorAll('path').forEach((p, i) => { p.id = 'rp' + i; });
+
+  // SVGの実際のレンダリングサイズを取得してSVGユニット→pxの変換係数を算出
+  const svgRect = svg.getBoundingClientRect();
+  const pxPerUnit = svgRect.height / SVG_VB_H;
+
+  BBOXES.forEach((bb, order) => {
+    const el = document.getElementById('rp' + bb.i);
+    if (!el) return;
+    el.style.transformBox    = 'fill-box';
+    el.style.transformOrigin = '50% 50%';
+    el.style.opacity         = '0';
+    el.style.willChange      = 'transform, opacity';
+    const delay = order * 190 + Math.random() * 60 + 100;
+    parts.push(new RollingPart(el, bb, delay, pxPerUnit));
+  });
+
+  parts.forEach(rp => {
+    rp.el.style.transform = `translateX(${rp.startTx}px)`;
+  });
+
+  function loop(ts) {
+    if (!startTs) startTs = ts;
+    const now = ts - startTs;
+    parts.forEach(rp => rp.tick(now));
+    if (parts.some(rp => !rp.done)) rafId = requestAnimationFrame(loop);
+  }
+  rafId = requestAnimationFrame(loop);
+}
+
+init();
+document.getElementById('btn').addEventListener('click', init);
+</script>
+</body>
+</html>
