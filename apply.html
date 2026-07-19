@@ -307,7 +307,7 @@
         </div>
 
         <!-- ===== 送信ボタン ===== -->
-        <button class="form-submit" type="submit">申請する</button>
+        <button class="form-submit form-submit--closed" type="button" disabled>出店申請期間終了いたしました</button>
 
       </form>
 
@@ -386,6 +386,9 @@
 
       form.addEventListener('submit', function (e) {
         e.preventDefault();
+
+        // 出店申請期間は終了しました。受付を停止しています。
+        return;
 
         // 送信前に条件付き必須を反映
         updateConditionalRequired();

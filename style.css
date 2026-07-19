@@ -856,6 +856,15 @@ a.new-event-placeholder:hover {
   color: #FFFFFF;
 }
 
+/* 出店申請 受付終了：グレーで押せない状態 */
+.form-submit--closed,
+.form-submit--closed:hover {
+  border-color: #BBBBBB;
+  background: #EEEEEE;
+  color: #999999;
+  cursor: not-allowed;
+}
+
 /* ============================================================
    APPLY PAGE — ASOBO! 出店申請フォーム
    ============================================================ */
