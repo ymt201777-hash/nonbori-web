@@ -449,6 +449,12 @@ footer {
 .member-name-svg .mn-name { height: 50px; margin-top: 17px; }
 .member-name-svg .mn-name img { height: 110.2px; margin-top: -61.1px; }
 
+/* ゆうくん：肩書と名前が別SVGなのでクリップ不要、そのまま表示 */
+.member-name-svg--split .mn-title { height: auto; }
+.member-name-svg--split .mn-title img { height: 20px; }
+.member-name-svg--split .mn-name { height: auto; margin-top: 10px; }
+.member-name-svg--split .mn-name img { height: 46px; margin-top: 0; }
+
 .member-bio {
   font-size: 14px;
   line-height: 2;
@@ -1573,6 +1579,11 @@ a.new-event-placeholder:hover {
   .sp-member-name .mn-title img { height: 53px; }
   .sp-member-name .mn-name { height: 38px; margin-top: 10px; }
   .sp-member-name .mn-name img { height: 74.8px; margin-top: -37.8px; }
+  /* ゆうくん：肩書と名前が別SVGなのでクリップ不要、そのまま表示 */
+  .sp-member-name--split .mn-title { height: auto; }
+  .sp-member-name--split .mn-title img { height: 15px; }
+  .sp-member-name--split .mn-name { height: auto; margin-top: 8px; }
+  .sp-member-name--split .mn-name img { height: 34px; margin-top: 0; }
 
   /* ── SP FOOTER（曲線＋コピーライト） ── */
   .sp-footer {
