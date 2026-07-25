@@ -399,6 +399,13 @@ footer {
 .member-name-only .mn-name  img[src*="haru"]     { margin-left: -11.4px; }
 .member-name-only .mn-name  img[src*="mibo"]     { margin-left: -23.1px; }
 
+/* ゆうくん：肩書と名前が別SVGなのでクリップ不要、そのまま表示
+   （他メンバーの実測値に一致：肩書18px / 名前50px / 間24px） */
+.member-name-only--split .mn-title { height: auto; }
+.member-name-only--split .mn-title img { height: 18px; }
+.member-name-only--split .mn-name { height: auto; margin-top: 24px; }
+.member-name-only--split .mn-name img { height: 50px; margin-top: 0; }
+
 /* HARU: name左、photo右（reverse）*/
 .member-row.reverse .member-photo { order: 2; }
 .member-row.reverse .member-name-only { order: 1; }
@@ -449,11 +456,12 @@ footer {
 .member-name-svg .mn-name { height: 50px; margin-top: 17px; }
 .member-name-svg .mn-name img { height: 110.2px; margin-top: -61.1px; }
 
-/* ゆうくん：肩書と名前が別SVGなのでクリップ不要、そのまま表示 */
+/* ゆうくん：肩書と名前が別SVGなのでクリップ不要、そのまま表示
+   （サイズ・余白は他メンバーの実測値に一致：肩書17px / 名前49px / 間21px） */
 .member-name-svg--split .mn-title { height: auto; }
-.member-name-svg--split .mn-title img { height: 20px; }
-.member-name-svg--split .mn-name { height: auto; margin-top: 10px; }
-.member-name-svg--split .mn-name img { height: 46px; margin-top: 0; }
+.member-name-svg--split .mn-title img { height: 17px; }
+.member-name-svg--split .mn-name { height: auto; margin-top: 21px; }
+.member-name-svg--split .mn-name img { height: 49px; margin-top: 0; }
 
 .member-bio {
   font-size: 14px;
@@ -1579,11 +1587,12 @@ a.new-event-placeholder:hover {
   .sp-member-name .mn-title img { height: 53px; }
   .sp-member-name .mn-name { height: 38px; margin-top: 10px; }
   .sp-member-name .mn-name img { height: 74.8px; margin-top: -37.8px; }
-  /* ゆうくん：肩書と名前が別SVGなのでクリップ不要、そのまま表示 */
+  /* ゆうくん：肩書と名前が別SVGなのでクリップ不要、そのまま表示
+     （他メンバーの実測値に一致：肩書13px / 名前37px / 間14px） */
   .sp-member-name--split .mn-title { height: auto; }
-  .sp-member-name--split .mn-title img { height: 15px; }
-  .sp-member-name--split .mn-name { height: auto; margin-top: 8px; }
-  .sp-member-name--split .mn-name img { height: 34px; margin-top: 0; }
+  .sp-member-name--split .mn-title img { height: 13px; }
+  .sp-member-name--split .mn-name { height: auto; margin-top: 14px; }
+  .sp-member-name--split .mn-name img { height: 37px; margin-top: 0; }
 
   /* ── SP FOOTER（曲線＋コピーライト） ── */
   .sp-footer {
