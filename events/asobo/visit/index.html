@@ -361,7 +361,9 @@ a {
   border-radius: 16px;
   overflow: hidden;
   background: var(--white);
-  height: 320px;
+  /* 画像とぴったり同じ高さにして上下の余白をなくす。
+     JS が読み込み後に実測値(px)で上書きし、端数のズレも消す */
+  aspect-ratio: 1852 / 1654;
   touch-action: none;          /* ピンチ／ドラッグを自前で処理 */
   cursor: grab;
   user-select: none;
@@ -1877,6 +1879,12 @@ const mapApi = (() => {
   /* --- 拡大・移動 --- */
   function baseH() { return img.offsetHeight || view.clientWidth / 1.1197; }
 
+  /* 枠の高さを画像の実寸に合わせ、上下の余白を出さない */
+  function fitViewHeight() {
+    const h = img.offsetHeight;
+    if (h) view.style.height = h + 'px';
+  }
+
   function apply() {
     const vw = view.clientWidth, vh = view.clientHeight;
     const sw = vw * scale, sh = baseH() * scale;
@@ -1984,8 +1992,9 @@ const mapApi = (() => {
     apply();
   });
 
-  if (img.complete) apply(); else img.addEventListener('load', apply);
-  window.addEventListener('resize', apply);
+  function relayout() { fitViewHeight(); apply(); }
+  if (img.complete) relayout(); else img.addEventListener('load', relayout);
+  window.addEventListener('resize', relayout);
 
   /* 一覧から「マップで見る」で呼ぶ */
   return {
