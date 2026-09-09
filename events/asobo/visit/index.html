@@ -36,6 +36,13 @@
   box-sizing: border-box;
 }
 
+/* hidden 属性は必ず非表示にする。
+   ブラウザ標準の [hidden]{display:none} は .sheet{display:flex} のような
+   クラス指定に負けるため、ここで明示的に打ち消しておく */
+[hidden] {
+  display: none !important;
+}
+
 html, body {
   font-family: 'M PLUS Rounded 1c', 'Zen Maru Gothic', sans-serif;
   color: var(--black);
