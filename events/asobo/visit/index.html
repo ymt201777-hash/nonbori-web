@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9L9P18S8ND"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-9L9P18S8ND');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASOBO!! 来場者ガイド | NONBORI</title>
+<meta name="description" content="2026年10月4日（日）みんなの森 ぎふメディアコスモス。入場無料のファミリーイベント ASOBO!! の来場者向けガイド。会場マップ・出店者・タイムテーブル・アクセス情報。">
+<meta property="og:title" content="ASOBO!! 来場者ガイド | NONBORI">
+<meta property="og:description" content="遊んで、食べて、つくって。家族でまるごと楽しむ日！ 2026年10月4日（日）10:00〜16:00 @みんなの森 ぎふメディアコスモス／入場無料">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&family=Zen+Maru+Gothic:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red: #ff0000;
+  --white: #ffffff;
+  --black: #1a1a1a;
+  --gray: #f4f4f4;
+  --line: #eeeeee;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: 'M PLUS Rounded 1c', 'Zen Maru Gothic', sans-serif;
+  color: var(--black);
+  background: var(--white);
+  overflow: hidden;
+  height: 100vh;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ===== 3カラムレイアウト ===== */
+.layout {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.left-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: calc(50vw - 200px);
+  height: 100vh;
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.left-panel img {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+}
+
+.right-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: calc(50vw - 200px);
+  height: 100vh;
+  background: var(--white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 20px;
+}
+
+/* PC: SVG ベースのナビ（楕円の上に白文字オーバーレイ） */
+.right-nav {
+  position: relative;
+  width: 220px;
+  max-width: 100%;
+}
+
+.right-nav-bg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.right-btn {
+  position: absolute;
+  left: 2.25%;
+  width: 95.5%;
+  height: 6.2%;
+  background: transparent;
+  border: none;
+  color: var(--white);
+  font-family: 'M PLUS Rounded 1c', 'Zen Maru Gothic', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+  padding: 0;
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.right-btn-1 { top: 47.3%; }
+.right-btn-2 { top: 56.6%; }
+.right-btn-3 { top: 65.9%; }
+.right-btn-4 { top: 75.2%; }
+.right-btn-5 { top: 84.5%; }
+.right-btn-6 { top: 93.8%; }
+
+.right-btn:hover {
+  opacity: 0.85;
+}
+
+/* SP 用テキストボタン（PC では非表示） */
+.nav-buttons {
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  width: 180px;
+  margin-bottom: 20px;
+}
+
+.nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 180px;
+  height: 44px;
+  background: var(--red);
+  color: var(--white);
+  border: none;
+  border-radius: 100px;
+  font-family: 'M PLUS Rounded 1c', 'Zen Maru Gothic', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.nav-btn:hover {
+  opacity: 0.9;
+}
+
+/* ===== 中央スクロールエリア ===== */
+.center-area {
+  position: relative;
+  width: 400px;
+  height: 100vh;
+  margin: 0 auto;
+  overflow-y: scroll;
+  background: var(--white);
+}
+
+/* セクション共通 */
+.section {
+  padding: 30px 20px;
+}
+
+.section-heading {
+  color: var(--red);
+  font-weight: 700;
+  font-size: 22px;
+  margin-bottom: 16px;
+}
+
+.section p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--black);
+}
+
+/* 章見出し（英字ラベル＋和文） */
+.sec-label {
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.sec-label-en {
+  display: block;
+  color: var(--red);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  margin-bottom: 4px;
+}
+
+.sec-label-ja {
+  display: block;
+  color: var(--black);
+  font-size: 19px;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+/* TOPセクション */
+#top {
+  padding: 0;
+}
+
+#top img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 開催概要 */
+.event-facts {
+  margin-top: 18px;
+  border: 2px solid var(--red);
+  border-radius: 16px;
+  padding: 16px 14px;
+}
+
+.event-facts dl {
+  display: grid;
+  grid-template-columns: 74px 1fr;
+  row-gap: 10px;
+  column-gap: 8px;
+  align-items: start;
+}
+
+.event-facts dt {
+  color: var(--white);
+  background: var(--red);
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 800;
+  text-align: center;
+  padding: 4px 0;
+  letter-spacing: 0.04em;
+}
+
+.event-facts dd {
+  font-size: 13.5px;
+  font-weight: 700;
+  line-height: 1.6;
+  padding-top: 2px;
+}
+
+.event-facts .free {
+  color: var(--red);
+  font-size: 16px;
+  font-weight: 800;
+}
+
+/* 見どころカード */
+.highlights {
+  display: grid;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.highlight {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  background: var(--gray);
+  border-radius: 14px;
+  padding: 14px;
+}
+
+.highlight-no {
+  flex: 0 0 auto;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--red);
+  color: var(--white);
+  font-size: 12px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.highlight-body h3 {
+  font-size: 14px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.highlight-body p {
+  font-size: 12.5px;
+  line-height: 1.7;
+}
+
+/* ABOUT タグライン（SVG背景に白文字オーバーレイ） */
+.about-tagline-wrap {
+  position: relative;
+  margin-left: -20px;
+  margin-right: -20px;
+}
+
+.about-tagline-bg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.about-tagline-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--white);
+  font-weight: 800;
+  font-size: 26px;
+  line-height: 1.4;
+  text-align: center;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* ===== ゾーニングマップ ===== */
+.zonemap-hint {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--red);
+  margin-bottom: 10px;
+}
+
+.zonemap-wrap {
+  position: relative;
+  border: 2px solid var(--red);
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--white);
+}
+
+.zonemap {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.zone {
+  cursor: pointer;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform .28s cubic-bezier(.2,.8,.3,1.2), opacity .2s;
+}
+
+.zone .zone-shape {
+  fill: #ffe6e6;
+  stroke: var(--red);
+  stroke-width: 2;
+  transition: fill .2s;
+}
+
+.zone .zone-pin {
+  fill: var(--red);
+  transition: fill .2s;
+}
+
+.zone .zone-no {
+  fill: var(--white);
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  text-anchor: middle;
+  dominant-baseline: central;
+  pointer-events: none;
+  transition: fill .2s;
+}
+
+.zone .zone-name {
+  fill: var(--red);
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-anchor: middle;
+  pointer-events: none;
+  transition: fill .2s;
+}
+
+.zonemap.has-active .zone:not(.is-active) {
+  opacity: .3;
+}
+
+.zone.is-active {
+  transform: scale(1.14);
+}
+
+.zone.is-active .zone-shape { fill: var(--red); }
+.zone.is-active .zone-name  { fill: var(--white); }
+.zone.is-active .zone-pin   { fill: var(--white); }
+.zone.is-active .zone-no    { fill: var(--red); }
+
+.zone:focus { outline: none; }
+
+/* マップ詳細カード */
+.zone-detail {
+  margin-top: 14px;
+  border-radius: 16px;
+  background: var(--gray);
+  padding: 16px 16px 18px;
+  min-height: 156px;
+}
+
+.zone-detail-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.zone-detail-no {
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--red);
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.zone-detail-title {
+  display: block;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.zone-detail-en {
+  display: block;
+  color: var(--red);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+.zone-detail-text {
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.zone-detail-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.zone-detail-tags span {
+  border: 1.5px solid var(--red);
+  color: var(--red);
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+}
+
+.zone-detail.is-empty .zone-detail-no { display: none; }
+
+/* ===== 出店者・コンテンツ ===== */
+.cat-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.cat-btn {
+  border: 1.5px solid var(--red);
+  background: var(--white);
+  color: var(--red);
+  border-radius: 100px;
+  font-family: 'M PLUS Rounded 1c', 'Zen Maru Gothic', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: background .15s, color .15s;
+}
+
+.cat-btn.is-on {
+  background: var(--red);
+  color: var(--white);
+}
+
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.shop-card {
+  border: 1.5px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--white);
+}
+
+.shop-thumb {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  background: var(--gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shop-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.shop-thumb-ph {
+  font-size: 11px;
+  font-weight: 700;
+  color: #c9c9c9;
+  letter-spacing: 0.08em;
+}
+
+.shop-cat {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  background: var(--red);
+  color: var(--white);
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  border-radius: 100px;
+  padding: 3px 8px;
+}
+
+.shop-body {
+  padding: 9px 10px 11px;
+}
+
+.shop-name {
+  font-size: 12.5px;
+  font-weight: 800;
+  line-height: 1.35;
+  margin-bottom: 3px;
+}
+
+.shop-note {
+  font-size: 11px;
+  line-height: 1.5;
+  color: #666;
+}
+
+.shop-zone {
+  display: inline-block;
+  margin-top: 6px;
+  border: 1.2px solid var(--red);
+  color: var(--red);
+  border-radius: 100px;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 8px;
+}
+
+.list-note {
+  margin-top: 14px;
+  text-align: center;
+  font-size: 11.5px;
+  line-height: 1.7;
+  color: #777;
+}
+
+/* ===== タイムテーブル ===== */
+.timetable {
+  border-top: 2px solid var(--red);
+}
+
+.tt-row {
+  display: grid;
+  grid-template-columns: 78px 1fr;
+  gap: 10px;
+  padding: 12px 2px;
+  border-bottom: 1px solid var(--line);
+  align-items: start;
+}
+
+.tt-time {
+  color: var(--red);
+  font-size: 12.5px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  padding-top: 1px;
+}
+
+.tt-title {
+  font-size: 13.5px;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+.tt-title.tt-tba {
+  color: #aaa;
+}
+
+.tt-desc {
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: #666;
+  margin-top: 3px;
+}
+
+/* ===== アクセス ===== */
+#access iframe {
+  width: 100%;
+  height: 260px;
+  border: 0;
+  display: block;
+  border-radius: 14px;
+}
+
+.access-list {
+  margin-top: 16px;
+}
+
+.access-item {
+  border-bottom: 1px solid var(--line);
+  padding: 12px 0;
+}
+
+.access-item h3 {
+  color: var(--red);
+  font-size: 13px;
+  font-weight: 800;
+  margin-bottom: 5px;
+}
+
+.access-item p {
+  font-size: 12.5px;
+  line-height: 1.75;
+}
+
+.access-caution {
+  margin-top: 14px;
+  background: var(--red);
+  color: var(--white);
+  border-radius: 14px;
+  padding: 13px 14px;
+  font-size: 12.5px;
+  font-weight: 700;
+  line-height: 1.7;
+  text-align: center;
+}
+
+/* NEWS / FAQ 見出し */
+.news-heading,
+#faq .section-heading {
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+}
+
+#news .news-subheading {
+  color: var(--red);
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  margin: 8px 0 0;
+}
+
+.behold-wrap {
+  margin-top: 20px;
+}
+
+.behold-wrap behold-widget {
+  display: block;
+  width: 100%;
+}
+
+/* FAQ アコーディオン */
+.faq-item {
+  border-bottom: 1px solid var(--line);
+  padding: 12px 0;
+}
+
+.faq-q {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-family: 'M PLUS Rounded 1c', 'Zen Maru Gothic', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--black);
+  cursor: pointer;
+  padding: 6px 0;
+}
+
+.faq-q::after {
+  content: "+";
+  color: var(--red);
+  font-size: 20px;
+  font-weight: 700;
+  margin-left: 10px;
+}
+
+.faq-item.open .faq-q::after {
+  content: "−";
+}
+
+.faq-a {
+  display: none;
+  padding: 8px 4px 4px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--black);
+}
+
+.faq-item.open .faq-a {
+  display: block;
+}
+
+.organizer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  color: var(--red);
+  padding: 30px 20px 40px;
+}
+
+p.organizer-label {
+  color: var(--red);
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.organizer-logo {
+  height: 18px;
+  width: auto;
+  display: block;
+}
+
+/* フッター */
+.page-footer {
+  width: 100%;
+  padding: 0 0 20px;
+}
+
+.page-footer img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ===== SP ===== */
+@media (max-width: 768px) {
+  html, body {
+    overflow: auto;
+    height: auto;
+  }
+
+  .left-panel,
+  .right-panel {
+    display: none;
+  }
+
+  .center-area {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  /* 各章の上余白を 90px に統一（section 同士で padding が加算されないよう下は 0） */
+  .section {
+    padding-top: 90px;
+    padding-bottom: 0;
+  }
+
+  .organizer {
+    padding-top: 90px;
+    padding-bottom: 90px;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="layout">
+  <!-- 左パネル -->
+  <aside class="left-panel">
+    <img src="../../../asobo-characters-left.svg" alt="ASOBO!! characters left">
+  </aside>
+
+  <!-- 中央スクロール -->
+  <main class="center-area" id="centerScroll">
+
+    <!-- ===== TOP ===== -->
+    <section id="top">
+      <img src="../../../asobo-top-hero.svg" alt="ASOBO!! メインビジュアル">
+    </section>
+
+    <!-- ===== 基本情報＋見どころ ===== -->
+    <section id="about" class="section">
+      <div class="about-tagline-wrap">
+        <img class="about-tagline-bg" src="../../../asobo-date-venue.svg" alt="">
+        <div class="about-tagline-text">
+          遊んで<br>
+          食べて、<br>
+          つくって。<br>
+          家族でまるごと<br>
+          楽しむ日！
+        </div>
+      </div>
+
+      <div class="event-facts">
+        <dl>
+          <dt>日時</dt>
+          <dd>2026年10月4日（日）<br>10:00〜16:00</dd>
+
+          <dt>会場</dt>
+          <dd>みんなの森 ぎふメディアコスモス<br>みんなの広場カオカオ／<br>せせらぎの並木テニテオ</dd>
+
+          <dt>入場料</dt>
+          <dd class="free">無料</dd>
+
+          <dt>雨天時</dt>
+          <dd>1週間前の降水確率70%以上で中止<br>（SNSでお知らせします）</dd>
+        </dl>
+      </div>
+
+      <div class="highlights">
+        <div class="highlight">
+          <span class="highlight-no">1</span>
+          <div class="highlight-body">
+            <h3>子どもも大人も、どっちも主役。</h3>
+            <p>"付き添い"で終わらない一日。大人がときめくお店と、子どもが夢中になるあそび場が同じ場所に並びます。</p>
+          </div>
+        </div>
+        <div class="highlight">
+          <span class="highlight-no">2</span>
+          <div class="highlight-body">
+            <h3>約60店舗が大集合。</h3>
+            <p>フードトラック、ワークショップ、こだわりの雑貨。歩くだけでも楽しい規模感です。</p>
+          </div>
+        </div>
+        <div class="highlight">
+          <span class="highlight-no">3</span>
+          <div class="highlight-body">
+            <h3>入場無料・手ぶらでOK。</h3>
+            <p>入場料はかかりません。木陰の並木道でひと休みしながら、のんびり過ごせます。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ゾーニングマップ ===== -->
+    <section id="map" class="section">
+      <div class="sec-label">
+        <span class="sec-label-en">ZONING MAP</span>
+        <span class="sec-label-ja">会場マップ</span>
+      </div>
+      <p class="zonemap-hint">数字にカーソル／タップで詳細がひらきます</p>
+
+      <div class="zonemap-wrap">
+        <svg class="zonemap" id="zonemap" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ASOBO!! 会場ゾーニングマップ">
+          <rect x="0" y="0" width="400" height="500" fill="#fdfdfd"/>
+
+          <!-- みんなの広場カオカオ（上部の広場） -->
+          <rect x="22" y="30" width="356" height="212" rx="18" fill="#f6f6f6"/>
+          <text x="200" y="22" fill="#bbbbbb" font-size="10.5" font-weight="700" text-anchor="middle" font-family="'M PLUS Rounded 1c', sans-serif">みんなの広場カオカオ</text>
+
+          <!-- せせらぎの並木テニテオ（下部の並木道） -->
+          <path d="M40 268 C 120 258, 150 300, 200 300 C 250 300, 290 262, 360 272 L 360 452 C 290 442, 250 470, 200 470 C 150 470, 120 434, 40 444 Z" fill="#f6f6f6"/>
+          <text x="200" y="490" fill="#bbbbbb" font-size="10.5" font-weight="700" text-anchor="middle" font-family="'M PLUS Rounded 1c', sans-serif">せせらぎの並木テニテオ</text>
+
+          <!-- ZONE 1 : FOOD -->
+          <g class="zone" data-zone="1" tabindex="0" role="button" aria-label="ゾーン1 フードエリア">
+            <rect class="zone-shape" x="40" y="48" width="150" height="88" rx="14"/>
+            <circle class="zone-pin" cx="70" cy="76" r="15"/>
+            <text class="zone-no" x="70" y="76">1</text>
+            <text class="zone-name" x="115" y="120">FOOD</text>
+          </g>
+
+          <!-- ZONE 2 : KIDS -->
+          <g class="zone" data-zone="2" tabindex="0" role="button" aria-label="ゾーン2 キッズあそび場">
+            <rect class="zone-shape" x="212" y="48" width="146" height="88" rx="14"/>
+            <circle class="zone-pin" cx="242" cy="76" r="15"/>
+            <text class="zone-no" x="242" y="76">2</text>
+            <text class="zone-name" x="285" y="120">KIDS</text>
+          </g>
+
+          <!-- ZONE 3 : STAGE -->
+          <g class="zone" data-zone="3" tabindex="0" role="button" aria-label="ゾーン3 ステージ">
+            <rect class="zone-shape" x="40" y="154" width="150" height="72" rx="14"/>
+            <circle class="zone-pin" cx="70" cy="180" r="15"/>
+            <text class="zone-no" x="70" y="180">3</text>
+            <text class="zone-name" x="115" y="212">STAGE</text>
+          </g>
+
+          <!-- ZONE 4 : INFO -->
+          <g class="zone" data-zone="4" tabindex="0" role="button" aria-label="ゾーン4 総合案内">
+            <rect class="zone-shape" x="212" y="154" width="146" height="72" rx="14"/>
+            <circle class="zone-pin" cx="242" cy="180" r="15"/>
+            <text class="zone-no" x="242" y="180">4</text>
+            <text class="zone-name" x="285" y="212">INFO</text>
+          </g>
+
+          <!-- ZONE 5 : WORKSHOP -->
+          <g class="zone" data-zone="5" tabindex="0" role="button" aria-label="ゾーン5 ワークショップ">
+            <rect class="zone-shape" x="52" y="300" width="132" height="76" rx="14"/>
+            <circle class="zone-pin" cx="82" cy="326" r="15"/>
+            <text class="zone-no" x="82" y="326">5</text>
+            <text class="zone-name" x="118" y="362">WORKSHOP</text>
+          </g>
+
+          <!-- ZONE 6 : SHOP -->
+          <g class="zone" data-zone="6" tabindex="0" role="button" aria-label="ゾーン6 ショップ">
+            <rect class="zone-shape" x="212" y="330" width="132" height="76" rx="14"/>
+            <circle class="zone-pin" cx="242" cy="356" r="15"/>
+            <text class="zone-no" x="242" y="356">6</text>
+            <text class="zone-name" x="278" y="392">SHOP</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="zone-detail is-empty" id="zoneDetail" aria-live="polite">
+        <div class="zone-detail-head">
+          <span class="zone-detail-no" id="zdNo"></span>
+          <div>
+            <span class="zone-detail-en" id="zdEn">SELECT A ZONE</span>
+            <span class="zone-detail-title" id="zdTitle">気になる番号をえらんでね</span>
+          </div>
+        </div>
+        <p class="zone-detail-text" id="zdText">マップの数字にカーソルを合わせる（スマホはタップ）と、そのエリアが大きくなって内容が表示されます。</p>
+        <div class="zone-detail-tags" id="zdTags"></div>
+      </div>
+
+      <p class="list-note">※ 会場レイアウトは変更になる場合があります。最終版は開催直前に更新します。</p>
+    </section>
+
+    <!-- ===== 出店者・コンテンツ ===== -->
+    <section id="shops" class="section">
+      <div class="sec-label">
+        <span class="sec-label-en">SHOPS &amp; CONTENTS</span>
+        <span class="sec-label-ja">出店者・コンテンツ</span>
+      </div>
+
+      <div class="cat-filter" id="catFilter"></div>
+      <div class="shop-grid" id="shopGrid"></div>
+
+      <p class="list-note">
+        出店者は順次公開していきます。<br>
+        最新情報は公式Instagramをチェック！
+      </p>
+    </section>
+
+    <!-- ===== タイムテーブル ===== -->
+    <section id="timetable" class="section">
+      <div class="sec-label">
+        <span class="sec-label-en">TIME TABLE</span>
+        <span class="sec-label-ja">タイムテーブル</span>
+      </div>
+      <div class="timetable" id="timetableList"></div>
+      <p class="list-note">※ 内容・時間は変更になる場合があります。</p>
+    </section>
+
+    <!-- ===== アクセス ===== -->
+    <section id="access" class="section">
+      <div class="sec-label">
+        <span class="sec-label-en">ACCESS</span>
+        <span class="sec-label-ja">アクセス</span>
+      </div>
+
+      <iframe
+        src="https://www.google.com/maps?q=%E3%81%BF%E3%82%93%E3%81%AA%E3%81%AE%E6%A3%AE%E3%81%8E%E3%81%B5%E3%83%A1%E3%83%87%E3%82%A3%E3%82%A2%E3%82%B3%E3%82%B9%E3%83%A2%E3%82%B9&output=embed"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        allowfullscreen></iframe>
+
+      <div class="access-list">
+        <div class="access-item">
+          <h3>会場</h3>
+          <p>
+            みんなの森 ぎふメディアコスモス 敷地内<br>
+            みんなの広場カオカオ・せせらぎの並木テニテオ<br>
+            岐阜市司町40番地5
+          </p>
+        </div>
+        <div class="access-item">
+          <h3>バスでお越しの方</h3>
+          <p>JR岐阜駅／名鉄岐阜駅からバスをご利用ください。「メディアコスモス・岐阜市役所前」下車すぐです。</p>
+        </div>
+        <div class="access-item">
+          <h3>お車でお越しの方</h3>
+          <p>付近に市営駐車場がございますが、台数に限りがあります。会場に来場者専用の駐車場はありません。</p>
+        </div>
+      </div>
+
+      <p class="access-caution">
+        当日は大変混雑が予想されます。<br>
+        公共交通機関でのご来場に<br>
+        ご協力ください。
+      </p>
+    </section>
+
+    <!-- ===== NEWS ===== -->
+    <section id="news" class="section">
+      <h2 class="section-heading news-heading">最新情報はこちら</h2>
+      <p class="news-subheading">公式Instagram</p>
+      <div class="behold-wrap">
+        <behold-widget feed-id="dvgVk90MQYaLHKqvKE5f"></behold-widget>
+      </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section id="faq" class="section">
+      <h2 class="section-heading">FAQ</h2>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button">Q. 入場料はかかりますか？</button>
+        <div class="faq-a">A. 入場無料です。どなたでもお越しいただけます。</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button">Q. 雨天の場合はどうなりますか？</button>
+        <div class="faq-a">A. Yahoo!天気にて開催1週間前の降水確率が70%以上の場合は中止となります。中止の場合はSNSでお知らせします。</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button">Q. 駐車場はありますか？</button>
+        <div class="faq-a">A. 付近に市営駐車場はございますが、公共交通機関でのご来場を推奨しております。</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button">Q. ベビーカーで行っても大丈夫ですか？</button>
+        <div class="faq-a">A. はい、大丈夫です。会場は屋外の広場と並木道で、段差の少ないルートでまわれます。</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button">Q. 支払いは現金だけですか？</button>
+        <div class="faq-a">A. 出店者によって異なります。キャッシュレス非対応のお店もありますので、現金もあわせてお持ちいただくと安心です。</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button">Q. ペットを連れて行けますか？</button>
+        <div class="faq-a">A. 会場の規定に準じます。詳細は決まり次第、公式Instagramでお知らせします。</div>
+      </div>
+
+      <div class="organizer">
+        <p class="organizer-label">主催</p>
+        <a href="../../../" aria-label="NONBORI トップへ">
+          <img class="organizer-logo" src="../../../logo-red.svg" alt="NONBORI">
+        </a>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="page-footer">
+      <img src="../../../asobo-tagline.svg" alt="ASOBO!! tagline">
+    </footer>
+
+  </main>
+
+  <!-- 右パネル -->
+  <aside class="right-panel">
+    <!-- PC: SVG の楕円を直接ボタン化 -->
+    <div class="right-nav">
+      <img class="right-nav-bg" src="../../../asobo-characters-right.svg" alt="ASOBO!! characters right">
+      <button class="right-btn right-btn-1" data-target="top">TOP</button>
+      <button class="right-btn right-btn-2" data-target="about">見どころ</button>
+      <button class="right-btn right-btn-3" data-target="map">会場マップ</button>
+      <button class="right-btn right-btn-4" data-target="shops">出店者</button>
+      <button class="right-btn right-btn-5" data-target="timetable">タイムテーブル</button>
+      <button class="right-btn right-btn-6" data-target="access">アクセス</button>
+    </div>
+
+    <!-- SP: テキストボタン（PCでは非表示） -->
+    <nav class="nav-buttons">
+      <button class="nav-btn" data-target="top">TOP</button>
+      <button class="nav-btn" data-target="about">見どころ</button>
+      <button class="nav-btn" data-target="map">会場マップ</button>
+      <button class="nav-btn" data-target="shops">出店者</button>
+      <button class="nav-btn" data-target="timetable">タイムテーブル</button>
+      <button class="nav-btn" data-target="access">アクセス</button>
+    </nav>
+  </aside>
+</div>
+
+<script>
+/* =========================================================
+   1. ゾーニングマップのデータ（ここを書き換えれば内容が変わります）
+   ========================================================= */
+const ZONES = {
+  1: {
+    en: 'FOOD',
+    title: 'フードエリア',
+    text: 'キッチンカーとフードトラックが並ぶエリア。片手で食べられるものから、しっかりごはんまで。広場のベンチや芝生でそのまま食べられます。',
+    tags: ['キッチンカー', 'スイーツ', 'ドリンク']
+  },
+  2: {
+    en: 'KIDS',
+    title: 'キッズあそび場',
+    text: '小さな子どもが思いきり体を動かせるあそびのエリア。保護者の方が見守りやすいよう、まわりをぐるっと開けたレイアウトにしています。',
+    tags: ['あそび', '未就学児OK', '無料']
+  },
+  3: {
+    en: 'STAGE',
+    title: 'ステージ',
+    text: '音楽ライブやパフォーマンス、キッズ向けのステージ企画を行うエリア。タイムテーブルは決まり次第このページで公開します。',
+    tags: ['ライブ', 'パフォーマンス']
+  },
+  4: {
+    en: 'INFO',
+    title: '総合案内',
+    text: '迷子・落とし物・救護のご相談はこちら。会場マップの配布もしています。困ったらまずはここへ。',
+    tags: ['受付', '迷子', '救護']
+  },
+  5: {
+    en: 'WORKSHOP',
+    title: 'ワークショップ',
+    text: 'つくる時間を楽しむエリア。木陰の並木道の下で、親子でも大人ひとりでも参加できるワークショップが並びます。',
+    tags: ['体験', '親子OK', '当日受付']
+  },
+  6: {
+    en: 'SHOP',
+    title: 'ショップ',
+    text: '雑貨・洋服・こだわりの日用品など、暮らしを楽しくするお店が集まるエリア。大人がゆっくり見てまわれる並びにしています。',
+    tags: ['雑貨', 'こども服', 'クラフト']
+  }
+};
+
+/* =========================================================
+   2. 出店者データ（cat: FOOD / WORKSHOP / SHOP / KIDS）
+      img を入れると写真、無ければ COMING SOON 表示
+   ========================================================= */
+const SHOPS = [
+  { name: '出店者名 Coming Soon', cat: 'FOOD',     note: '準備中', zone: 1 },
+  { name: '出店者名 Coming Soon', cat: 'FOOD',     note: '準備中', zone: 1 },
+  { name: '出店者名 Coming Soon', cat: 'WORKSHOP', note: '準備中', zone: 5 },
+  { name: '出店者名 Coming Soon', cat: 'WORKSHOP', note: '準備中', zone: 5 },
+  { name: '出店者名 Coming Soon', cat: 'SHOP',     note: '準備中', zone: 6 },
+  { name: '出店者名 Coming Soon', cat: 'SHOP',     note: '準備中', zone: 6 },
+  { name: '出店者名 Coming Soon', cat: 'KIDS',     note: '準備中', zone: 2 },
+  { name: '出店者名 Coming Soon', cat: 'KIDS',     note: '準備中', zone: 2 }
+];
+
+const CATS = [
+  { key: 'ALL',      label: 'すべて' },
+  { key: 'FOOD',     label: 'フード' },
+  { key: 'WORKSHOP', label: 'ワークショップ' },
+  { key: 'SHOP',     label: 'ショップ' },
+  { key: 'KIDS',     label: 'キッズ' }
+];
+
+/* =========================================================
+   3. タイムテーブルデータ
+   ========================================================= */
+const TIMETABLE = [
+  { time: '10:00', title: 'OPEN',           desc: '開場。総合案内で会場マップを配布します。' },
+  { time: '10:30', title: 'ステージ企画',   desc: '内容調整中', tba: true },
+  { time: '12:00', title: 'ステージ企画',   desc: '内容調整中', tba: true },
+  { time: '14:00', title: 'ステージ企画',   desc: '内容調整中', tba: true },
+  { time: '15:45', title: 'ラストオーダー', desc: '店舗により終了時間が異なります。' },
+  { time: '16:00', title: 'CLOSE',          desc: '閉場。ゴミはお持ち帰りにご協力ください。' }
+];
+
+/* =========================================================
+   ゾーニングマップの挙動
+   ========================================================= */
+(() => {
+  const svg     = document.getElementById('zonemap');
+  const detail  = document.getElementById('zoneDetail');
+  const zdNo    = document.getElementById('zdNo');
+  const zdEn    = document.getElementById('zdEn');
+  const zdTitle = document.getElementById('zdTitle');
+  const zdText  = document.getElementById('zdText');
+  const zdTags  = document.getElementById('zdTags');
+  if (!svg) return;
+
+  const zones = svg.querySelectorAll('.zone');
+  let pinned = null; // タップ／クリックで固定したゾーン
+
+  function render(no) {
+    const z = ZONES[no];
+    if (!z) return;
+    detail.classList.remove('is-empty');
+    zdNo.textContent    = no;
+    zdEn.textContent    = z.en;
+    zdTitle.textContent = z.title;
+    zdText.textContent  = z.text;
+    zdTags.innerHTML    = '';
+    (z.tags || []).forEach(t => {
+      const s = document.createElement('span');
+      s.textContent = t;
+      zdTags.appendChild(s);
+    });
+  }
+
+  function activate(no) {
+    svg.classList.add('has-active');
+    zones.forEach(g => g.classList.toggle('is-active', g.dataset.zone === String(no)));
+    render(no);
+  }
+
+  function clearActive() {
+    if (pinned) return;
+    svg.classList.remove('has-active');
+    zones.forEach(g => g.classList.remove('is-active'));
+  }
+
+  zones.forEach(g => {
+    const no = g.dataset.zone;
+    g.addEventListener('mouseenter', () => { if (!pinned) activate(no); });
+    g.addEventListener('focus',      () => { if (!pinned) activate(no); });
+    g.addEventListener('click', () => {
+      if (pinned === no) {   // 同じゾーンをもう一度 → 固定解除
+        pinned = null;
+        clearActive();
+      } else {
+        pinned = no;
+        activate(no);
+      }
+    });
+    g.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        g.dispatchEvent(new MouseEvent('click'));
+      }
+    });
+  });
+
+  svg.addEventListener('mouseleave', clearActive);
+})();
+
+/* =========================================================
+   出店者リスト＋カテゴリ絞り込み
+   ========================================================= */
+(() => {
+  const grid   = document.getElementById('shopGrid');
+  const filter = document.getElementById('catFilter');
+  if (!grid || !filter) return;
+
+  let current = 'ALL';
+
+  const esc = s => String(s).replace(/[&<>"']/g, c => (
+    { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
+  ));
+
+  CATS.forEach(c => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'cat-btn' + (c.key === 'ALL' ? ' is-on' : '');
+    b.textContent = c.label;
+    b.dataset.cat = c.key;
+    b.addEventListener('click', () => {
+      current = c.key;
+      filter.querySelectorAll('.cat-btn').forEach(x => x.classList.toggle('is-on', x.dataset.cat === current));
+      draw();
+    });
+    filter.appendChild(b);
+  });
+
+  function draw() {
+    const list = current === 'ALL' ? SHOPS : SHOPS.filter(s => s.cat === current);
+    grid.innerHTML = '';
+    list.forEach(s => {
+      const card = document.createElement('div');
+      card.className = 'shop-card';
+      const thumb = s.img
+        ? '<img src="' + esc(s.img) + '" alt="' + esc(s.name) + '" loading="lazy">'
+        : '<span class="shop-thumb-ph">COMING SOON</span>';
+      card.innerHTML =
+        '<div class="shop-thumb">' + thumb +
+          '<span class="shop-cat">' + esc(s.cat) + '</span>' +
+        '</div>' +
+        '<div class="shop-body">' +
+          '<p class="shop-name">' + esc(s.name) + '</p>' +
+          (s.note ? '<p class="shop-note">' + esc(s.note) + '</p>' : '') +
+          (s.zone ? '<span class="shop-zone">ZONE ' + esc(s.zone) + '</span>' : '') +
+        '</div>';
+      grid.appendChild(card);
+    });
+  }
+
+  draw();
+})();
+
+/* =========================================================
+   タイムテーブル
+   ========================================================= */
+(() => {
+  const el = document.getElementById('timetableList');
+  if (!el) return;
+  TIMETABLE.forEach(t => {
+    const row = document.createElement('div');
+    row.className = 'tt-row';
+
+    const time = document.createElement('div');
+    time.className = 'tt-time';
+    time.textContent = t.time;
+
+    const body = document.createElement('div');
+    const title = document.createElement('p');
+    title.className = 'tt-title' + (t.tba ? ' tt-tba' : '');
+    title.textContent = t.title;
+    body.appendChild(title);
+
+    if (t.desc) {
+      const desc = document.createElement('p');
+      desc.className = 'tt-desc';
+      desc.textContent = t.desc;
+      body.appendChild(desc);
+    }
+
+    row.appendChild(time);
+    row.appendChild(body);
+    el.appendChild(row);
+  });
+})();
+
+/* =========================================================
+   ナビ・FAQ・Instagram（既存ASOBOページと同じ挙動）
+   ========================================================= */
+const scrollEl = document.getElementById('centerScroll');
+document.querySelectorAll('[data-target]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const id = btn.getAttribute('data-target');
+    const target = document.getElementById(id);
+    if (!target) return;
+
+    // SP は body スクロール、PC は中央エリアのスクロール
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    if (isMobile) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      scrollEl.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
+    }
+  });
+});
+
+document.querySelectorAll('.faq-item').forEach(item => {
+  const q = item.querySelector('.faq-q');
+  q.addEventListener('click', () => item.classList.toggle('open'));
+});
+
+(() => {
+  const s = document.createElement("script");
+  s.type = "module";
+  s.src = "https://w.behold.so/widget.js";
+  document.head.append(s);
+})();
+</script>
+
+</body>
+</html>
