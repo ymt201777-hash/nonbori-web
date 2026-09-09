@@ -13,7 +13,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ASOBO!! 来場者ガイド | NONBORI</title>
-<meta name="description" content="2026年10月4日（日）みんなの森 ぎふメディアコスモス。入場無料のファミリーイベント ASOBO!! の来場者向けガイド。会場マップ・出店者・タイムテーブル・アクセス情報。">
+<meta name="description" content="2026年10月4日（日）みんなの森 ぎふメディアコスモス。入場無料のファミリーイベント ASOBO!! の来場者向けガイド。会場マップ・出店者・アクセス情報。">
 <meta property="og:title" content="ASOBO!! 来場者ガイド | NONBORI">
 <meta property="og:description" content="遊んで、食べて、つくって。家族でまるごと楽しむ日！ 2026年10月4日（日）10:00〜16:00 @みんなの森 ぎふメディアコスモス／入場無料">
 <meta property="og:type" content="website">
@@ -878,45 +878,6 @@ a {
 
 .more-btn:hover { opacity: .85; }
 
-/* ===== タイムテーブル ===== */
-.timetable {
-  border-top: 2px solid var(--red);
-}
-
-.tt-row {
-  display: grid;
-  grid-template-columns: 78px 1fr;
-  gap: 10px;
-  padding: 12px 2px;
-  border-bottom: 1px solid var(--line);
-  align-items: start;
-}
-
-.tt-time {
-  color: var(--red);
-  font-size: 12.5px;
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  padding-top: 1px;
-}
-
-.tt-title {
-  font-size: 13.5px;
-  font-weight: 800;
-  line-height: 1.4;
-}
-
-.tt-title.tt-tba {
-  color: #aaa;
-}
-
-.tt-desc {
-  font-size: 11.5px;
-  line-height: 1.6;
-  color: #666;
-  margin-top: 3px;
-}
-
 /* ===== アクセス ===== */
 #access iframe {
   width: 100%;
@@ -1218,16 +1179,6 @@ p.organizer-label {
       </p>
     </section>
 
-    <!-- ===== タイムテーブル ===== -->
-    <section id="timetable" class="section">
-      <div class="sec-label">
-        <span class="sec-label-en">TIME TABLE</span>
-        <span class="sec-label-ja">タイムテーブル</span>
-      </div>
-      <div class="timetable" id="timetableList"></div>
-      <p class="list-note">※ 内容・時間は変更になる場合があります。</p>
-    </section>
-
     <!-- ===== アクセス ===== -->
     <section id="access" class="section">
       <div class="sec-label">
@@ -1343,8 +1294,8 @@ p.organizer-label {
       <button class="right-btn right-btn-2" data-target="about">見どころ</button>
       <button class="right-btn right-btn-3" data-target="map">会場マップ</button>
       <button class="right-btn right-btn-4" data-target="shops">出店者</button>
-      <button class="right-btn right-btn-5" data-target="timetable">タイムテーブル</button>
-      <button class="right-btn right-btn-6" data-target="access">アクセス</button>
+      <button class="right-btn right-btn-5" data-target="access">アクセス</button>
+      <button class="right-btn right-btn-6" data-target="faq">FAQ</button>
     </div>
 
     <!-- SP: テキストボタン（PCでは非表示） -->
@@ -1353,8 +1304,8 @@ p.organizer-label {
       <button class="nav-btn" data-target="about">見どころ</button>
       <button class="nav-btn" data-target="map">会場マップ</button>
       <button class="nav-btn" data-target="shops">出店者</button>
-      <button class="nav-btn" data-target="timetable">タイムテーブル</button>
       <button class="nav-btn" data-target="access">アクセス</button>
+      <button class="nav-btn" data-target="faq">FAQ</button>
     </nav>
   </aside>
 </div>
@@ -1716,18 +1667,6 @@ const CATS = [
   { key: '物販',           label: '物販' }
 ];
 
-/* =========================================================
-   3. タイムテーブルデータ
-   ========================================================= */
-const TIMETABLE = [
-  { time: '10:00', title: 'OPEN',           desc: '開場。総合案内で会場マップを配布します。' },
-  { time: '10:30', title: 'ステージ企画',   desc: '内容調整中', tba: true },
-  { time: '12:00', title: 'ステージ企画',   desc: '内容調整中', tba: true },
-  { time: '14:00', title: 'ステージ企画',   desc: '内容調整中', tba: true },
-  { time: '15:45', title: 'ラストオーダー', desc: '店舗により終了時間が異なります。' },
-  { time: '16:00', title: 'CLOSE',          desc: '閉場。ゴミはお持ち帰りにご協力ください。' }
-];
-
 /* 共通ヘルパー */
 const esc = s => String(s).replace(/[&<>"']/g, c => (
   { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
@@ -2071,39 +2010,6 @@ const mapApi = (() => {
   });
 
   draw();
-})();
-
-/* =========================================================
-   タイムテーブル
-   ========================================================= */
-(() => {
-  const el = document.getElementById('timetableList');
-  if (!el) return;
-  TIMETABLE.forEach(t => {
-    const row = document.createElement('div');
-    row.className = 'tt-row';
-
-    const time = document.createElement('div');
-    time.className = 'tt-time';
-    time.textContent = t.time;
-
-    const body = document.createElement('div');
-    const title = document.createElement('p');
-    title.className = 'tt-title' + (t.tba ? ' tt-tba' : '');
-    title.textContent = t.title;
-    body.appendChild(title);
-
-    if (t.desc) {
-      const desc = document.createElement('p');
-      desc.className = 'tt-desc';
-      desc.textContent = t.desc;
-      body.appendChild(desc);
-    }
-
-    row.appendChild(time);
-    row.appendChild(body);
-    el.appendChild(row);
-  });
 })();
 
 /* =========================================================
