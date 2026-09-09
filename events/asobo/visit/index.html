@@ -465,6 +465,24 @@ a {
   margin-bottom: 10px;
 }
 
+/* マップ詳細カードの店舗写真 */
+.zone-detail-thumb {
+  flex: 0 0 auto;
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--white);
+}
+
+.zone-detail-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.zone-detail-thumb[hidden] { display: none; }
+
 .zone-detail-no {
   flex: 0 0 auto;
   min-width: 30px;
@@ -970,6 +988,7 @@ p.organizer-label {
 
       <div class="zone-detail is-empty" id="zoneDetail" aria-live="polite">
         <div class="zone-detail-head">
+          <span class="zone-detail-thumb" id="zdThumb" hidden><img src="" alt="" id="zdImg"></span>
           <span class="zone-detail-no" id="zdNo"></span>
           <div>
             <span class="zone-detail-en" id="zdEn">SELECT A SHOP</span>
@@ -1141,44 +1160,44 @@ p.organizer-label {
       img   : 店舗画像のパス（入れるとサムネイルが写真に変わる）
    ========================================================= */
 const SHOPS = [
-  { no: 1,  pins: [{ n: 1,  x: 35.64, y: 39.78 }], name: 'えほんのこや',                     cat: 'ワークショップ', insta: ['ehonnokoya', '__58.okashi'] },
+  { no: 1,  pins: [{ n: 1,  x: 35.64, y: 39.78 }], name: 'えほんのこや',                     cat: 'ワークショップ', insta: ['ehonnokoya', '__58.okashi'], img: 'shops/01.jpg' },
   { no: 2,  pins: [{ n: 2,  x: 31.97, y: 39.06 }], name: 'Lima♡COCO',                       cat: 'ワークショップ', insta: ['takachan823'] },
-  { no: 3,  pins: [{ n: 3,  x: 28.21, y: 37.73 }], name: 'やさしい魔女の部屋',               cat: null,             insta: [] },
-  { no: 4,  pins: [{ n: 4,  x: 24.53, y: 38.45 }], name: '日本こども色彩協会',               cat: 'ワークショップ', insta: ['iroha.kirakira', 't_yuri81'] },
+  { no: 3,  pins: [{ n: 3,  x: 28.21, y: 37.73 }], name: 'やさしい魔女の部屋',               cat: null,             insta: [], img: 'shops/03.jpg' },
+  { no: 4,  pins: [{ n: 4,  x: 24.53, y: 38.45 }], name: '日本こども色彩協会',               cat: 'ワークショップ', insta: ['iroha.kirakira', 't_yuri81'], img: 'shops/04.jpg' },
   { no: 5,  pins: [{ n: 5,  x: 22.82, y: 43.05 }], name: 'モンテッソーリ子どもの家陽だまり', cat: 'ワークショップ', insta: ['maria_monte_inuyama'] },
-  { no: 6,  pins: [{ n: 6,  x: 28.29, y: 53.32 }], name: 'Kleines Glück（クライネス グリュック）', cat: '物販',    insta: ['kleinesgluck.aa'] },
-  { no: 7,  pins: [{ n: 7,  x: 31.97, y: 52.96 }], name: 'カロンファクトリー',               cat: 'キッチンカー',   insta: ['calon_factory_foodtruck.new'] },
+  { no: 6,  pins: [{ n: 6,  x: 28.29, y: 53.32 }], name: 'Kleines Glück（クライネス グリュック）', cat: '物販',    insta: ['kleinesgluck.aa'], img: 'shops/06.jpg' },
+  { no: 7,  pins: [{ n: 7,  x: 31.97, y: 52.96 }], name: 'カロンファクトリー',               cat: 'キッチンカー',   insta: ['calon_factory_foodtruck.new'], img: 'shops/07.jpg' },
   { no: 8,  pins: [{ n: 8,  x: 35.64, y: 53.93 }], name: 'sa made cafe',                     cat: 'キッチンカー',   insta: ['samadecafe.new'] },
-  { no: 9,  pins: [{ n: 9,  x: 42.99, y: 49.33 }], name: 'あそびとアートと空と月',           cat: 'ワークショップ', insta: ['asobi.art.soratotsuki'] },
-  { no: 10, pins: [{ n: 10, x: 46.41, y: 49.46 }], name: 'あ 〜折染ワークショップ〜',         cat: 'ワークショップ', insta: ['someworks.a'] },
-  { no: 11, pins: [{ n: 11, x: 42.99, y: 54.41 }], name: 'ヤマダ似顔絵店',                   cat: '物販',           insta: ['yamada_takae'] },
-  { no: 12, pins: [{ n: 12, x: 46.50, y: 54.41 }], name: 'リメイクデニム Tumugu',            cat: 'ワークショップ', insta: ['tumugu.0'] },
-  { no: 13, pins: [{ n: 13, x: 57.26, y: 37.85 }], name: 'merry merry life',                 cat: '物販',           insta: ['merry.merry.life'] },
-  { no: 14, pins: [{ n: 14, x: 55.47, y: 42.32 }], name: 'piccoli pattini',                  cat: 'ワークショップ', insta: ['piccoli.pattini'] },
-  { no: 15, pins: [{ n: 15, x: 58.97, y: 42.32 }], name: 'cafe shunka',                      cat: '物販',           insta: ['cafe_shunka'] },
-  { no: 16, pins: [{ n: 16, x: 54.10, y: 52.72 }], name: 'こっことなんな',                   cat: '物販',           insta: ['koala_to_cat'] },
+  { no: 9,  pins: [{ n: 9,  x: 42.99, y: 49.33 }], name: 'あそびとアートと空と月',           cat: 'ワークショップ', insta: ['asobi.art.soratotsuki'], img: 'shops/09.jpg' },
+  { no: 10, pins: [{ n: 10, x: 46.41, y: 49.46 }], name: 'あ 〜折染ワークショップ〜',         cat: 'ワークショップ', insta: ['someworks.a'], img: 'shops/10.jpg' },
+  { no: 11, pins: [{ n: 11, x: 42.99, y: 54.41 }], name: 'ヤマダ似顔絵店',                   cat: '物販',           insta: ['yamada_takae'], img: 'shops/11.jpg' },
+  { no: 12, pins: [{ n: 12, x: 46.50, y: 54.41 }], name: 'リメイクデニム Tumugu',            cat: 'ワークショップ', insta: ['tumugu.0'], img: 'shops/12.jpg' },
+  { no: 13, pins: [{ n: 13, x: 57.26, y: 37.85 }], name: 'merry merry life',                 cat: '物販',           insta: ['merry.merry.life'], img: 'shops/13.jpg' },
+  { no: 14, pins: [{ n: 14, x: 55.47, y: 42.32 }], name: 'piccoli pattini',                  cat: 'ワークショップ', insta: ['piccoli.pattini'], img: 'shops/14.jpg' },
+  { no: 15, pins: [{ n: 15, x: 58.97, y: 42.32 }], name: 'cafe shunka',                      cat: '物販',           insta: ['cafe_shunka'], img: 'shops/15.jpg' },
+  { no: 16, pins: [{ n: 16, x: 54.10, y: 52.72 }], name: 'こっことなんな',                   cat: '物販',           insta: ['koala_to_cat'], img: 'shops/16.jpg' },
   { no: 17, pins: [{ n: 17, x: 57.69, y: 52.72 }], name: 'かっちゃん さっちゃん',            cat: '物販',           insta: [] },
-  { no: 18, pins: [{ n: 18, x: 54.10, y: 57.68 }], name: 'mummo.',                           cat: '物販',           insta: ['_mummo._'] },
-  { no: 19, pins: [{ n: 19, x: 57.61, y: 57.68 }], name: 'Tomori',                           cat: '物販',           insta: ['tomori_curry'] },
-  { no: 20, pins: [{ n: 20, x: 51.79, y: 65.05 }], name: 'Rosso Caccini',                    cat: 'キッチンカー',   insta: ['pizza_prc'] },
+  { no: 18, pins: [{ n: 18, x: 54.10, y: 57.68 }], name: 'mummo.',                           cat: '物販',           insta: ['_mummo._'], img: 'shops/18.jpg' },
+  { no: 19, pins: [{ n: 19, x: 57.61, y: 57.68 }], name: 'Tomori',                           cat: '物販',           insta: ['tomori_curry'], img: 'shops/19.jpg' },
+  { no: 20, pins: [{ n: 20, x: 51.79, y: 65.05 }], name: 'Rosso Caccini',                    cat: 'キッチンカー',   insta: ['pizza_prc'], img: 'shops/20.jpg' },
   { no: 21, pins: [{ n: 21, x: 54.19, y: 68.80 }], name: 'ヒマラヤ',                         cat: 'キッチンカー',   insta: [] },
   { no: 22, pins: [{ n: 22, x: 56.32, y: 72.91 }], name: 'home_kitchencar_',                 cat: 'キッチンカー',   insta: ['home_kitchencar_'] },
   { no: 23, pins: [{ n: 23, x: 73.42, y: 30.11 }], name: 'Agatto Handmade Craft',            cat: null,             insta: [] },
   { no: 24, pins: [{ n: 24, x: 76.58, y: 32.89 }], name: 'soso antique',                     cat: null,             insta: [] },
   { no: 25, pins: [{ n: 25, x: 69.32, y: 36.52 }], name: 'matsuri',                          cat: '物販',           insta: ['matsuri1881'] },
-  { no: 26, pins: [{ n: 26, x: 66.15, y: 39.18 }], name: 'meguru（low waste shop Gifu）',    cat: '物販',           insta: ['meguru_gifu'] },
-  { no: 27, pins: [{ n: 27, x: 69.40, y: 41.72 }], name: 'ゥさん食堂',                       cat: '物販',           insta: ['usansyokudo'] },
-  { no: 28, pins: [{ n: 28, x: 70.60, y: 54.41 }], name: '86coffee',                         cat: 'キッチンカー',   insta: ['86coffee__'] },
+  { no: 26, pins: [{ n: 26, x: 66.15, y: 39.18 }], name: 'meguru（low waste shop Gifu）',    cat: '物販',           insta: ['meguru_gifu'], img: 'shops/26.jpg' },
+  { no: 27, pins: [{ n: 27, x: 69.40, y: 41.72 }], name: 'ゥさん食堂',                       cat: '物販',           insta: ['usansyokudo'], img: 'shops/27.jpg' },
+  { no: 28, pins: [{ n: 28, x: 70.60, y: 54.41 }], name: '86coffee',                         cat: 'キッチンカー',   insta: ['86coffee__'], img: 'shops/28.jpg' },
   { no: 29, pins: [{ n: 29, x: 73.68, y: 51.87 }], name: 'おやこ似顔絵',                     cat: '物販',           insta: ['kyoko06061963'] },
-  { no: 30, pins: [{ n: 30, x: 76.84, y: 49.58 }], name: 'neaz eyewear（メガネ工房AZ）',     cat: '物販',           insta: ['meganekoubouaz'] },
-  { no: 31, pins: [{ n: 31, x: 70.94, y: 59.61 }], name: 'うさぎ村',                         cat: '物販',           insta: ['usagimura2021'] },
-  { no: 32, pins: [{ n: 32, x: 73.93, y: 57.32 }], name: 'ippo',                             cat: 'ワークショップ', insta: ['ippo_official_balloon'] },
-  { no: 33, pins: [{ n: 33, x: 77.18, y: 55.02 }], name: '一般社団法人 RuFL',                cat: '物販',           insta: ['rufl_japan'] },
-  { no: 34, pins: [{ n: 34, x: 80.26, y: 52.72 }], name: 'calme.',                           cat: '物販',           insta: ['calme.329'] },
+  { no: 30, pins: [{ n: 30, x: 76.84, y: 49.58 }], name: 'neaz eyewear（メガネ工房AZ）',     cat: '物販',           insta: ['meganekoubouaz'], img: 'shops/30.jpg' },
+  { no: 31, pins: [{ n: 31, x: 70.94, y: 59.61 }], name: 'うさぎ村',                         cat: '物販',           insta: ['usagimura2021'], img: 'shops/31.jpg' },
+  { no: 32, pins: [{ n: 32, x: 73.93, y: 57.32 }], name: 'ippo',                             cat: 'ワークショップ', insta: ['ippo_official_balloon'], img: 'shops/32.jpg' },
+  { no: 33, pins: [{ n: 33, x: 77.18, y: 55.02 }], name: '一般社団法人 RuFL',                cat: '物販',           insta: ['rufl_japan'], img: 'shops/33.jpg' },
+  { no: 34, pins: [{ n: 34, x: 80.26, y: 52.72 }], name: 'calme.',                           cat: '物販',           insta: ['calme.329'], img: 'shops/34.jpg' },
   { no: '35&36', pins: [{ n: 35, x: 90.94, y: 50.54 }, { n: 36, x: 94.44, y: 49.70 }],
                                                    name: 'CHARO 〜自転車に乗るヒゲのおじさん〜', cat: 'ワークショップ', insta: ['cheki_charo3939'] },
-  { no: 37, pins: [{ n: 37, x: 79.23, y: 63.85 }], name: 'SOWA CURRY',                       cat: 'キッチンカー',   insta: ['sowacurry116'] },
-  { no: 38, pins: [{ n: 38, x: 78.03, y: 68.68 }], name: 'イルソーレ',                       cat: 'キッチンカー',   insta: ['ilsole_wizard.of.flour'] }
+  { no: 37, pins: [{ n: 37, x: 79.23, y: 63.85 }], name: 'SOWA CURRY',                       cat: 'キッチンカー',   insta: ['sowacurry116'], img: 'shops/37.jpg' },
+  { no: 38, pins: [{ n: 38, x: 78.03, y: 68.68 }], name: 'イルソーレ',                       cat: 'キッチンカー',   insta: ['ilsole_wizard.of.flour'], img: 'shops/38.jpg' }
 ];
 
 const CATS = [
@@ -1220,6 +1239,8 @@ const mapApi = (() => {
   const zdTitle = document.getElementById('zdTitle');
   const zdText  = document.getElementById('zdText');
   const zdTags  = document.getElementById('zdTags');
+  const zdThumb = document.getElementById('zdThumb');
+  const zdImg   = document.getElementById('zdImg');
   if (!view || !stage) return null;
 
   const MIN = 1, MAX = 5;
@@ -1244,6 +1265,8 @@ const mapApi = (() => {
     const s = shopByPin.get(n);
     if (!s) return;
     detail.classList.remove('is-empty');
+    if (s.img) { zdImg.src = s.img; zdImg.alt = s.name; zdThumb.hidden = false; }
+    else       { zdImg.removeAttribute('src'); zdThumb.hidden = true; }
     zdNo.textContent    = s.no;
     zdEn.textContent    = s.cat || 'CATEGORY TBA';
     zdTitle.textContent = s.name;
