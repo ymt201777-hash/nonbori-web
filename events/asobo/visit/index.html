@@ -678,6 +678,184 @@ a {
   color: #777;
 }
 
+/* ===== 店舗詳細シート ===== */
+.sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.sheet-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, .5);
+}
+
+.sheet-panel {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  max-height: 86vh;
+  overflow-y: auto;
+  background: var(--white);
+  border-radius: 18px;
+  border: 2px solid var(--red);
+  -webkit-overflow-scrolling: touch;
+}
+
+.sheet-close {
+  position: sticky;
+  top: 0;
+  float: right;
+  margin: 8px 8px 0 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--red);
+  background: rgba(255, 255, 255, .95);
+  color: var(--red);
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.sheet-close:hover { background: var(--red); color: var(--white); }
+
+.sheet-body { padding: 16px 18px 22px; }
+
+.sheet-photo {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  max-height: 46vh;
+  object-fit: cover;
+  border-radius: 14px;
+  background: var(--gray);
+  margin-bottom: 14px;
+}
+
+.sheet-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.sheet-no {
+  flex: 0 0 auto;
+  min-width: 30px;
+  height: 30px;
+  padding: 0 8px;
+  border-radius: 100px;
+  background: var(--red);
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sheet-cat {
+  display: block;
+  color: var(--red);
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+.sheet-name {
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.sheet-kana {
+  display: block;
+  font-size: 11px;
+  color: #888;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+.sheet-desc {
+  font-size: 13px;
+  line-height: 1.85;
+  white-space: pre-line;   /* データの改行をそのまま活かす */
+}
+
+.sheet-items {
+  margin-top: 16px;
+  border-top: 2px solid var(--red);
+}
+
+.sheet-items-label {
+  color: var(--red);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  padding: 10px 0 4px;
+}
+
+.sheet-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  padding: 8px 2px;
+  border-bottom: 1px solid var(--line);
+  font-size: 13px;
+}
+
+.sheet-item span:first-child { font-weight: 700; }
+.sheet-item span:last-child { color: var(--red); font-weight: 800; white-space: nowrap; }
+
+.sheet-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.sheet-actions a,
+.sheet-actions button {
+  border: 1.5px solid var(--red);
+  background: var(--white);
+  color: var(--red);
+  border-radius: 100px;
+  font-family: 'M PLUS Rounded 1c', 'Zen Maru Gothic', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 7px 14px;
+  cursor: pointer;
+}
+
+.sheet-actions a:hover,
+.sheet-actions button:hover { background: var(--red); color: var(--white); }
+
+/* 「くわしく」ボタン */
+.more-btn {
+  display: inline-block;
+  margin-top: 7px;
+  margin-right: 5px;
+  border: none;
+  background: var(--red);
+  color: var(--white);
+  border-radius: 100px;
+  font-family: 'M PLUS Rounded 1c', 'Zen Maru Gothic', sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+
+.more-btn:hover { opacity: .85; }
+
 /* ===== タイムテーブル ===== */
 .timetable {
   border-top: 2px solid var(--red);
@@ -1125,6 +1303,15 @@ p.organizer-label {
 
   </main>
 
+  <!-- 店舗詳細シート -->
+  <div class="sheet" id="shopSheet" hidden>
+    <div class="sheet-backdrop" data-sheet-close></div>
+    <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="sheetName">
+      <button class="sheet-close" type="button" data-sheet-close aria-label="閉じる">×</button>
+      <div class="sheet-body" id="sheetBody"></div>
+    </div>
+  </div>
+
   <!-- 右パネル -->
   <aside class="right-panel">
     <!-- PC: SVG の楕円を直接ボタン化 -->
@@ -1164,10 +1351,16 @@ const SHOPS = [
   { no: 2,  pins: [{ n: 2,  x: 14.08, y: 39.06 }], name: 'Lima♡COCO',                       cat: 'ワークショップ', insta: ['takachan823'] },
   { no: 3,  pins: [{ n: 3,  x: 9.33, y: 37.73 }], name: 'やさしい魔女の部屋',               cat: null,             insta: [], img: 'shops/03.jpg' },
   { no: 4,  pins: [{ n: 4,  x: 4.68, y: 38.45 }], name: '日本こども色彩協会',               cat: 'ワークショップ', insta: ['iroha.kirakira', 't_yuri81'], img: 'shops/04.jpg' },
-  { no: 5,  pins: [{ n: 5,  x: 2.52, y: 43.05 }], name: 'モンテッソーリ子どもの家陽だまり', cat: 'ワークショップ', insta: ['maria_monte_inuyama'] },
+  { no: 5,  pins: [{ n: 5,  x: 2.52, y: 43.05 }], name: 'モンテッソーリ子どもの家陽だまり', cat: 'ワークショップ', insta: ['monte_hidamari'],
+    kana: 'もんてっそーりこどものいえひだまり',
+    desc: '＼ モンテッソーリのお仕事を体験しませんか？ ／\n子どもが自分で選び、手を動かし、集中して取り組む活動を「お仕事」と呼びます。今回のマルシェでは、実際のお仕事を親子で体験✨ 集中力や手と目の協応性など、どんな力が育つのかも楽しくお伝えします。\n体験したお道具はお持ち帰りOK🎁 お家での取り組み方や声かけのポイントもお渡しします。\n「モンテッソーリってどんなこと？」という方も、ぜひ遊びに来てください🌱',
+    items: [{ name: 'お仕事体験（参加費）', price: '¥500〜1,000' }] },
   { no: 6,  pins: [{ n: 6,  x: 9.43, y: 53.32 }], name: 'Kleines Glück（クライネス グリュック）', cat: '物販',    insta: ['kleinesgluck.aa'], img: 'shops/06.jpg' },
   { no: 7,  pins: [{ n: 7,  x: 14.08, y: 52.96 }], name: 'カロンファクトリー',               cat: 'キッチンカー',   insta: ['calon_factory_foodtruck.new'], img: 'shops/07.jpg' },
-  { no: 8,  pins: [{ n: 8,  x: 18.72, y: 53.93 }], name: 'sa made cafe',                     cat: 'キッチンカー',   insta: ['samadecafe.new'] },
+  { no: 8,  pins: [{ n: 8,  x: 18.72, y: 53.93 }], name: 'sa made cafe',                     cat: 'キッチンカー',   insta: ['samadecafe.new'],
+    kana: 'サーメイドカフェ',
+    desc: '沖縄と海が大好きな店主の作る、当店のえびはひとつひとつ丁寧に殻を剥き、ぷりぷりえびになる様に魔法の仕込みをし皆様にお届けします。\n大人気のガーリック味は勿論、ガーリック苦手な方やお年寄りやお子様でも食べれるその他のお味もご用意してます。',
+    items: [{ name: 'シュリンプ各種', price: '¥700〜1,200' }, { name: 'ドリンク', price: '¥400' }, { name: 'アルコール', price: '¥400〜' }] },
   { no: 9,  pins: [{ n: 9,  x: 28.00, y: 49.33 }], name: 'あそびとアートと空と月',           cat: 'ワークショップ', insta: ['asobi.art.soratotsuki'], img: 'shops/09.jpg' },
   { no: 10, pins: [{ n: 10, x: 32.32, y: 49.46 }], name: 'あ 〜折染ワークショップ〜',         cat: 'ワークショップ', insta: ['someworks.a'], img: 'shops/10.jpg' },
   { no: 11, pins: [{ n: 11, x: 28.00, y: 54.41 }], name: 'ヤマダ似顔絵店',                   cat: '物販',           insta: ['yamada_takae'], img: 'shops/11.jpg' },
@@ -1182,7 +1375,10 @@ const SHOPS = [
   { no: 20, pins: [{ n: 20, x: 39.11, y: 65.05 }], name: 'Rosso Caccini',                    cat: 'キッチンカー',   insta: ['pizza_prc'], img: 'shops/20.jpg' },
   { no: 21, pins: [{ n: 21, x: 42.14, y: 68.80 }], name: 'ヒマラヤ',                         cat: 'キッチンカー',   insta: [] },
   { no: 22, pins: [{ n: 22, x: 44.83, y: 72.91 }], name: 'home_kitchencar_',                 cat: 'キッチンカー',   insta: ['home_kitchencar_'] },
-  { no: 23, pins: [{ n: 23, x: 66.43, y: 30.11 }], name: 'Agatto Handmade Craft',            cat: null,             insta: [] },
+  { no: 23, pins: [{ n: 23, x: 66.43, y: 30.11 }], name: 'Agatto Handmade Craft',            cat: '物販',           insta: ['agatto_handmade_craft'],
+    kana: 'アガット・ハンドメイド・クラフト',
+    desc: '地味に可愛い、子どもたちの毎日に、もっとカラフルで楽しい服を。\nシンプルなデニムや無地布にカラフルなポイントなど、一点一点心を込めて手作りしています♡ 普段着はもちろん、兄弟・姉妹でのおそろいや、世界にひとつだけのオーダーメイドも。\nDIYやハンドメイド、ちょっと個性的なものが好きなママさんも大歓迎♡\n今回のイベントは最近人気のあるバレルパンツ（90〜110cm）、お弁当袋と財布などの小物とハギレの販売をする予定です♪',
+    items: [{ name: '子供バレルパンツ', price: '¥3,000' }, { name: 'お弁当袋', price: '¥3,500' }, { name: 'ハギレ（2〜3m）', price: '¥2,000〜' }, { name: 'お財布', price: '¥5,000〜' }] },
   { no: 24, pins: [{ n: 24, x: 70.42, y: 32.89 }], name: 'soso antique',                     cat: null,             insta: [] },
   { no: 25, pins: [{ n: 25, x: 61.25, y: 36.52 }], name: 'matsuri',                          cat: '物販',           insta: ['matsuri1881'] },
   { no: 26, pins: [{ n: 26, x: 57.25, y: 39.18 }], name: 'meguru（low waste shop Gifu）',    cat: '物販',           insta: ['meguru_gifu'], img: 'shops/26.jpg' },
@@ -1195,7 +1391,10 @@ const SHOPS = [
   { no: 33, pins: [{ n: 33, x: 71.18, y: 55.02 }], name: '一般社団法人 RuFL',                cat: '物販',           insta: ['rufl_japan'], img: 'shops/33.jpg' },
   { no: 34, pins: [{ n: 34, x: 75.07, y: 52.72 }], name: 'calme.',                           cat: '物販',           insta: ['calme.329'], img: 'shops/34.jpg' },
   { no: '35&36', pins: [{ n: 35, x: 88.56, y: 50.54 }, { n: 36, x: 92.98, y: 49.70 }],
-                                                   name: 'CHARO 〜自転車に乗るヒゲのおじさん〜', cat: 'ワークショップ', insta: ['cheki_charo3939'] },
+                                                   name: 'CHARO 〜自転車に乗るヒゲのおじさん〜', cat: 'ワークショップ', insta: ['cheki_charo3939'],
+    kana: 'ちゃろ じてんしゃにのるひげのおじさん',
+    desc: '100年前のイギリス自転車に乗ってみよう！🇬🇧🚲\n見たことのない大きな自転車にまたがって、昔の世界へタイムスリップ！試乗体験ワークショップを開催します。\nお店には、美濃焼の器や木工職人CHAROがつくる雑貨もずらり。さらに、車に自由に絵を描ける「らくがきアートトラック」も登場！🚚🎨\n乗って、描いて、見つけて楽しむ。子どもも大人も遊べるCHAROのお店へ、ぜひ遊びにきてね！',
+    items: [{ name: 'イギリス自転車 試乗体験', price: '無料' }, { name: '美濃焼・木工職人雑貨', price: '¥1,500〜' }] },
   { no: 37, pins: [{ n: 37, x: 73.77, y: 63.85 }], name: 'SOWA CURRY',                       cat: 'キッチンカー',   insta: ['sowacurry116'], img: 'shops/37.jpg' },
   { no: 38, pins: [{ n: 38, x: 72.25, y: 68.68 }], name: 'イルソーレ',                       cat: 'キッチンカー',   insta: ['ilsole_wizard.of.flour'], img: 'shops/38.jpg' }
 ];
@@ -1225,6 +1424,69 @@ const esc = s => String(s).replace(/[&<>"']/g, c => (
 ));
 const shopByPin = new Map();
 SHOPS.forEach(s => s.pins.forEach(p => shopByPin.set(p.n, s)));
+const shopByNo = new Map(SHOPS.map(s => [String(s.no), s]));
+
+/* =========================================================
+   店舗詳細シート（紹介文・展開商品は長いのでここに出す）
+   ========================================================= */
+const sheet = (() => {
+  const el   = document.getElementById('shopSheet');
+  const body = document.getElementById('sheetBody');
+  if (!el) return null;
+  let lastFocus = null;
+
+  function close() {
+    el.hidden = true;
+    if (lastFocus) { try { lastFocus.focus(); } catch (e) {} }
+  }
+
+  function open(no) {
+    const s = shopByNo.get(String(no));
+    if (!s) return;
+    lastFocus = document.activeElement;
+
+    const photo = s.img
+      ? '<img class="sheet-photo" src="' + esc(s.img) + '" alt="' + esc(s.name) + '">'
+      : '';
+    const items = (s.items && s.items.length)
+      ? '<div class="sheet-items"><p class="sheet-items-label">展開商品</p>' +
+        s.items.map(i => '<div class="sheet-item"><span>' + esc(i.name) +
+          '</span><span>' + esc(i.price) + '</span></div>').join('') + '</div>'
+      : '';
+    const insta = s.insta.map(h =>
+      '<a href="https://www.instagram.com/' + esc(h) + '" target="_blank" rel="noopener noreferrer">@' +
+      esc(h) + '</a>').join('');
+
+    body.innerHTML =
+      photo +
+      '<div class="sheet-head">' +
+        '<span class="sheet-no">' + esc(s.no) + '</span>' +
+        '<div>' +
+          '<span class="sheet-cat">' + esc(s.cat || '準備中') + '</span>' +
+          '<span class="sheet-name" id="sheetName">' + esc(s.name) + '</span>' +
+          (s.kana ? '<span class="sheet-kana">' + esc(s.kana) + '</span>' : '') +
+        '</div>' +
+      '</div>' +
+      (s.desc ? '<p class="sheet-desc">' + esc(s.desc) + '</p>' : '') +
+      items +
+      '<div class="sheet-actions">' + insta +
+        '<button type="button" data-sheet-map="' + esc(s.pins[0].n) + '">マップで見る</button>' +
+      '</div>';
+
+    el.hidden = false;
+    el.querySelector('.sheet-panel').scrollTop = 0;
+    el.querySelector('.sheet-close').focus();
+  }
+
+  el.addEventListener('click', e => {
+    if (e.target.closest('[data-sheet-close]')) { close(); return; }
+    const m = e.target.closest('[data-sheet-map]');
+    if (m) { close(); if (mapApi) mapApi.focus(Number(m.dataset.sheetMap)); }
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !el.hidden) close(); });
+
+  return { open, close };
+})();
 
 /* =========================================================
    会場マップ：ピンチ／ドラッグ拡大＋番号タップで店舗表示
@@ -1270,10 +1532,19 @@ const mapApi = (() => {
     zdNo.textContent    = s.no;
     zdEn.textContent    = s.cat || 'CATEGORY TBA';
     zdTitle.textContent = s.name;
-    zdText.textContent  = s.cat
-      ? s.cat + 'として出店します。'
-      : 'カテゴリーは調整中です。';
+    // 紹介文があれば冒頭を出し、続きはシートで読ませる
+    zdText.textContent = s.desc
+      ? s.desc.replace(/\n/g, ' ').slice(0, 70) + (s.desc.length > 70 ? '…' : '')
+      : (s.cat ? s.cat + 'として出店します。' : 'カテゴリーは調整中です。');
     zdTags.innerHTML = '';
+    if (s.desc || (s.items && s.items.length)) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'more-btn';
+      b.textContent = 'くわしく見る';
+      b.addEventListener('click', () => sheet && sheet.open(s.no));
+      zdTags.appendChild(b);
+    }
     s.insta.forEach(h => {
       const a = document.createElement('a');
       a.href = 'https://www.instagram.com/' + h;
@@ -1464,6 +1735,9 @@ const mapApi = (() => {
         '<div class="shop-body">' +
           '<p class="shop-name">' + esc(s.name) + '</p>' +
           insta +
+          (s.desc || (s.items && s.items.length)
+            ? '<button type="button" class="more-btn" data-more="' + esc(s.no) + '">くわしく</button>'
+            : '') +
           '<button type="button" class="shop-zone" data-pin="' + s.pins[0].n + '">' +
             'マップで見る</button>' +
         '</div>';
@@ -1472,6 +1746,8 @@ const mapApi = (() => {
   }
 
   grid.addEventListener('click', e => {
+    const more = e.target.closest('[data-more]');
+    if (more) { if (sheet) sheet.open(more.dataset.more); return; }
     const btn = e.target.closest('.shop-zone');
     if (btn && mapApi) mapApi.focus(Number(btn.dataset.pin));
   });
