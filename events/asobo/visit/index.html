@@ -339,7 +339,7 @@ a {
   pointer-events: none;
 }
 
-/* ===== ゾーニングマップ ===== */
+/* ===== 会場マップ（ピンチ／ドラッグで拡大） ===== */
 .zonemap-hint {
   text-align: center;
   font-size: 12px;
@@ -348,75 +348,106 @@ a {
   margin-bottom: 10px;
 }
 
-.zonemap-wrap {
+.mapview {
   position: relative;
   border: 2px solid var(--red);
   border-radius: 16px;
   overflow: hidden;
   background: var(--white);
+  height: 320px;
+  touch-action: none;          /* ピンチ／ドラッグを自前で処理 */
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
-.zonemap {
+.mapview.is-panning { cursor: grabbing; }
+
+/* 拡大・移動するレイヤー。画像とピンが一緒に動く */
+.mapstage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+
+.mapstage img {
   display: block;
   width: 100%;
   height: auto;
+  pointer-events: none;
 }
 
-.zone {
+/* ピン（印刷マップの番号の上に重なる透明な当たり判定） */
+.pin {
+  position: absolute;
+  width: 5.2%;               /* 画像幅に対する比率。translate(-50%,-50%) で中心合わせ */
+  aspect-ratio: 1 / 1;
+  transform: translate(-50%, -50%);
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  padding: 0;
   cursor: pointer;
-  transform-box: fill-box;
-  transform-origin: center;
-  transition: transform .28s cubic-bezier(.2,.8,.3,1.2), opacity .2s;
+  transition: box-shadow .18s, background .18s;
 }
 
-.zone .zone-shape {
-  fill: #ffe6e6;
-  stroke: var(--red);
-  stroke-width: 2;
-  transition: fill .2s;
+/* 当たり判定はピン全体（指で押しやすいサイズ）だが、
+   ハイライトの輪は印刷マップの丸（画像幅の約2.6%）に合わせて内側に描く */
+.pin::after {
+  content: "";
+  position: absolute;
+  inset: 22%;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  transition: border-color .18s, transform .25s cubic-bezier(.2,.8,.3,1.2);
 }
 
-.zone .zone-pin {
-  fill: var(--red);
-  transition: fill .2s;
+.pin:hover::after,
+.pin:focus-visible::after {
+  border-color: rgba(255, 0, 0, .5);
+  transform: scale(1.12);
 }
 
-.zone .zone-no {
-  fill: var(--white);
-  font-family: 'M PLUS Rounded 1c', sans-serif;
-  font-size: 15px;
+.pin.is-active::after {
+  border-color: var(--red);
+  transform: scale(1.18);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, .95), 0 3px 10px rgba(0, 0, 0, .35);
+}
+
+.pin:focus { outline: none; }
+
+/* ズーム操作ボタン */
+.map-ctrl {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.map-ctrl button {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid var(--red);
+  background: rgba(255, 255, 255, .92);
+  color: var(--red);
+  font-family: 'M PLUS Rounded 1c', 'Zen Maru Gothic', sans-serif;
+  font-size: 17px;
   font-weight: 800;
-  text-anchor: middle;
-  dominant-baseline: central;
-  pointer-events: none;
-  transition: fill .2s;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.zone .zone-name {
-  fill: var(--red);
-  font-family: 'M PLUS Rounded 1c', sans-serif;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  text-anchor: middle;
-  pointer-events: none;
-  transition: fill .2s;
-}
+.map-ctrl button:hover { background: var(--red); color: var(--white); }
 
-.zonemap.has-active .zone:not(.is-active) {
-  opacity: .3;
-}
-
-.zone.is-active {
-  transform: scale(1.14);
-}
-
-.zone.is-active .zone-shape { fill: var(--red); }
-.zone.is-active .zone-name  { fill: var(--white); }
-.zone.is-active .zone-pin   { fill: var(--white); }
-.zone.is-active .zone-no    { fill: var(--red); }
-
-.zone:focus { outline: none; }
+.map-ctrl .map-ctrl-reset { font-size: 10px; letter-spacing: 0.02em; }
 
 /* マップ詳細カード */
 .zone-detail {
@@ -424,7 +455,7 @@ a {
   border-radius: 16px;
   background: var(--gray);
   padding: 16px 16px 18px;
-  min-height: 156px;
+  min-height: 132px;
 }
 
 .zone-detail-head {
@@ -436,9 +467,10 @@ a {
 
 .zone-detail-no {
   flex: 0 0 auto;
-  width: 30px;
+  min-width: 30px;
   height: 30px;
-  border-radius: 50%;
+  padding: 0 8px;
+  border-radius: 100px;
   background: var(--red);
   color: var(--white);
   font-size: 14px;
@@ -475,6 +507,7 @@ a {
   margin-top: 10px;
 }
 
+.zone-detail-tags a,
 .zone-detail-tags span {
   border: 1.5px solid var(--red);
   color: var(--red);
@@ -483,6 +516,8 @@ a {
   font-weight: 700;
   padding: 3px 10px;
 }
+
+.zone-detail-tags a:hover { background: var(--red); color: var(--white); }
 
 .zone-detail.is-empty .zone-detail-no { display: none; }
 
@@ -561,6 +596,25 @@ a {
   padding: 3px 8px;
 }
 
+/* 印刷マップと同じ番号。番号から探せるように目立たせる */
+.shop-no {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  min-width: 24px;
+  height: 24px;
+  padding: 0 6px;
+  border-radius: 100px;
+  background: var(--white);
+  border: 2px solid var(--red);
+  color: var(--red);
+  font-size: 11px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .shop-body {
   padding: 9px 10px 11px;
 }
@@ -572,22 +626,31 @@ a {
   margin-bottom: 3px;
 }
 
-.shop-note {
-  font-size: 11px;
+.shop-insta {
+  display: block;
+  font-size: 10.5px;
   line-height: 1.5;
-  color: #666;
+  color: #777;
+  word-break: break-all;
 }
+
+.shop-insta:hover { color: var(--red); }
 
 .shop-zone {
   display: inline-block;
-  margin-top: 6px;
+  margin-top: 7px;
   border: 1.2px solid var(--red);
+  background: var(--white);
   color: var(--red);
   border-radius: 100px;
+  font-family: 'M PLUS Rounded 1c', 'Zen Maru Gothic', sans-serif;
   font-size: 10px;
   font-weight: 800;
-  padding: 2px 8px;
+  padding: 3px 9px;
+  cursor: pointer;
 }
+
+.shop-zone:hover { background: var(--red); color: var(--white); }
 
 .list-note {
   margin-top: 14px;
@@ -871,7 +934,7 @@ p.organizer-label {
         <div class="highlight">
           <span class="highlight-no">2</span>
           <div class="highlight-body">
-            <h3>約60店舗が大集合。</h3>
+            <h3>38店舗が大集合。</h3>
             <p>フードトラック、ワークショップ、こだわりの雑貨。歩くだけでも楽しい規模感です。</p>
           </div>
         </div>
@@ -891,79 +954,29 @@ p.organizer-label {
         <span class="sec-label-en">ZONING MAP</span>
         <span class="sec-label-ja">会場マップ</span>
       </div>
-      <p class="zonemap-hint">数字にカーソル／タップで詳細がひらきます</p>
+      <p class="zonemap-hint">番号にカーソル／タップでお店がわかります</p>
 
-      <div class="zonemap-wrap">
-        <svg class="zonemap" id="zonemap" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ASOBO!! 会場ゾーニングマップ">
-          <rect x="0" y="0" width="400" height="500" fill="#fdfdfd"/>
-
-          <!-- みんなの広場カオカオ（上部の広場） -->
-          <rect x="22" y="30" width="356" height="212" rx="18" fill="#f6f6f6"/>
-          <text x="200" y="22" fill="#bbbbbb" font-size="10.5" font-weight="700" text-anchor="middle" font-family="'M PLUS Rounded 1c', sans-serif">みんなの広場カオカオ</text>
-
-          <!-- せせらぎの並木テニテオ（下部の並木道） -->
-          <path d="M40 268 C 120 258, 150 300, 200 300 C 250 300, 290 262, 360 272 L 360 452 C 290 442, 250 470, 200 470 C 150 470, 120 434, 40 444 Z" fill="#f6f6f6"/>
-          <text x="200" y="490" fill="#bbbbbb" font-size="10.5" font-weight="700" text-anchor="middle" font-family="'M PLUS Rounded 1c', sans-serif">せせらぎの並木テニテオ</text>
-
-          <!-- ZONE 1 : FOOD -->
-          <g class="zone" data-zone="1" tabindex="0" role="button" aria-label="ゾーン1 フードエリア">
-            <rect class="zone-shape" x="40" y="48" width="150" height="88" rx="14"/>
-            <circle class="zone-pin" cx="70" cy="76" r="15"/>
-            <text class="zone-no" x="70" y="76">1</text>
-            <text class="zone-name" x="115" y="120">FOOD</text>
-          </g>
-
-          <!-- ZONE 2 : KIDS -->
-          <g class="zone" data-zone="2" tabindex="0" role="button" aria-label="ゾーン2 キッズあそび場">
-            <rect class="zone-shape" x="212" y="48" width="146" height="88" rx="14"/>
-            <circle class="zone-pin" cx="242" cy="76" r="15"/>
-            <text class="zone-no" x="242" y="76">2</text>
-            <text class="zone-name" x="285" y="120">KIDS</text>
-          </g>
-
-          <!-- ZONE 3 : STAGE -->
-          <g class="zone" data-zone="3" tabindex="0" role="button" aria-label="ゾーン3 ステージ">
-            <rect class="zone-shape" x="40" y="154" width="150" height="72" rx="14"/>
-            <circle class="zone-pin" cx="70" cy="180" r="15"/>
-            <text class="zone-no" x="70" y="180">3</text>
-            <text class="zone-name" x="115" y="212">STAGE</text>
-          </g>
-
-          <!-- ZONE 4 : INFO -->
-          <g class="zone" data-zone="4" tabindex="0" role="button" aria-label="ゾーン4 総合案内">
-            <rect class="zone-shape" x="212" y="154" width="146" height="72" rx="14"/>
-            <circle class="zone-pin" cx="242" cy="180" r="15"/>
-            <text class="zone-no" x="242" y="180">4</text>
-            <text class="zone-name" x="285" y="212">INFO</text>
-          </g>
-
-          <!-- ZONE 5 : WORKSHOP -->
-          <g class="zone" data-zone="5" tabindex="0" role="button" aria-label="ゾーン5 ワークショップ">
-            <rect class="zone-shape" x="52" y="300" width="132" height="76" rx="14"/>
-            <circle class="zone-pin" cx="82" cy="326" r="15"/>
-            <text class="zone-no" x="82" y="326">5</text>
-            <text class="zone-name" x="118" y="362">WORKSHOP</text>
-          </g>
-
-          <!-- ZONE 6 : SHOP -->
-          <g class="zone" data-zone="6" tabindex="0" role="button" aria-label="ゾーン6 ショップ">
-            <rect class="zone-shape" x="212" y="330" width="132" height="76" rx="14"/>
-            <circle class="zone-pin" cx="242" cy="356" r="15"/>
-            <text class="zone-no" x="242" y="356">6</text>
-            <text class="zone-name" x="278" y="392">SHOP</text>
-          </g>
-        </svg>
+      <div class="mapview" id="mapview">
+        <div class="mapstage" id="mapstage">
+          <img src="../../../asobo-map.png" alt="ASOBO!! 会場マップ" id="mapimg">
+          <!-- ピンは JS が SHOPS から生成 -->
+        </div>
+        <div class="map-ctrl">
+          <button type="button" id="mapZoomIn" aria-label="拡大">＋</button>
+          <button type="button" id="mapZoomOut" aria-label="縮小">−</button>
+          <button type="button" class="map-ctrl-reset" id="mapReset" aria-label="全体表示に戻す">全体</button>
+        </div>
       </div>
 
       <div class="zone-detail is-empty" id="zoneDetail" aria-live="polite">
         <div class="zone-detail-head">
           <span class="zone-detail-no" id="zdNo"></span>
           <div>
-            <span class="zone-detail-en" id="zdEn">SELECT A ZONE</span>
+            <span class="zone-detail-en" id="zdEn">SELECT A SHOP</span>
             <span class="zone-detail-title" id="zdTitle">気になる番号をえらんでね</span>
           </div>
         </div>
-        <p class="zone-detail-text" id="zdText">マップの数字にカーソルを合わせる（スマホはタップ）と、そのエリアが大きくなって内容が表示されます。</p>
+        <p class="zone-detail-text" id="zdText">マップの番号にカーソルを合わせる（スマホはタップ）とお店の名前が出ます。マップはピンチ／ドラッグで拡大・移動できます。</p>
         <div class="zone-detail-tags" id="zdTags"></div>
       </div>
 
@@ -1120,68 +1133,59 @@ p.organizer-label {
 
 <script>
 /* =========================================================
-   1. ゾーニングマップのデータ（ここを書き換えれば内容が変わります）
-   ========================================================= */
-const ZONES = {
-  1: {
-    en: 'FOOD',
-    title: 'フードエリア',
-    text: 'キッチンカーとフードトラックが並ぶエリア。片手で食べられるものから、しっかりごはんまで。広場のベンチや芝生でそのまま食べられます。',
-    tags: ['キッチンカー', 'スイーツ', 'ドリンク']
-  },
-  2: {
-    en: 'KIDS',
-    title: 'キッズあそび場',
-    text: '小さな子どもが思いきり体を動かせるあそびのエリア。保護者の方が見守りやすいよう、まわりをぐるっと開けたレイアウトにしています。',
-    tags: ['あそび', '未就学児OK', '無料']
-  },
-  3: {
-    en: 'STAGE',
-    title: 'ステージ',
-    text: '音楽ライブやパフォーマンス、キッズ向けのステージ企画を行うエリア。タイムテーブルは決まり次第このページで公開します。',
-    tags: ['ライブ', 'パフォーマンス']
-  },
-  4: {
-    en: 'INFO',
-    title: '総合案内',
-    text: '迷子・落とし物・救護のご相談はこちら。会場マップの配布もしています。困ったらまずはここへ。',
-    tags: ['受付', '迷子', '救護']
-  },
-  5: {
-    en: 'WORKSHOP',
-    title: 'ワークショップ',
-    text: 'つくる時間を楽しむエリア。木陰の並木道の下で、親子でも大人ひとりでも参加できるワークショップが並びます。',
-    tags: ['体験', '親子OK', '当日受付']
-  },
-  6: {
-    en: 'SHOP',
-    title: 'ショップ',
-    text: '雑貨・洋服・こだわりの日用品など、暮らしを楽しくするお店が集まるエリア。大人がゆっくり見てまわれる並びにしています。',
-    tags: ['雑貨', 'こども服', 'クラフト']
-  }
-};
-
-/* =========================================================
-   2. 出店者データ（cat: FOOD / WORKSHOP / SHOP / KIDS）
-      img を入れると写真、無ければ COMING SOON 表示
+   1. 出店者データ（マップのピンと一覧の共通ソース）
+      no    : マップ上の表示番号
+      pins  : 実際のピン。n=番号、x/y=マップ画像に対する位置(%)
+      cat   : 'キッチンカー' | 'ワークショップ' | '物販' | null(未確定)
+      insta : Instagram のアカウント名（@ なし）。複数可
+      img   : 店舗画像のパス（入れるとサムネイルが写真に変わる）
    ========================================================= */
 const SHOPS = [
-  { name: '出店者名 Coming Soon', cat: 'FOOD',     note: '準備中', zone: 1 },
-  { name: '出店者名 Coming Soon', cat: 'FOOD',     note: '準備中', zone: 1 },
-  { name: '出店者名 Coming Soon', cat: 'WORKSHOP', note: '準備中', zone: 5 },
-  { name: '出店者名 Coming Soon', cat: 'WORKSHOP', note: '準備中', zone: 5 },
-  { name: '出店者名 Coming Soon', cat: 'SHOP',     note: '準備中', zone: 6 },
-  { name: '出店者名 Coming Soon', cat: 'SHOP',     note: '準備中', zone: 6 },
-  { name: '出店者名 Coming Soon', cat: 'KIDS',     note: '準備中', zone: 2 },
-  { name: '出店者名 Coming Soon', cat: 'KIDS',     note: '準備中', zone: 2 }
+  { no: 1,  pins: [{ n: 1,  x: 35.64, y: 39.78 }], name: 'えほんのこや',                     cat: 'ワークショップ', insta: ['ehonnokoya', '__58.okashi'] },
+  { no: 2,  pins: [{ n: 2,  x: 31.97, y: 39.06 }], name: 'Lima♡COCO',                       cat: 'ワークショップ', insta: ['takachan823'] },
+  { no: 3,  pins: [{ n: 3,  x: 28.21, y: 37.73 }], name: 'やさしい魔女の部屋',               cat: null,             insta: [] },
+  { no: 4,  pins: [{ n: 4,  x: 24.53, y: 38.45 }], name: '日本こども色彩協会',               cat: 'ワークショップ', insta: ['iroha.kirakira', 't_yuri81'] },
+  { no: 5,  pins: [{ n: 5,  x: 22.82, y: 43.05 }], name: 'モンテッソーリ子どもの家陽だまり', cat: 'ワークショップ', insta: ['maria_monte_inuyama'] },
+  { no: 6,  pins: [{ n: 6,  x: 28.29, y: 53.32 }], name: 'Kleines Glück（クライネス グリュック）', cat: '物販',    insta: ['kleinesgluck.aa'] },
+  { no: 7,  pins: [{ n: 7,  x: 31.97, y: 52.96 }], name: 'カロンファクトリー',               cat: 'キッチンカー',   insta: ['calon_factory_foodtruck.new'] },
+  { no: 8,  pins: [{ n: 8,  x: 35.64, y: 53.93 }], name: 'sa made cafe',                     cat: 'キッチンカー',   insta: ['samadecafe.new'] },
+  { no: 9,  pins: [{ n: 9,  x: 42.99, y: 49.33 }], name: 'あそびとアートと空と月',           cat: 'ワークショップ', insta: ['asobi.art.soratotsuki'] },
+  { no: 10, pins: [{ n: 10, x: 46.41, y: 49.46 }], name: 'あ 〜折染ワークショップ〜',         cat: 'ワークショップ', insta: ['someworks.a'] },
+  { no: 11, pins: [{ n: 11, x: 42.99, y: 54.41 }], name: 'ヤマダ似顔絵店',                   cat: '物販',           insta: ['yamada_takae'] },
+  { no: 12, pins: [{ n: 12, x: 46.50, y: 54.41 }], name: 'リメイクデニム Tumugu',            cat: 'ワークショップ', insta: ['tumugu.0'] },
+  { no: 13, pins: [{ n: 13, x: 57.26, y: 37.85 }], name: 'merry merry life',                 cat: '物販',           insta: ['merry.merry.life'] },
+  { no: 14, pins: [{ n: 14, x: 55.47, y: 42.32 }], name: 'piccoli pattini',                  cat: 'ワークショップ', insta: ['piccoli.pattini'] },
+  { no: 15, pins: [{ n: 15, x: 58.97, y: 42.32 }], name: 'cafe shunka',                      cat: '物販',           insta: ['cafe_shunka'] },
+  { no: 16, pins: [{ n: 16, x: 54.10, y: 52.72 }], name: 'こっことなんな',                   cat: '物販',           insta: ['koala_to_cat'] },
+  { no: 17, pins: [{ n: 17, x: 57.69, y: 52.72 }], name: 'かっちゃん さっちゃん',            cat: '物販',           insta: [] },
+  { no: 18, pins: [{ n: 18, x: 54.10, y: 57.68 }], name: 'mummo.',                           cat: '物販',           insta: ['_mummo._'] },
+  { no: 19, pins: [{ n: 19, x: 57.61, y: 57.68 }], name: 'Tomori',                           cat: '物販',           insta: ['tomori_curry'] },
+  { no: 20, pins: [{ n: 20, x: 51.79, y: 65.05 }], name: 'Rosso Caccini',                    cat: 'キッチンカー',   insta: ['pizza_prc'] },
+  { no: 21, pins: [{ n: 21, x: 54.19, y: 68.80 }], name: 'ヒマラヤ',                         cat: 'キッチンカー',   insta: [] },
+  { no: 22, pins: [{ n: 22, x: 56.32, y: 72.91 }], name: 'home_kitchencar_',                 cat: 'キッチンカー',   insta: ['home_kitchencar_'] },
+  { no: 23, pins: [{ n: 23, x: 73.42, y: 30.11 }], name: 'Agatto Handmade Craft',            cat: null,             insta: [] },
+  { no: 24, pins: [{ n: 24, x: 76.58, y: 32.89 }], name: 'soso antique',                     cat: null,             insta: [] },
+  { no: 25, pins: [{ n: 25, x: 69.32, y: 36.52 }], name: 'matsuri',                          cat: '物販',           insta: ['matsuri1881'] },
+  { no: 26, pins: [{ n: 26, x: 66.15, y: 39.18 }], name: 'meguru（low waste shop Gifu）',    cat: '物販',           insta: ['meguru_gifu'] },
+  { no: 27, pins: [{ n: 27, x: 69.40, y: 41.72 }], name: 'ゥさん食堂',                       cat: '物販',           insta: ['usansyokudo'] },
+  { no: 28, pins: [{ n: 28, x: 70.60, y: 54.41 }], name: '86coffee',                         cat: 'キッチンカー',   insta: ['86coffee__'] },
+  { no: 29, pins: [{ n: 29, x: 73.68, y: 51.87 }], name: 'おやこ似顔絵',                     cat: '物販',           insta: ['kyoko06061963'] },
+  { no: 30, pins: [{ n: 30, x: 76.84, y: 49.58 }], name: 'neaz eyewear（メガネ工房AZ）',     cat: '物販',           insta: ['meganekoubouaz'] },
+  { no: 31, pins: [{ n: 31, x: 70.94, y: 59.61 }], name: 'うさぎ村',                         cat: '物販',           insta: ['usagimura2021'] },
+  { no: 32, pins: [{ n: 32, x: 73.93, y: 57.32 }], name: 'ippo',                             cat: 'ワークショップ', insta: ['ippo_official_balloon'] },
+  { no: 33, pins: [{ n: 33, x: 77.18, y: 55.02 }], name: '一般社団法人 RuFL',                cat: '物販',           insta: ['rufl_japan'] },
+  { no: 34, pins: [{ n: 34, x: 80.26, y: 52.72 }], name: 'calme.',                           cat: '物販',           insta: ['calme.329'] },
+  { no: '35&36', pins: [{ n: 35, x: 90.94, y: 50.54 }, { n: 36, x: 94.44, y: 49.70 }],
+                                                   name: 'CHARO 〜自転車に乗るヒゲのおじさん〜', cat: 'ワークショップ', insta: ['cheki_charo3939'] },
+  { no: 37, pins: [{ n: 37, x: 79.23, y: 63.85 }], name: 'SOWA CURRY',                       cat: 'キッチンカー',   insta: ['sowacurry116'] },
+  { no: 38, pins: [{ n: 38, x: 78.03, y: 68.68 }], name: 'イルソーレ',                       cat: 'キッチンカー',   insta: ['ilsole_wizard.of.flour'] }
 ];
 
 const CATS = [
-  { key: 'ALL',      label: 'すべて' },
-  { key: 'FOOD',     label: 'フード' },
-  { key: 'WORKSHOP', label: 'ワークショップ' },
-  { key: 'SHOP',     label: 'ショップ' },
-  { key: 'KIDS',     label: 'キッズ' }
+  { key: 'ALL',            label: 'すべて' },
+  { key: 'キッチンカー',   label: 'キッチンカー' },
+  { key: 'ワークショップ', label: 'ワークショップ' },
+  { key: '物販',           label: '物販' }
 ];
 
 /* =========================================================
@@ -1196,72 +1200,201 @@ const TIMETABLE = [
   { time: '16:00', title: 'CLOSE',          desc: '閉場。ゴミはお持ち帰りにご協力ください。' }
 ];
 
+/* 共通ヘルパー */
+const esc = s => String(s).replace(/[&<>"']/g, c => (
+  { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
+));
+const shopByPin = new Map();
+SHOPS.forEach(s => s.pins.forEach(p => shopByPin.set(p.n, s)));
+
 /* =========================================================
-   ゾーニングマップの挙動
+   会場マップ：ピンチ／ドラッグ拡大＋番号タップで店舗表示
    ========================================================= */
-(() => {
-  const svg     = document.getElementById('zonemap');
+const mapApi = (() => {
+  const view    = document.getElementById('mapview');
+  const stage   = document.getElementById('mapstage');
+  const img     = document.getElementById('mapimg');
   const detail  = document.getElementById('zoneDetail');
   const zdNo    = document.getElementById('zdNo');
   const zdEn    = document.getElementById('zdEn');
   const zdTitle = document.getElementById('zdTitle');
   const zdText  = document.getElementById('zdText');
   const zdTags  = document.getElementById('zdTags');
-  if (!svg) return;
+  if (!view || !stage) return null;
 
-  const zones = svg.querySelectorAll('.zone');
-  let pinned = null; // タップ／クリックで固定したゾーン
+  const MIN = 1, MAX = 5;
+  let scale = 1, tx = 0, ty = 0;
+  let pinned = null;
 
-  function render(no) {
-    const z = ZONES[no];
-    if (!z) return;
+  /* --- ピンを生成 --- */
+  SHOPS.forEach(s => s.pins.forEach(p => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'pin';
+    b.dataset.pin = p.n;
+    b.style.left = p.x + '%';
+    b.style.top  = p.y + '%';
+    b.setAttribute('aria-label', p.n + '番 ' + s.name);
+    stage.appendChild(b);
+  }));
+  const pins = [...stage.querySelectorAll('.pin')];
+
+  /* --- 詳細カード --- */
+  function render(n) {
+    const s = shopByPin.get(n);
+    if (!s) return;
     detail.classList.remove('is-empty');
-    zdNo.textContent    = no;
-    zdEn.textContent    = z.en;
-    zdTitle.textContent = z.title;
-    zdText.textContent  = z.text;
-    zdTags.innerHTML    = '';
-    (z.tags || []).forEach(t => {
-      const s = document.createElement('span');
-      s.textContent = t;
-      zdTags.appendChild(s);
+    zdNo.textContent    = s.no;
+    zdEn.textContent    = s.cat || 'CATEGORY TBA';
+    zdTitle.textContent = s.name;
+    zdText.textContent  = s.cat
+      ? s.cat + 'として出店します。'
+      : 'カテゴリーは調整中です。';
+    zdTags.innerHTML = '';
+    s.insta.forEach(h => {
+      const a = document.createElement('a');
+      a.href = 'https://www.instagram.com/' + h;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.textContent = '@' + h;
+      zdTags.appendChild(a);
     });
   }
 
-  function activate(no) {
-    svg.classList.add('has-active');
-    zones.forEach(g => g.classList.toggle('is-active', g.dataset.zone === String(no)));
-    render(no);
+  function activate(n) {
+    pins.forEach(b => b.classList.toggle('is-active', b.dataset.pin === String(n)));
+    render(n);
   }
 
   function clearActive() {
     if (pinned) return;
-    svg.classList.remove('has-active');
-    zones.forEach(g => g.classList.remove('is-active'));
+    pins.forEach(b => b.classList.remove('is-active'));
   }
 
-  zones.forEach(g => {
-    const no = g.dataset.zone;
-    g.addEventListener('mouseenter', () => { if (!pinned) activate(no); });
-    g.addEventListener('focus',      () => { if (!pinned) activate(no); });
-    g.addEventListener('click', () => {
-      if (pinned === no) {   // 同じゾーンをもう一度 → 固定解除
-        pinned = null;
-        clearActive();
-      } else {
-        pinned = no;
-        activate(no);
-      }
-    });
-    g.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        g.dispatchEvent(new MouseEvent('click'));
-      }
-    });
+  /* --- 拡大・移動 --- */
+  function baseH() { return img.offsetHeight || view.clientWidth / 1.4142; }
+
+  function apply() {
+    const vw = view.clientWidth, vh = view.clientHeight;
+    const sw = vw * scale, sh = baseH() * scale;
+    tx = sw <= vw ? (vw - sw) / 2 : Math.min(0, Math.max(vw - sw, tx));
+    ty = sh <= vh ? (vh - sh) / 2 : Math.min(0, Math.max(vh - sh, ty));
+    stage.style.transform = 'translate(' + tx + 'px,' + ty + 'px) scale(' + scale + ')';
+  }
+
+  function zoomAt(factor, cx, cy) {
+    const ns = Math.min(MAX, Math.max(MIN, scale * factor));
+    const k = ns / scale;
+    tx = cx - (cx - tx) * k;
+    ty = cy - (cy - ty) * k;
+    scale = ns;
+    apply();
+  }
+
+  function centerOn(xPct, yPct, s) {
+    scale = Math.min(MAX, Math.max(MIN, s));
+    tx = view.clientWidth / 2  - (xPct / 100) * view.clientWidth * scale;
+    ty = view.clientHeight / 2 - (yPct / 100) * baseH() * scale;
+    apply();
+  }
+
+  /* --- ポインタ操作（1本=ドラッグ / 2本=ピンチ） --- */
+  const pts = new Map();
+  let startDist = 0, startScale = 1, moved = 0, dragged = false;
+
+  const pairDist = () => {
+    const [a, b] = [...pts.values()];
+    return Math.hypot(a.x - b.x, a.y - b.y);
+  };
+  const pairMid = () => {
+    const [a, b] = [...pts.values()];
+    const r = view.getBoundingClientRect();
+    return { x: (a.x + b.x) / 2 - r.left, y: (a.y + b.y) / 2 - r.top };
+  };
+
+  view.addEventListener('pointerdown', e => {
+    pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    moved = 0;
+    dragged = false;
+    if (pts.size === 1) view.classList.add('is-panning');
+    if (pts.size === 2) { startDist = pairDist(); startScale = scale; }
+    view.setPointerCapture(e.pointerId);
   });
 
-  svg.addEventListener('mouseleave', clearActive);
+  view.addEventListener('pointermove', e => {
+    const prev = pts.get(e.pointerId);
+    if (!prev) return;
+    const dx = e.clientX - prev.x, dy = e.clientY - prev.y;
+    pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
+
+    if (pts.size === 1) {
+      moved += Math.abs(dx) + Math.abs(dy);
+      if (moved > 6) dragged = true;
+      tx += dx; ty += dy;
+      apply();
+    } else if (pts.size === 2 && startDist > 0) {
+      dragged = true;
+      const m = pairMid();
+      const ns = Math.min(MAX, Math.max(MIN, startScale * (pairDist() / startDist)));
+      const k = ns / scale;
+      tx = m.x - (m.x - tx) * k;
+      ty = m.y - (m.y - ty) * k;
+      scale = ns;
+      apply();
+    }
+  });
+
+  ['pointerup', 'pointercancel'].forEach(ev =>
+    view.addEventListener(ev, e => {
+      pts.delete(e.pointerId);
+      if (pts.size === 0) view.classList.remove('is-panning');
+      if (pts.size < 2) startDist = 0;
+    })
+  );
+
+  view.addEventListener('wheel', e => {
+    e.preventDefault();
+    const r = view.getBoundingClientRect();
+    zoomAt(e.deltaY < 0 ? 1.18 : 1 / 1.18, e.clientX - r.left, e.clientY - r.top);
+  }, { passive: false });
+
+  /* --- ピンの操作 --- */
+  pins.forEach(b => {
+    const n = Number(b.dataset.pin);
+    b.addEventListener('mouseenter', () => { if (!pinned) activate(n); });
+    b.addEventListener('focus',      () => { if (!pinned) activate(n); });
+    b.addEventListener('click', e => {
+      if (dragged) { e.preventDefault(); return; }  // ドラッグ後の誤タップを無視
+      if (pinned === n) { pinned = null; clearActive(); }
+      else { pinned = n; activate(n); }
+    });
+  });
+  view.addEventListener('mouseleave', clearActive);
+
+  document.getElementById('mapZoomIn').addEventListener('click',
+    () => zoomAt(1.5, view.clientWidth / 2, view.clientHeight / 2));
+  document.getElementById('mapZoomOut').addEventListener('click',
+    () => zoomAt(1 / 1.5, view.clientWidth / 2, view.clientHeight / 2));
+  document.getElementById('mapReset').addEventListener('click', () => {
+    scale = 1; tx = 0; ty = 0; pinned = null;
+    clearActive();
+    apply();
+  });
+
+  if (img.complete) apply(); else img.addEventListener('load', apply);
+  window.addEventListener('resize', apply);
+
+  /* 一覧から「マップで見る」で呼ぶ */
+  return {
+    focus(n) {
+      const p = shopByPin.get(n) && shopByPin.get(n).pins.find(q => q.n === n);
+      if (!p) return;
+      centerOn(p.x, p.y, 2.6);
+      pinned = n;
+      activate(n);
+      document.getElementById('map').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 })();
 
 /* =========================================================
@@ -1273,10 +1406,6 @@ const TIMETABLE = [
   if (!grid || !filter) return;
 
   let current = 'ALL';
-
-  const esc = s => String(s).replace(/[&<>"']/g, c => (
-    { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
-  ));
 
   CATS.forEach(c => {
     const b = document.createElement('button');
@@ -1301,18 +1430,28 @@ const TIMETABLE = [
       const thumb = s.img
         ? '<img src="' + esc(s.img) + '" alt="' + esc(s.name) + '" loading="lazy">'
         : '<span class="shop-thumb-ph">COMING SOON</span>';
+      const insta = s.insta.map(h =>
+        '<a class="shop-insta" href="https://www.instagram.com/' + esc(h) +
+        '" target="_blank" rel="noopener noreferrer">@' + esc(h) + '</a>').join('');
       card.innerHTML =
         '<div class="shop-thumb">' + thumb +
-          '<span class="shop-cat">' + esc(s.cat) + '</span>' +
+          '<span class="shop-cat">' + esc(s.cat || '準備中') + '</span>' +
+          '<span class="shop-no">' + esc(s.no) + '</span>' +
         '</div>' +
         '<div class="shop-body">' +
           '<p class="shop-name">' + esc(s.name) + '</p>' +
-          (s.note ? '<p class="shop-note">' + esc(s.note) + '</p>' : '') +
-          (s.zone ? '<span class="shop-zone">ZONE ' + esc(s.zone) + '</span>' : '') +
+          insta +
+          '<button type="button" class="shop-zone" data-pin="' + s.pins[0].n + '">' +
+            'マップで見る</button>' +
         '</div>';
       grid.appendChild(card);
     });
   }
+
+  grid.addEventListener('click', e => {
+    const btn = e.target.closest('.shop-zone');
+    if (btn && mapApi) mapApi.focus(Number(btn.dataset.pin));
+  });
 
   draw();
 })();
