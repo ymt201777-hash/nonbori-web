@@ -210,6 +210,22 @@ a {
   margin-bottom: 18px;
 }
 
+/* キャラクター付きの見出し */
+.sec-label-char {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.sec-char {
+  flex: 0 0 auto;
+  width: 62px;
+  height: auto;
+}
+
+.sec-label-char > div { flex: 0 0 auto; }
+
 .sec-label-en {
   display: block;
   color: var(--red);
@@ -276,46 +292,66 @@ a {
   font-weight: 800;
 }
 
-/* 見どころカード（赤ブロックを左右交互に画面端まで伸ばす） */
+/* 見どころカード
+   デザイン素材(ASOBO_出展者用web_制作-16.svg)に合わせている。
+   ・カードは左右いっぱい。片端は角なし、もう片端は高さの半分＝半円
+   ・番号は白い丸に赤文字 */
 .highlights {
+  position: relative;
   display: grid;
-  gap: 18px;
-  margin-top: 26px;
+  gap: 27px;               /* 素材の間隔 27.07px */
+  margin-top: 62px;        /* 上のキャラクターぶんを空ける */
+}
+
+/* カード1の上に顔を出すキャラクター。下半分はカードの裏に隠れる */
+.highlights::before {
+  content: "";
+  position: absolute;
+  top: -48px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 116px;
+  height: 84px;
+  background: url("../../../asobo-char-highlight.svg") no-repeat center / contain;
+  pointer-events: none;
 }
 
 .highlight {
+  position: relative;
+  z-index: 1;              /* キャラクターより前面に置いて下半分を隠す */
   display: flex;
   gap: 14px;
   align-items: center;
   background: var(--red);
   color: var(--white);
-  padding: 18px 18px;
+  /* セクションの左右 padding(20px) を打ち消して端まで伸ばす */
+  margin-left: -20px;
+  margin-right: -20px;
+  padding: 20px 26px;
   text-align: center;
+  border-radius: 999px;
 }
 
-/* 奇数は左端まで、偶数は右端まで。セクションの左右 padding(20px) を打ち消す */
+/* 奇数は左が角、右が半円。偶数はその逆 */
 .highlight:nth-child(odd) {
-  margin-left: -20px;
-  padding-left: 22px;
-  border-radius: 0 46px 46px 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
 .highlight:nth-child(even) {
-  margin-right: -20px;
-  padding-right: 22px;
-  border-radius: 46px 0 0 46px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
   flex-direction: row-reverse;
 }
 
 .highlight-no {
   flex: 0 0 auto;
-  width: 46px;
-  height: 46px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  border: 3px solid var(--white);
-  background: transparent;
-  color: var(--white);
-  font-size: 24px;
+  background: var(--white);
+  color: var(--red);
+  font-size: 28px;
   font-weight: 800;
   line-height: 1;
   display: flex;
@@ -1190,9 +1226,12 @@ p.organizer-label {
 
     <!-- ===== ゾーニングマップ ===== -->
     <section id="map" class="section">
-      <div class="sec-label">
-        <span class="sec-label-en">ZONING MAP</span>
-        <span class="sec-label-ja">会場マップ</span>
+      <div class="sec-label sec-label-char">
+        <div>
+          <span class="sec-label-en">ZONING MAP</span>
+          <span class="sec-label-ja">会場マップ</span>
+        </div>
+        <img class="sec-char" src="../../../asobo-char-map.svg" alt="">
       </div>
       <p class="zonemap-hint">番号にカーソル / タップするとお店がわかるよ！</p>
 
@@ -1227,9 +1266,12 @@ p.organizer-label {
 
     <!-- ===== 出店者・コンテンツ ===== -->
     <section id="shops" class="section">
-      <div class="sec-label">
-        <span class="sec-label-en">SHOPS &amp; CONTENTS</span>
-        <span class="sec-label-ja">出店者・コンテンツ</span>
+      <div class="sec-label sec-label-char">
+        <img class="sec-char" src="../../../asobo-char-shops.svg" alt="">
+        <div>
+          <span class="sec-label-en">SHOPS &amp; CONTENTS</span>
+          <span class="sec-label-ja">出店者・コンテンツ</span>
+        </div>
       </div>
 
       <div class="cat-filter" id="catFilter"></div>
@@ -1243,9 +1285,12 @@ p.organizer-label {
 
     <!-- ===== アクセス ===== -->
     <section id="access" class="section">
-      <div class="sec-label">
-        <span class="sec-label-en">ACCESS</span>
-        <span class="sec-label-ja">アクセス</span>
+      <div class="sec-label sec-label-char">
+        <div>
+          <span class="sec-label-en">ACCESS</span>
+          <span class="sec-label-ja">アクセス</span>
+        </div>
+        <img class="sec-char" src="../../../asobo-char-access.svg" alt="">
       </div>
 
       <iframe
