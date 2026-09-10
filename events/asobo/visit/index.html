@@ -241,9 +241,7 @@ a {
 /* 開催概要 */
 .event-facts {
   margin-top: 18px;
-  border: 2px solid var(--red);
-  border-radius: 16px;
-  padding: 16px 14px;
+  padding: 4px 2px;
 }
 
 .event-facts dl {
@@ -278,45 +276,67 @@ a {
   font-weight: 800;
 }
 
-/* 見どころカード */
+/* 見どころカード（赤ブロックを左右交互に画面端まで伸ばす） */
 .highlights {
   display: grid;
-  gap: 12px;
-  margin-top: 20px;
+  gap: 18px;
+  margin-top: 26px;
 }
 
 .highlight {
   display: flex;
-  gap: 12px;
-  align-items: flex-start;
-  background: var(--gray);
-  border-radius: 14px;
-  padding: 14px;
+  gap: 14px;
+  align-items: center;
+  background: var(--red);
+  color: var(--white);
+  padding: 18px 18px;
+  text-align: center;
+}
+
+/* 奇数は左端まで、偶数は右端まで。セクションの左右 padding(20px) を打ち消す */
+.highlight:nth-child(odd) {
+  margin-left: -20px;
+  padding-left: 22px;
+  border-radius: 0 46px 46px 0;
+}
+
+.highlight:nth-child(even) {
+  margin-right: -20px;
+  padding-right: 22px;
+  border-radius: 46px 0 0 46px;
+  flex-direction: row-reverse;
 }
 
 .highlight-no {
   flex: 0 0 auto;
-  width: 26px;
-  height: 26px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
-  background: var(--red);
+  border: 3px solid var(--white);
+  background: transparent;
   color: var(--white);
-  font-size: 12px;
+  font-size: 24px;
   font-weight: 800;
+  line-height: 1;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+.highlight-body { flex: 1 1 auto; }
+
 .highlight-body h3 {
-  font-size: 14px;
+  font-size: 15.5px;
   font-weight: 800;
-  margin-bottom: 4px;
+  line-height: 1.4;
+  margin-bottom: 7px;
 }
 
-.highlight-body p {
+/* .section p に負けないよう詳細度を上げる */
+.section .highlight-body p {
   font-size: 12.5px;
-  line-height: 1.7;
+  line-height: 1.75;
+  color: var(--white);
 }
 
 /* ABOUT タグライン（SVG背景に白文字オーバーレイ） */
@@ -1147,22 +1167,22 @@ p.organizer-label {
         <div class="highlight">
           <span class="highlight-no">1</span>
           <div class="highlight-body">
-            <h3>子どもも大人も、どっちも主役。</h3>
-            <p>"付き添い"で終わらない一日。大人がときめくお店と、子どもが夢中になるあそび場が同じ場所に並びます。</p>
+            <h3>子どもも大人も、どっちも主役！</h3>
+            <p>付き添いで終わらない1日！大人がトキめくお店と、子どもが夢中になれるあそび場が同じ場所に並びます！</p>
           </div>
         </div>
         <div class="highlight">
           <span class="highlight-no">2</span>
           <div class="highlight-body">
-            <h3>37店舗が大集合。</h3>
-            <p>フードトラック、ワークショップ、こだわりの雑貨。歩くだけでも楽しい規模感です。</p>
+            <h3>37店舗が大集合！</h3>
+            <p>フードトラック、ワークショップ、こだわりの雑貨など…<br>歩くだけでも楽しい空間です！</p>
           </div>
         </div>
         <div class="highlight">
           <span class="highlight-no">3</span>
           <div class="highlight-body">
-            <h3>入場無料・手ぶらでOK。</h3>
-            <p>入場料はかかりません。木陰の並木道でひと休みしながら、のんびり過ごせます。</p>
+            <h3>入場無料！手ぶらでオッケー！</h3>
+            <p>入場料はかかりません！<br>木陰の並木道でひと休みしながら、のんびーり過ごせます！</p>
           </div>
         </div>
       </div>
@@ -1174,7 +1194,7 @@ p.organizer-label {
         <span class="sec-label-en">ZONING MAP</span>
         <span class="sec-label-ja">会場マップ</span>
       </div>
-      <p class="zonemap-hint">番号にカーソル／タップでお店がわかります</p>
+      <p class="zonemap-hint">番号にカーソル / タップするとお店がわかるよ！</p>
 
       <div class="mapview" id="mapview">
         <div class="mapstage" id="mapstage">
