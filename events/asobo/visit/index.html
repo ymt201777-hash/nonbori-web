@@ -101,79 +101,58 @@ a {
   padding: 30px 20px;
 }
 
-/* PC: SVG ベースのナビ（楕円の上に白文字オーバーレイ） */
-.right-nav {
-  position: relative;
-  width: 220px;
-  max-width: 100%;
+/* PC右メニュー（見出しと同じ体裁の3項目） */
+.side-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  width: 100%;
 }
 
-.right-nav-bg {
-  display: block;
-  width: 100%;
+.side-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: 'M PLUS Rounded 1c', 'Zen Maru Gothic', sans-serif;
+  text-align: left;
+  transition: opacity .15s;
+}
+
+.side-nav-item:hover { opacity: .75; }
+
+.side-nav-char {
+  flex: 0 0 auto;
+  /* パネル幅が狭い画面でも収まるように可変にする */
+  width: clamp(48px, 5.2vw, 76px);
   height: auto;
 }
 
-.right-btn {
-  position: absolute;
-  left: 2.25%;
-  width: 95.5%;
-  height: 6.2%;
-  background: transparent;
-  border: none;
-  color: var(--white);
-  font-family: 'M PLUS Rounded 1c', 'Zen Maru Gothic', sans-serif;
-  font-weight: 700;
-  font-size: 13px;
-  cursor: pointer;
+.side-nav-text { min-width: 0; }
+
+.side-nav-en {
+  display: block;
+  color: var(--red);
+  font-size: clamp(10px, 0.9vw, 12.5px);
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  margin-bottom: 3px;
   white-space: nowrap;
-  padding: 0;
-  letter-spacing: 0.02em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
 }
 
-.right-btn-1 { top: 47.3%; }
-.right-btn-2 { top: 56.6%; }
-.right-btn-3 { top: 65.9%; }
-.right-btn-4 { top: 75.2%; }
-.right-btn-5 { top: 84.5%; }
-.right-btn-6 { top: 93.8%; }
-
-.right-btn:hover {
-  opacity: 0.85;
-}
-
-/* SP 用テキストボタン（PC では非表示） */
-.nav-buttons {
-  display: none;
-  flex-direction: column;
-  gap: 10px;
-  width: 180px;
-  margin-bottom: 20px;
-}
-
-.nav-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 180px;
-  height: 44px;
-  background: var(--red);
-  color: var(--white);
-  border: none;
-  border-radius: 100px;
-  font-family: 'M PLUS Rounded 1c', 'Zen Maru Gothic', sans-serif;
-  font-weight: 700;
-  font-size: 14px;
-  cursor: pointer;
-  text-align: center;
-}
-
-.nav-btn:hover {
-  opacity: 0.9;
+.side-nav-ja {
+  display: block;
+  color: var(--black);
+  font-size: clamp(15px, 1.65vw, 23px);
+  font-weight: 800;
+  line-height: 1.3;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
 }
 
 /* ===== 中央スクロールエリア ===== */
@@ -1391,27 +1370,32 @@ p.organizer-label {
     </div>
   </div>
 
-  <!-- 右パネル -->
+  <!-- 右パネル（PCのみ。SPでは非表示） -->
   <aside class="right-panel">
-    <!-- PC: SVG の楕円を直接ボタン化 -->
-    <div class="right-nav">
-      <img class="right-nav-bg" src="../../../asobo-characters-right.svg" alt="ASOBO!! characters right">
-      <button class="right-btn right-btn-1" data-target="top">TOP</button>
-      <button class="right-btn right-btn-2" data-target="about">見どころ</button>
-      <button class="right-btn right-btn-3" data-target="map">会場マップ</button>
-      <button class="right-btn right-btn-4" data-target="shops">出店者</button>
-      <button class="right-btn right-btn-5" data-target="access">アクセス</button>
-      <button class="right-btn right-btn-6" data-target="faq">FAQ</button>
-    </div>
+    <nav class="side-nav">
+      <button class="side-nav-item" type="button" data-target="map">
+        <span class="side-nav-text">
+          <span class="side-nav-en">ZONING MAP</span>
+          <span class="side-nav-ja">会場マップ</span>
+        </span>
+        <img class="side-nav-char" src="../../../asobo-char-map.svg" alt="">
+      </button>
 
-    <!-- SP: テキストボタン（PCでは非表示） -->
-    <nav class="nav-buttons">
-      <button class="nav-btn" data-target="top">TOP</button>
-      <button class="nav-btn" data-target="about">見どころ</button>
-      <button class="nav-btn" data-target="map">会場マップ</button>
-      <button class="nav-btn" data-target="shops">出店者</button>
-      <button class="nav-btn" data-target="access">アクセス</button>
-      <button class="nav-btn" data-target="faq">FAQ</button>
+      <button class="side-nav-item" type="button" data-target="shops">
+        <img class="side-nav-char" src="../../../asobo-char-shops.svg" alt="">
+        <span class="side-nav-text">
+          <span class="side-nav-en">SHOPS &amp; CONTENTS</span>
+          <span class="side-nav-ja">出店者・コンテンツ</span>
+        </span>
+      </button>
+
+      <button class="side-nav-item" type="button" data-target="access">
+        <span class="side-nav-text">
+          <span class="side-nav-en">ACCESS</span>
+          <span class="side-nav-ja">アクセス</span>
+        </span>
+        <img class="side-nav-char" src="../../../asobo-char-access.svg" alt="">
+      </button>
     </nav>
   </aside>
 </div>
