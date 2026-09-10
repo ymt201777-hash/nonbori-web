@@ -128,9 +128,10 @@ a {
 
 .side-nav-char {
   flex: 0 0 auto;
-  /* パネル幅が狭い画面でも収まるように可変にする */
-  width: clamp(56px, 8vw, 150px);
-  height: auto;
+  /* キャラごとに縦横比が違うので、幅ではなく高さを揃える。
+     画面の幅と高さの両方に収まるよう可変にしている */
+  width: auto;
+  height: clamp(70px, min(9.4vw, 17vh), 180px);
 }
 
 .side-nav-text { min-width: 0; }
