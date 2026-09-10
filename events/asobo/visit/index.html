@@ -932,16 +932,17 @@ a {
   line-height: 1.75;
 }
 
-.access-caution {
-  margin-top: 14px;
-  background: var(--red);
-  color: var(--white);
-  border-radius: 14px;
-  padding: 13px 14px;
-  font-size: 12.5px;
-  font-weight: 700;
+/* 会場規約で掲載が必要な案内。目立たせず注記として置く。
+   `.section p` に負けないよう詳細度を上げている */
+.section p.access-caution {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+  color: #999;
+  font-size: 11px;
+  font-weight: 500;
   line-height: 1.7;
-  text-align: center;
+  text-align: left;
 }
 
 /* NEWS / FAQ 見出し */
@@ -1253,9 +1254,7 @@ p.organizer-label {
       </div>
 
       <p class="access-caution">
-        当日は大変混雑が予想されます。<br>
-        公共交通機関でのご来場に<br>
-        ご協力ください。
+        ※ 当日は混雑が予想されます。公共交通機関でのご来場にご協力ください。
       </p>
     </section>
 
