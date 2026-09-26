@@ -498,58 +498,6 @@ a {
 
 .pin:focus { outline: none; }
 
-/* ズーム操作ボタン */
-.map-ctrl {
-  position: absolute;
-  right: 8px;
-  top: 8px;              /* 下だと ASOBO!! MAP のロゴに重なるので上に置く */
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.map-ctrl button {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  border: 2px solid var(--red);
-  background: rgba(255, 255, 255, .92);
-  color: var(--red);
-  font-family: 'M PLUS Rounded 1c', 'Zen Maru Gothic', sans-serif;
-  font-size: 17px;
-  font-weight: 800;
-  line-height: 1;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.map-ctrl button:hover { background: var(--red); color: var(--white); }
-
-.map-ctrl .map-ctrl-reset,
-.map-ctrl .map-ctrl-full { font-size: 10px; letter-spacing: 0.02em; }
-
-/* 全画面表示 */
-.mapview.is-full {
-  position: fixed;
-  inset: 0;
-  z-index: 95;
-  width: 100%;
-  height: 100vh;
-  height: 100dvh;
-  margin: 0;
-  border: none;
-  border-radius: 0;
-  aspect-ratio: auto;
-  background: var(--white);
-}
-
-.mapview.is-full .map-ctrl {
-  right: 12px;
-  top: calc(12px + env(safe-area-inset-top, 0px));
-}
-
 /* マップ詳細カード */
 .zone-detail {
   margin-top: 14px;
@@ -1155,11 +1103,6 @@ p.organizer-label {
     width: calc(100% + 40px);
   }
 
-  /* 全画面時は打ち消しを解除 */
-  .mapview.is-full {
-    margin: 0;
-    width: 100%;
-  }
 }
 </style>
 </head>
@@ -1248,10 +1191,6 @@ p.organizer-label {
         <div class="mapstage" id="mapstage">
           <img src="../../../asobo-map.jpg" alt="ASOBO!! 会場マップ" id="mapimg">
           <!-- ピンは JS が SHOPS から生成 -->
-        </div>
-        <div class="map-ctrl">
-          <button type="button" class="map-ctrl-reset" id="mapReset" aria-label="全体表示に戻す">全体</button>
-          <button type="button" class="map-ctrl-full" id="mapFull" aria-label="全画面で見る">全画面</button>
         </div>
       </div>
 
@@ -2007,17 +1946,14 @@ const mapApi = (() => {
   /* --- 拡大・移動 --- */
   function baseH() { return img.offsetHeight || view.clientWidth / 1.1287; }
 
-  /* 縮小の下限。通常は枠＝画像なので 1。
-     全画面で横長のときだけ、マップ全体が収まる倍率まで下げられるようにする */
+  /* 縮小の下限。枠＝画像の実寸なので通常は 1 */
   function minScale() {
     const h = baseH();
     return h ? Math.min(1, view.clientHeight / h) : 1;
   }
 
-  /* 枠の高さを画像の実寸に合わせ、上下の余白を出さない。
-     全画面時は CSS(100dvh) に任せるので触らない */
+  /* 枠の高さを画像の実寸に合わせ、上下の余白を出さない */
   function fitViewHeight() {
-    if (view.classList.contains('is-full')) { view.style.height = ''; return; }
     const h = img.offsetHeight;
     if (!h) return;
     // box-sizing:border-box なので、指定する高さに上下の枠線分を足さないと画像が見切れる
@@ -2123,36 +2059,11 @@ const mapApi = (() => {
   });
   view.addEventListener('mouseleave', clearActive);
 
-  document.getElementById('mapReset').addEventListener('click', () => {
-    scale = minScale(); tx = 0; ty = 0; pinned = null;
-    clearActive();
-    apply();
-  });
 
   function relayout() { fitViewHeight(); apply(); }
   if (img.complete) relayout(); else img.addEventListener('load', relayout);
   window.addEventListener('resize', relayout);
 
-  /* --- 全画面 --- */
-  const btnFull = document.getElementById('mapFull');
-  function setFull(on) {
-    view.classList.toggle('is-full', on);
-    btnFull.textContent = on ? '閉じる' : '全画面';
-    btnFull.setAttribute('aria-label', on ? '全画面を閉じる' : '全画面で見る');
-    document.body.style.overflow = on ? 'hidden' : '';
-    pinned = null;
-    clearActive();
-    // 枠の寸法が変わってから倍率を決める（切り替え時は全体表示に戻す）
-    requestAnimationFrame(() => {
-      fitViewHeight();
-      scale = minScale(); tx = 0; ty = 0;
-      apply();
-    });
-  }
-  btnFull.addEventListener('click', () => setFull(!view.classList.contains('is-full')));
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && view.classList.contains('is-full')) setFull(false);
-  });
 
   /* 一覧から「マップで見る」で呼ぶ */
   return {
